@@ -18,7 +18,7 @@ function TheWhy({ theme }) {
               build Matterbase"
             </h4>
             <h6 className="tundora-text" style={{ lineHeight: '2.5rem;' }}>
-              - Hermann (Maker)"
+              - Hermann (Maker)
             </h6>
           </div>
         </div>

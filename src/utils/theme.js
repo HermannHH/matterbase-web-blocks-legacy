@@ -1,6 +1,7 @@
 export default {
   colors: {
     white: '#ffffff',
-    snowGrey: '#fcfcfc'
+    snowGrey: '#fcfcfc',
+    selago: '#ecf5fc'
   }
 };
