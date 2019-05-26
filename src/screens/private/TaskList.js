@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Register(props) {
+function TaskList(props) {
   return (
     <div>
-      <h1>Register</h1>
+      <h1>TaskList</h1>
     </div>
   );
 }
 
-Register.propTypes = {};
+TaskList.propTypes = {};
 
-export default Register;
+export default TaskList;

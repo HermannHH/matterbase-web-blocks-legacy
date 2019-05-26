@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Register(props) {
+function Notepad(props) {
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Notepad</h1>
     </div>
   );
 }
 
-Register.propTypes = {};
+Notepad.propTypes = {};
 
-export default Register;
+export default Notepad;

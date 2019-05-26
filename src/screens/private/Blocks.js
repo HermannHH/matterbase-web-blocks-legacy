@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Register(props) {
+function Blocks(props) {
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Blocks</h1>
     </div>
   );
 }
 
-Register.propTypes = {};
+Blocks.propTypes = {};
 
-export default Register;
+export default Blocks;
