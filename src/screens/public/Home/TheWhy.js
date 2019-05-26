@@ -1,9 +1,13 @@
 import React from 'react';
+import { withTheme } from 'styled-components';
 
-export default function TheWhy() {
+function TheWhy({ theme }) {
   return (
     <div className="my-5 py-5">
-      <section className="container snow-grey-background rad-5 p-5 my-5">
+      <section
+        className="container rad-5 p-5 my-5"
+        style={{ backgroundColor: theme.colors.snowGrey, borderRadius: '5px' }}
+      >
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
             <h4 className="black-text" style={{ lineHeight: '2.3rem' }}>
@@ -23,3 +27,5 @@ export default function TheWhy() {
     </div>
   );
 }
+
+export default withTheme(TheWhy);

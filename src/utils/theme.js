@@ -1,5 +1,6 @@
 export default {
   colors: {
-    white: '#ffffff'
+    white: '#ffffff',
+    snowGrey: '#fcfcfc'
   }
 };
