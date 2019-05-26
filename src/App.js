@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from '@reach/router';
 import Public from './Public';
 import Private from './Private';
+import Protected from './Protected';
 
 function App() {
   const [state, setState] = useState({ isAuthenticated: true });
@@ -14,6 +15,7 @@ function App() {
       </nav>
       {!isAuthenticated && <Public />}
       {isAuthenticated && <Private />}
+      <Protected />
     </div>
   );
 }
