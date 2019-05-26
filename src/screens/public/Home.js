@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import standard from 'screens/public/layouts/standard';
+
 import AboveTheFold from 'screens/public/Home/AboveTheFold';
 import TheWhy from 'screens/public/Home/TheWhy';
 import TimeAtCore from 'screens/public/Home/TimeAtCore';
@@ -15,12 +17,14 @@ function Home(props) {
   return (
     <div>
       <Navbar />
-      <AboveTheFold />
-      <TheWhy />
-      <TimeAtCore />
-      <EverythingYouNeed />
-      <Notepad />
-      <FinalCallToAction />
+      <div>
+        <AboveTheFold />
+        <TheWhy />
+        <TimeAtCore />
+        <EverythingYouNeed />
+        <Notepad />
+        <FinalCallToAction />
+      </div>
       <Footer />
     </div>
   );
@@ -28,4 +32,4 @@ function Home(props) {
 
 Home.propTypes = {};
 
-export default Home;
+export default standard(Home);
