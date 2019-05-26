@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import AuthContext from './AuthContext';
+import AppContext from './AppContext';
 
-export default function AuthContextProvider({ children }) {
+export default function AppContextProvider({ children }) {
   const [state, setState] = useState({ isAuthenticated: false });
 
   const { isAuthenticated } = state;
   return (
-    <AuthContext.Provider
+    <AppContext.Provider
       value={{
         data: {
           isAuthenticated
@@ -15,6 +15,6 @@ export default function AuthContextProvider({ children }) {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AppContext.Provider>
   );
 }

@@ -1,29 +1,30 @@
 import React, { Fragment } from 'react';
 import { Link } from '@reach/router';
-import AuthContext from 'components/contextuals/AuthContext';
-import AuthContextProvider from 'components/contextuals/AuthContextProvider';
+import { ThemeProvider } from 'styled-components';
+import AppContext from 'components/contextuals/AppContext';
+import AppContextProvider from 'components/contextuals/AppContextProvider';
+import theme from 'utils/theme';
 import Public from './Public';
 import Private from './Private';
 import Protected from './Protected';
 
 function App() {
   return (
-    <AuthContextProvider>
+    <AppContextProvider>
       <div className="App">
-        <AuthContext.Consumer>
+        <AppContext.Consumer>
           {context => (
-            <Fragment>
-              <nav>
-                <Link to="/">Home</Link> | <Link to="dashboard">Dashboard</Link>
-              </nav>
-              {!context.data.isAuthenticated && <Public />}
-              {context.data.isAuthenticated && <Private />}
-              <Protected />
-            </Fragment>
+            <ThemeProvider theme={theme}>
+              <Fragment>
+                {!context.data.isAuthenticated && <Public />}
+                {context.data.isAuthenticated && <Private />}
+                <Protected />
+              </Fragment>
+            </ThemeProvider>
           )}
-        </AuthContext.Consumer>
+        </AppContext.Consumer>
       </div>
-    </AuthContextProvider>
+    </AppContextProvider>
   );
 }
 

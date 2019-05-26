@@ -1,14 +1,12 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
-const Home = () => <div>Public Home</div>;
-const Dash = () => <div>Public Dash</div>;
+import Home from 'screens/public/Home';
 
 function Public() {
   return (
     <Router>
       <Home path="/" />
-      <Dash path="dashboard" />
     </Router>
   );
 }
