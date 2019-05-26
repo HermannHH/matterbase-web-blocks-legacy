@@ -1,19 +1,19 @@
-import React from 'react';
-import { Router, Link } from '@reach/router';
-
-const Home = () => <div>Home</div>;
-const Dash = () => <div>Dash</div>;
+import React, { useState } from 'react';
+import { Link } from '@reach/router';
+import Public from './Public';
+import Private from './Private';
 
 function App() {
+  const [state, setState] = useState({ isAuthenticated: true });
+
+  const { isAuthenticated } = state;
   return (
     <div className="App">
       <nav>
         <Link to="/">Home</Link> | <Link to="dashboard">Dashboard</Link>
       </nav>
-      <Router>
-        <Home path="/" />
-        <Dash path="dashboard" />
-      </Router>
+      {!isAuthenticated && <Public />}
+      {isAuthenticated && <Private />}
     </div>
   );
 }
