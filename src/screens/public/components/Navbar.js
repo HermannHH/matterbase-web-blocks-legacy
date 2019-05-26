@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components';
 
+import routes from 'routes';
 import NavbarBrand from 'components/NavbarBrand';
 
 const Wrapper = withTheme(styled.nav`
@@ -9,11 +10,11 @@ const Wrapper = withTheme(styled.nav`
   `}
 `);
 
-function Navbar({}) {
+function Navbar() {
   return (
     <Wrapper className="navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
-        <NavbarBrand />
+        <NavbarBrand href={routes.public.home.path} />
         <button
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
@@ -27,11 +28,24 @@ function Navbar({}) {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <a className="nav-link">About Us</a>
-            <a className="nav-link">Pricing</a>
-            <a className="nav-link">Login</a>
-            <a className="btn btn-outline-secondary ml-4 mr-2">Login</a>
-            <a className="btn btn-primary mx-2">Register</a>
+            <a className="nav-link" href={routes.public.aboutUs.path}>
+              About Us
+            </a>
+            <a className="nav-link" href={routes.public.pricing.path}>
+              Pricing
+            </a>
+            <a
+              className="btn btn-outline-secondary ml-4 mr-2"
+              href={routes.public.login.path}
+            >
+              Login
+            </a>
+            <a
+              className="btn btn-primary mx-2"
+              href={routes.public.register.path}
+            >
+              Register
+            </a>
           </ul>
         </div>
       </div>

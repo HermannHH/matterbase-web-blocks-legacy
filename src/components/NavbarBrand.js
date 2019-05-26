@@ -12,9 +12,9 @@ const Wrapper = withTheme(styled.a`
   `}
 `);
 
-export default function NavbarBrand() {
+export default function NavbarBrand({ href }) {
   return (
-    <Wrapper className="navbar-brand" href={`${constants.ENV.BASE_URL}`}>
+    <Wrapper className="navbar-brand" href={href}>
       <img src={`${constants.ENV.ASSET_BASE_PATH}/branding/logo-full.png`} />
     </Wrapper>
   );
