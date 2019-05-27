@@ -11,8 +11,6 @@ const Wrapper = styled.div`
   line-height: 2rem;
   justify-content: space-between;
   clear: both;
-  position: absolute;
-  bottom: 0px;
 
   #brochure-footer--links {
     > a {

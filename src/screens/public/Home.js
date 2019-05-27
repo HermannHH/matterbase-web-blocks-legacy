@@ -10,22 +10,15 @@ import EverythingYouNeed from 'screens/public/Home/EverythingYouNeed';
 import Notepad from 'screens/public/Home/Notepad';
 import FinalCallToAction from 'screens/public/Home/FinalCallToAction';
 
-import Navbar from 'screens/public/components/Navbar';
-import Footer from 'screens/public/components/Footer';
-
 function Home(props) {
   return (
     <div>
-      <Navbar />
-      <div>
-        <AboveTheFold />
-        <TheWhy />
-        <TimeAtCore />
-        <EverythingYouNeed />
-        <Notepad />
-        <FinalCallToAction />
-      </div>
-      <Footer />
+      <AboveTheFold />
+      <TheWhy />
+      <TimeAtCore />
+      <EverythingYouNeed />
+      <Notepad />
+      <FinalCallToAction />
     </div>
   );
 }

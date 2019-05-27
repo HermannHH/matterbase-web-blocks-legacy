@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+
+import Navbar from 'screens/public/components/Navbar';
+import Footer from 'screens/public/components/Footer';
 
 export default function standard(WrappedComponent) {
   function Standard(props) {
     return (
-      <Fragment>
-        <h1>Header</h1>
+      <div>
+        <Navbar />
         <WrappedComponent {...props} />
-      </Fragment>
+        <Footer />
+      </div>
     );
   }
   const wrappedComponentName =
