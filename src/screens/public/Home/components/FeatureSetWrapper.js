@@ -28,9 +28,9 @@ const FeatureSetWrapper = withTheme(styled.section`
         width: 90%;
         display: block;
         margin: 0 auto;
-        @include media-breakpoint-up(lg) {
+        ${media.greaterThan("large")`
           width: 150%;
-        }
+        `}
       }
     }
 `);
