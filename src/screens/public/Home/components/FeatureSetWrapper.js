@@ -1,8 +1,8 @@
 // import React from 'react';
 import styled, { withTheme } from 'styled-components';
+import media from "styled-media-query";
 
 const FeatureSetWrapper = withTheme(styled.section`
-  ${props => `
     margin-bottom: 0px;
     .screenshot-explainer {
       display: flex;
@@ -11,7 +11,7 @@ const FeatureSetWrapper = withTheme(styled.section`
       justify-content: center;
       align-items: center;
       text-align: center;
-      ${props.theme.media.desktop`
+      ${media.greaterThan("medium")`
         padding-right: 80px;
         align-items: flex-start;
         text-align: left;
@@ -33,7 +33,6 @@ const FeatureSetWrapper = withTheme(styled.section`
         }
       }
     }
-  `}
 `);
 
 export default FeatureSetWrapper;
