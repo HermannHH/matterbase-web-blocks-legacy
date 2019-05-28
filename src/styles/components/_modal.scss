@@ -1,0 +1,10 @@
+.modal {
+  &-dialog {
+    .modal-content {
+      padding: 20px;
+      .close {
+        text-align: right;
+      }
+    }
+  }
+}

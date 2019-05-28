@@ -8,6 +8,8 @@ import Public from './Public';
 import Private from './Private';
 import Protected from './Protected';
 
+import "styles/base.scss";
+
 function App() {
   return (
     <AppContextProvider>

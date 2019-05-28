@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import auth from 'screens/public/layouts/auth';
+
 function Login(props) {
   return (
     <div>
@@ -11,4 +13,4 @@ function Login(props) {
 
 Login.propTypes = {};
 
-export default Login;
+export default auth(Login);

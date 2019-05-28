@@ -1,0 +1,15 @@
+@mixin color-classes( $name , $color) {
+	.#{ $name }-background{
+		 background: $color;
+	}
+
+	.#{ $name }-text{
+		 color: $color;
+     a{ color: $color; }
+     i{ color: $color; }
+	}
+
+	.#{ $name }-border{
+		 border-color: $color;
+	}
+}

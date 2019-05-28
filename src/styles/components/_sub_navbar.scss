@@ -1,0 +1,33 @@
+#sub-navbar {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  background-color: $dodgerBlue;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  color: $white;
+  &--title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+    > svg {
+      margin-right: 5px;
+      font-size: 20px;
+    }
+  }
+  &--actions {
+    display: flex;
+    flex-direction: row;
+    > .item {
+      font-size: 20px;
+      padding: 0px 20px;
+      a {
+        color: $white;
+      }
+    }
+  }
+}

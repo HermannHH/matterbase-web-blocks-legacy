@@ -1,0 +1,83 @@
+$chatbot-padding: 20px;
+#bot-modal {
+  .modal-content {
+    // @extend .has-background-white-bis;
+    @include border-radius(4px);
+    position: relative;
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    > .chatbot-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      > .chatbot-messages-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        padding: 20px 0;
+        overflow-y: scroll;
+        @extend .mercury-background;
+        .chatbot-message-row {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 30px 15px;
+          @extend .white-text;
+
+          > .chatbot-message {
+            display: none;
+            @include border-radius(8px);
+            padding: 5px 15px;
+            @extend .portage-background;
+            max-width: 45%;
+          }
+          &.self{
+            justify-content: flex-end;
+            > .chatbot-message {
+              @extend .electric-violet-background;
+            }
+          }
+          > .chatbot-message-busy {
+            display: none;
+            @include border-radius(8px);
+            padding: 5px 15px;
+            @extend .tundora-background;
+            max-width: 45%;
+          }
+
+          &.busy {
+            > .chatbot-message-busy {
+              display: flex;
+            }
+          }
+          &:not(.busy) {
+            > .chatbot-message {
+              display: flex;
+            }
+          }
+
+        }
+      }
+      > .chatbot-footer {
+        padding: $chatbot-padding $chatbot-padding 5px $chatbot-padding;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        > .chatbot-message {
+          width: 100%;
+          > .control {
+            &:first-child {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,16 @@
+#editor {
+  margin-top: 120px !important;
+  background-color: $white;
+  > .codex-editor {
+    > .codex-editor__redactor {
+      padding: 27mm 16mm 27mm 16mm;
+      > .ce-block {
+        > .ce-block__content {
+          // min-height: 29.7cm;
+          max-width: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

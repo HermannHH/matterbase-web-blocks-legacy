@@ -1,0 +1,26 @@
+.trix {
+  .trix-button {
+    width: 2.6em;
+    max-width: calc(0.8em + 4vw);
+
+  }
+}
+
+trix-toolbar {
+  display: none;
+}
+
+#trix-editor {
+  border: 0px;
+  border-radius: 3px;
+  margin: 0;
+  padding: 30px 20px;
+  min-height: 80vh;
+  outline: none;
+
+  pre {
+    background-color: $mercury;
+    padding: 15px;
+    @include border-radius(5px);
+  }
+}

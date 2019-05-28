@@ -1,0 +1,16 @@
+.blank-matters-placeholder {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $tundora;
+  background-color: $white;
+  @include border-radius(5px);
+  @extend .my-3;
+  @extend .has-shadow;
+  > * {
+    margin: 20px 0;
+  }
+}

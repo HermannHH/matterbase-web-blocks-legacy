@@ -1,0 +1,13 @@
+.btn-ghost {
+  &-selago {
+    font-weight: 500;
+    border-color: darken($selago, 4);
+    background-color: darken($selago, 4);
+    color: $dodgerBlue;
+    &:hover {
+      border-color: darken($selago, 6);
+      background-color: darken($selago, 6);
+      color: $dodgerBlue;
+    }
+  }
+}

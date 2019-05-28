@@ -1,0 +1,24 @@
+@import "./settings/base";
+@import "./mixins/base";
+
+@import "~bootstrap/scss/bootstrap";
+@import './bootstrap_overrides';
+
+
+@import "./utils/base";
+@import "./components/base";
+@import "./pages/base";
+
+
+.test {
+  border: thin solid red;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+}
