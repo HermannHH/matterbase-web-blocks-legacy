@@ -6,7 +6,11 @@ export default {
     aboutUs: { path: '/about-us' },
     pricing: { path: '/pricing' },
     login: { path: '/auth/login' },
-    register: { path: '/auth/register' }
+    register: { path: '/auth/register' },
+    forgotPassword: { path: '/auth/forgot-password' },
+    noConfirmationInstructions: { path: '/auth/no-confirmation-instructions' },
+    noUnlockInstructions: { path: '/auth/no-unlock-instructions' },
+    resetPassword: { path: '/auth/reset-password' }
   },
   protected: {},
   private: {}

@@ -7,8 +7,8 @@ import routes from 'routes';
 
 function AuthNavbar() {
   return (
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top selago-background">
-    <a className="navbar-brand"><FontAwesomeIcon icon={faArrowLeft} /> Back Home</a>
+  <nav className="navbar navbar-expand-lg navbar-light sticky-top selago-background">
+    <a className="navbar-brand" href={routes.public.home.path}><FontAwesomeIcon icon={faArrowLeft} /> Back Home</a>
   </nav>
 
   );
