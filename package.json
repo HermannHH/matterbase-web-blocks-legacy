@@ -14,7 +14,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "styled-components": "^4.2.0",
-    "styled-media-query": "^2.1.1"
+    "styled-media-query": "^2.1.1",
+    "yup": "^0.27.0"
   },
   "lint-staged": {
     "*.{js,jsx}": [

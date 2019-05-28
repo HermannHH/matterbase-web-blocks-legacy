@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function NoConfirmationInstruction(props) {
+import auth from 'screens/public/layouts/auth';
+
+import CardForm from 'screens/public/NoConfirmationInstructions/CardForm';
+import AuthActionButtons from 'screens/public/components/AuthActionButtons';
+
+function NoConfirmationInstructions(props) {
   return (
     <div>
-      <h1>NoConfirmationInstruction</h1>
+      <CardForm />
+      <AuthActionButtons />
     </div>
   );
 }
 
-NoConfirmationInstruction.propTypes = {};
+NoConfirmationInstructions.propTypes = {};
 
-export default NoConfirmationInstruction;
+export default auth(NoConfirmationInstructions);

@@ -20,15 +20,27 @@ function AuthActionButtons() {
     </div>
     )}
     </Match>
+    <Match path={routes.public.forgotPassword.path}>
+    {props => !props.match && (
     <div className="my-4">
       <a className="btn btn-primary btn-block btn-ghost-selago" href={routes.public.forgotPassword.path}>Forgot your password?</a>
     </div>
+    )}
+    </Match>
+    <Match path={routes.public.noConfirmationInstructions.path}>
+    {props => !props.match && (
     <div className="my-4">
       <a className="btn btn-primary btn-block btn-ghost-selago" href={routes.public.noConfirmationInstructions.path}>Didn't receive confirmation instructions?</a>
     </div>
+    )}
+    </Match>
+    <Match path={routes.public.noUnlockInstructions.path}>
+    {props => !props.match && (
     <div className="my-4">
       <a className="btn btn-primary btn-block btn-ghost-selago" href={routes.public.noUnlockInstructions.path}>Didn't receive unlock instructions?</a>
     </div>
+    )}
+    </Match>
   </div>
 
   );

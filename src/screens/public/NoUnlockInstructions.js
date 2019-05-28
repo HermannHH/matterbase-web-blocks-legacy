@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function NoUnlockInstruction(props) {
+import auth from 'screens/public/layouts/auth';
+
+import CardForm from 'screens/public/NoUnlockInstructions/CardForm';
+import AuthActionButtons from 'screens/public/components/AuthActionButtons';
+
+function NoUnlockInstructions(props) {
   return (
     <div>
-      <h1>NoUnlockInstruction</h1>
+      <CardForm />
+      <AuthActionButtons />
     </div>
   );
 }
 
-NoUnlockInstruction.propTypes = {};
+NoUnlockInstructions.propTypes = {};
 
-export default NoUnlockInstruction;
+export default auth(NoUnlockInstructions);

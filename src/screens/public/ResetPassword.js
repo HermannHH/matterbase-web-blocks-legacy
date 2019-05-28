@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import auth from 'screens/public/layouts/auth';
+
+import CardForm from 'screens/public/ResetPassword/CardForm';
+
 function ResetPassword(props) {
   return (
     <div>
-      <h1>ResetPassword</h1>
+      <CardForm />
     </div>
   );
 }
 
 ResetPassword.propTypes = {};
 
-export default ResetPassword;
+export default auth(ResetPassword);

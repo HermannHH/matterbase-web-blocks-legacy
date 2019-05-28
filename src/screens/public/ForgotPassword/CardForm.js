@@ -21,8 +21,7 @@ function CardForm(props) {
   const validationSchema = object().shape({
     email: string()
       .required()
-      .email(),
-    password: string().required()
+      .email()
   });
 
 
@@ -70,24 +69,6 @@ function CardForm(props) {
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
                 </Form.Text>
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  placeholder="Enter password"
-                  isInvalid={errors.password && touched.password}
-                />
-                {errors.password && touched.password &&
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password}
-                  </Form.Control.Feedback>
-                }
               </Form.Group>
               <Button
                 type="submit"
