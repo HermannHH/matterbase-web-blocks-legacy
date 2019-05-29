@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import standard from "screens/private/layouts/standard";
+
 function Timeline(props) {
   return (
     <div>
@@ -11,4 +13,4 @@ function Timeline(props) {
 
 Timeline.propTypes = {};
 
-export default Timeline;
+export default standard(Timeline);

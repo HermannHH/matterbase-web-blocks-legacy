@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import standard from "screens/private/layouts/standard";
+
 function Blocks(props) {
   return (
     <div>
@@ -11,4 +13,4 @@ function Blocks(props) {
 
 Blocks.propTypes = {};
 
-export default Blocks;
+export default standard(Blocks);

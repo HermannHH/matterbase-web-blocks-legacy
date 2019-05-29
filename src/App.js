@@ -22,9 +22,6 @@ function App() {
                 {!context.data.isAuthenticated && <Public />}
                 {context.data.isAuthenticated && <Private />}
                 <Protected />
-                <Router>
-                    <PageNotFound default/>
-                </Router>
               </Fragment>
             </ThemeProvider>
           )}
