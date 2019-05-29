@@ -1,8 +1,8 @@
 import constants from 'utils/constants';
 
 export default {
+  home: { path: '/' },
   public: {
-    home: { path: '/' },
     aboutUs: { path: '/about-us' },
     pricing: { path: '/pricing' },
     login: { path: '/auth/login' },
@@ -13,5 +13,15 @@ export default {
     resetPassword: { path: '/auth/reset-password' }
   },
   protected: {},
-  private: {}
+  private: {
+    blocks: { path: '/blocks/:matterId' },
+    notepad: { path: '/notepad/:matterId' },
+    tasklist: { path: '/tasklist/:matterId' },
+  }
 };
+
+{/* <Timeline path="/" />
+<ChangePassword path="/change_password" />
+<Notepad path="/notepad" />
+<TaskList path="/task_list" />
+<Blocks path="/blocks/:matterId" /> */}

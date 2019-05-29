@@ -15,7 +15,7 @@ const Wrapper = withTheme(styled.nav`
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light sticky-top white-background has-shadow">
-    <NavbarBrand href={routes.public.home.path} />
+    <NavbarBrand href={routes.home.path} />
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" className="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
       <span className="navbar-toggler-icon"></span>
     </button>

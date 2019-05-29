@@ -13,7 +13,7 @@ function MatterList(props) {
   let content = <NoResults />;
 
   if (state.mattersIndex.length) {
-    content = state.mattersIndex.map( matter => <Item title={state.matters[matter].title} />)
+    content = state.mattersIndex.map( matter => <Item token={matter} title={state.matters[matter].title} />)
   }
 
   return (

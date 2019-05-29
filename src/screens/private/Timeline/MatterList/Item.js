@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-function Item({ title }) {
+import replaceUrlParams from 'utils/replaceUrlParams';
+import routes from 'routes';
+
+function Item({ token, title }) {
 
   return (
     <div className="col-12 my-4 d-flex align-items-stretch">
       <div className="card">
-        <h1>{title}</h1>
+        <div className="card-body">
+          <h3>{title}</h3>
+        </div>
+        <div className="card-actions">
+          <a className="btn btn-light dodger-blue-text" href={replaceUrlParams(':matterId', routes.private.blocks.path, token)}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
+        </div>
       </div>
     </div>
   );

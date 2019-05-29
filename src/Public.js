@@ -16,7 +16,7 @@ import ResetPassword from 'screens/public/ResetPassword';
 function Public() {
   return (
     <Router>
-      <Home path={routes.public.home.path} />
+      <Home path={routes.home.path} />
       <AboutUs path={routes.public.aboutUs.path} />
       <Pricing path={routes.public.pricing.path} />
       <Login path={routes.public.login.path} />

@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <Wrapper className="navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
-        <NavbarBrand href={routes.public.home.path} />
+        <NavbarBrand href={routes.home.path} />
         <button
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
