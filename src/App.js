@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
-import { Link } from '@reach/router';
+import { Router } from '@reach/router';
 import { ThemeProvider } from 'styled-components';
 import AppContext from 'components/contextuals/AppContext';
 import AppContextProvider from 'components/contextuals/AppContextProvider';
+import PageNotFound from 'screens/errors/PageNotFound';
 import theme from 'utils/theme';
 import Public from './Public';
 import Private from './Private';
@@ -21,6 +22,9 @@ function App() {
                 {!context.data.isAuthenticated && <Public />}
                 {context.data.isAuthenticated && <Private />}
                 <Protected />
+                <Router>
+                    <PageNotFound default/>
+                </Router>
               </Fragment>
             </ThemeProvider>
           )}
