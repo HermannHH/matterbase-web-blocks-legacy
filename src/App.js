@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 
 import AppContext from 'components/contextuals/AppContext';
 import AppContextProvider from 'components/contextuals/AppContextProvider';
@@ -41,11 +42,13 @@ function App() {
           {context => (
             <ThemeProvider theme={theme}>
               <ApolloProvider client={client}>
-              <Fragment>
-                {!context.data.isAuthenticated && <Public />}
-                {context.data.isAuthenticated && <Private />}
-                <Protected />
-              </Fragment>
+                <ApolloProviderHooks client={client}>
+                  <Fragment>
+                    {!context.data.isAuthenticated && <Public />}
+                    {context.data.isAuthenticated && <Private />}
+                    <Protected />
+                  </Fragment>
+                </ApolloProviderHooks>
               </ApolloProvider>
             </ThemeProvider>
           )}

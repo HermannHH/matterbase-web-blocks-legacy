@@ -6,14 +6,16 @@ import NoResults from 'screens/private/components/NoResults'
 
 import Item from 'screens/private/Timeline/MatterList/Item';
 
-function MatterList(props) {
+function MatterList({ matters, mattersIndex }) {
   // const [state, setState] = useState({ matters: {}, mattersIndex: [] });
-  const [state, setState] = useState({ matters: {a:{title:"Hello World"}, b:{title:"Hello World"}}, mattersIndex: ["a","b"] });
+
+  
+  // const [state, setState] = useState({ matters: {a:{title:"Hello World"}, b:{title:"Hello World"}}, mattersIndex: ["a","b"] });
 
   let content = <NoResults />;
-
-  if (state.mattersIndex.length) {
-    content = state.mattersIndex.map( matter => <Item token={matter} title={state.matters[matter].title} />)
+console.log('matters zz', matters)
+  if (mattersIndex.length) {
+    content = mattersIndex.map( matter => <Item key={matter} token={matter} title={matters[matter].title} />)
   }
 
   return (
