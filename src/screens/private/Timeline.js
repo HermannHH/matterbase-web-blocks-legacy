@@ -151,5 +151,4 @@ export default compose(
         }),
     }),
   }),
-  graphql(ListMatters)
 ) (standard(Timeline));
