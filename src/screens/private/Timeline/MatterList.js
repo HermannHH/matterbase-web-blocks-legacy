@@ -6,7 +6,7 @@ import NoResults from 'screens/private/components/NoResults'
 
 import Item from 'screens/private/Timeline/MatterList/Item';
 
-function MatterList({ matters, mattersIndex }) {
+function MatterList({ matters, mattersIndex, removeMatter }) {
   // const [state, setState] = useState({ matters: {}, mattersIndex: [] });
 
   
@@ -15,7 +15,7 @@ function MatterList({ matters, mattersIndex }) {
   let content = <NoResults />;
 console.log('matters zz', matters)
   if (mattersIndex.length) {
-    content = mattersIndex.map( matter => <Item key={matter} token={matter} title={matters[matter].title} />)
+    content = mattersIndex.map( matter => <Item key={matter} token={matter} title={matters[matter].title} removeMatter={removeMatter}/>)
   }
 
   return (
