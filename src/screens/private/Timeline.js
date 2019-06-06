@@ -20,9 +20,9 @@ query listMatters {
 `;
 
 
-const createMatter = gql`
-  mutation createMatter($title: String!) {
-    createMatter(input: {
+const matterCreate = gql`
+  mutation matterCreate($title: String!) {
+    matterCreate(input: {
       title: $title
     }) {
       matter {
@@ -35,9 +35,9 @@ const createMatter = gql`
 `;
 
 
-const deleteMatter = gql`
-  mutation deleteMatter($token: String!) {
-    deleteMatter(input: {
+const matterDelete = gql`
+  mutation matterDelete($token: String!) {
+    matterDelete(input: {
       token: $token
     }) {
       matter {
@@ -50,7 +50,7 @@ const deleteMatter = gql`
 `;
 
 
-function Timeline({ createMatter, deleteMatter }) {
+function Timeline({ matterCreate, matterDelete }) {
 
   const arrayReduce = (array, keyName ) => {
     if (!array) { return {
@@ -115,16 +115,16 @@ function Timeline({ createMatter, deleteMatter }) {
   // console.log('props', props)
   async function addMatter({ title }) {
     try {
-      const { data } = await createMatter({ title });
-      appendToState(data.createMatter.matter)
+      const { data } = await matterCreate({ title });
+      appendToState(data.matterCreate.matter)
     } catch (error) {
       console.log('error', error)
     }
   }
   async function removeMatter({ token }) {
     try {
-      const { data } = await deleteMatter({ token });
-      removeFromState(data.deleteMatter.matter)
+      const { data } = await matterDelete({ token });
+      removeFromState(data.matterDelete.matter)
     } catch (error) {
       console.log('error', error)
     }
@@ -161,17 +161,17 @@ function Timeline({ createMatter, deleteMatter }) {
 Timeline.propTypes = {};
 
 export default compose(
-  graphql(createMatter, {
+  graphql(matterCreate, {
     props: ({ ownProps, mutate }) => ({
-      createMatter: ({ title }) =>
+      matterCreate: ({ title }) =>
         mutate({
           variables: { title },
         }),
     }),
   }),
-  graphql(deleteMatter, {
+  graphql(matterDelete, {
     props: ({ ownProps, mutate }) => ({
-      deleteMatter: ({ token }) =>
+      matterDelete: ({ token }) =>
         mutate({
           variables: { token },
         }),
