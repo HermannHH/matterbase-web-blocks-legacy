@@ -7,15 +7,15 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 
-import AppContext from 'components/contextuals/AppContext';
-import AppContextProvider from 'components/contextuals/AppContextProvider';
+import AppContext from 'contextuals/AppContext';
+import AppContextProvider from 'contextuals/AppContextProvider';
 import PageNotFound from 'screens/errors/PageNotFound';
 import theme from 'utils/theme';
 import Public from './Public';
 import Private from './Private';
 import Protected from './Protected';
 
-import "styles/base.scss";
+import "styles/index.scss";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:5000/graphql",
