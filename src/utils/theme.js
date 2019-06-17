@@ -10,6 +10,7 @@ export default {
   colors: {
     white: '#ffffff',
     snowGrey: '#fcfcfc',
-    selago: '#ecf5fc'
+    selago: '#ecf5fc',
+    dodgerBlue: '#2a79fc'
   },
 };

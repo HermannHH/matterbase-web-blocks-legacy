@@ -12,19 +12,25 @@ import SubNavbar from "screens/private/components/SubNavbar";
 
 import AddBlock from "screens/private/Blocks/AddBlock";
 
+import Block from "components/Block";
+
 function Blocks({ token }) {
   return (
     <div>
     <SubNavbar />
     <div className="container">
       <div className="row d-flex justify-content-center">
-        <div className="col-12 col-md-10">
-        <div className="row">
-          <div className="col-12">
-            <AddBlock />
-          </div>          
-
-        </div>
+        <div className="col-12 col-md-10 test">
+          <div className="row">
+              <div className="col-12">
+                <Block />
+              </div>          
+            </div>
+          <div className="row">
+            <div className="col-12">
+              <AddBlock />
+            </div>          
+          </div>
         </div>
       </div>
     </div>
