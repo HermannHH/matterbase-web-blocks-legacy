@@ -18,12 +18,13 @@ function Blocks({ token }) {
   return (
     <div>
     <SubNavbar />
-    <div className="container">
+    <div className="container" style={{paddingTop: "66px"}}>
       <div className="row d-flex justify-content-center">
         <div className="col-12 col-md-10 test">
           <div className="row">
               <div className="col-12">
-                <Block />
+                <Block type="tasks"/>
+                <Block type="sticky_notes"/>
               </div>          
             </div>
           <div className="row">
