@@ -19,8 +19,9 @@ function Timeline() {
               <h1>Loading...</h1>
               :
               <div className="my-5">
-                <button onClick={() => context.actions.addMatter({ title: "Dommie"})}>Create</button>
-                <MatterList matters={context.data.matters} mattersIndex={context.data.mattersIndex} removeMatter={context.actions.removeMatter}/>
+                <MatterList 
+                  {...context}
+                />
               </div>
           }
           </div>

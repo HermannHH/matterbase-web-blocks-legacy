@@ -11,25 +11,39 @@ setLocale({
   },
 });
 
-function MatterModalForm(props) {
+function MatterModal({ matter, addMatter, updateMatter, showMatterModal, setShowMatterModal }) {
 
   // const [state, setState] = useState({ isSubmitting: false });
 
   const validationSchema = object().shape({
-    name: string()
+    title: string()
       .required()
   });
 
 
+  const isUpdate = Object.keys(matter).length;
+  const initialTitle = isUpdate ? matter.title : '';
+
+  console.log('I am matter', matter, initialTitle   )
   return (
+    <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
+      <Modal.Header closeButton />
       <Formik
-          initialValues={{ name: '' }}
+          initialValues={{ title: initialTitle }}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting }) => {
+            if(isUpdate) {
+              await updateMatter({ token: matter.token, title: values.title });
+            } else {
+              await addMatter({ title: values.title });
+            }
+            
+            setShowMatterModal(false);
+            setSubmitting(false);
+            // setTimeout(() => {
+            //   alert(JSON.stringify(values, null, 2));
+            //   setSubmitting(false);
+            // }, 400);
           }}
         >
           {({
@@ -49,10 +63,11 @@ function MatterModalForm(props) {
                 <Form.Label>Matter Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="name"
+                  name="title"
                   onChange={handleChange}
+                  ref={input => input && input.focus()}
                   onBlur={handleBlur}
-                  value={values.email}
+                  value={values.title}
                   placeholder="Enter matter name"
                   isInvalid={errors.name && touched.name}
                 />
@@ -66,7 +81,7 @@ function MatterModalForm(props) {
       <Modal.Footer>
               <Button
                 type="submit"
-                disabled={isSubmitting || !isValid}
+                // disabled={isSubmitting || !isValid}
                 className="btn btn-primary btn-block"
               >
                 {isSubmitting ? "Saving..." : "Save"}
@@ -74,9 +89,10 @@ function MatterModalForm(props) {
             </Form>
           )}
         </Formik>
+    </Modal>
   );
 }
 
-MatterModalForm.propTypes = {};
+MatterModal.propTypes = {};
 
-export default MatterModalForm;
+export default MatterModal;

@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-import gql from 'graphql-tag';
-import { Query, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { useQuery } from "react-apollo-hooks";
-import _ from 'lodash';
 
-import { matterCreate, matterDelete } from './mutations';
+import { matterCreate, matterDelete, matterUpdate } from './mutations';
 import { listMatters } from './queries';
 
 import {
   dataReduce,
   appendToData,
-  removeFromData
+  removeFromData,
+  updateToData
 } from 'utils/dataStructures';
 
 const Context = React.createContext();
 
-function BaseProvider({ children, matterCreate, matterDelete }) {
+function BaseProvider({ children, matterCreate, matterDelete, matterUpdate }) {
   
   const { data: queryData, loading: queryLoading } = useQuery(listMatters, {
     suspend: false
@@ -35,6 +34,24 @@ function BaseProvider({ children, matterCreate, matterDelete }) {
     });
     setListLoading(queryLoading);
   }, [queryLoading]);
+
+  const [showMatterModal, setShowMatterModal] = useState(false);
+
+  const [editToken, setEditToken] = useState('');
+
+  useEffect(() => {
+    if (editToken) {
+      setShowMatterModal(true);
+    } else {
+      setShowMatterModal(false);
+    }
+  }, [editToken]);
+
+  useEffect(() => {
+    if (!showMatterModal) {
+      setEditToken('');
+    }
+  }, [showMatterModal]);
 
 
   const { matters, mattersIndex } = matterData;
@@ -67,6 +84,21 @@ function BaseProvider({ children, matterCreate, matterDelete }) {
       console.log('error', error)
     }
   }
+  async function updateMatter({ token, title }) {
+    try {
+      const { data } = await matterUpdate({ token, title });
+      console.log('data resp', data)
+      const newData = await updateToData({
+        keyArray: mattersIndex,
+        indexedObject: matters,
+        token: token,
+        data: data.matterUpdate.matter
+      });
+      setMatterData({...matterData, matters: newData.newIndexedObject, mattersIndex: newData.newKeyArray });
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
 
   return (
     <Context.Provider
@@ -74,11 +106,16 @@ function BaseProvider({ children, matterCreate, matterDelete }) {
         data: {
           matters,
           mattersIndex,
-          listLoading
+          listLoading,
+          showMatterModal,
+          editToken
         },
         actions: {
           addMatter,
-          removeMatter
+          removeMatter,
+          updateMatter,
+          setShowMatterModal,
+          setEditToken
         }
       }}
     >
@@ -93,6 +130,14 @@ const Provider = compose(
       matterCreate: ({ title }) =>
         mutate({
           variables: { title },
+        }),
+    }),
+  }),
+  graphql(matterUpdate, {
+    props: ({ ownProps, mutate }) => ({
+      matterUpdate: ({ token, title }) =>
+        mutate({
+          variables: { token, title },
         }),
     }),
   }),

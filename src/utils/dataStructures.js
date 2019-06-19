@@ -36,7 +36,7 @@ function appendToData({ keyArray, indexedObject, token, data }) {
 };
 
 // Updates item to indexed object & key array
-function udateToData({ keyArray, indexedObject, token, data }) {
+function updateToData({ keyArray, indexedObject, token, data }) {
   const newKeyArray = keyArray;
   const newIndexedObject = {
     ...indexedObject,
@@ -63,7 +63,7 @@ function removeFromData({ keyArray, indexedObject, token }) {
 
 export {
   dataReduce,
-  udateToData,
+  updateToData,
   appendToData,
   removeFromData
 }
