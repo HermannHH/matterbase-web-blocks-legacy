@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import { useDispatch } from 'react-redux';
+
+import {
+  // selectors as buyerAgentSelectors,
+  actions as matterActions,
+} from 'ducks/matter';
 
 
 import { Context, Provider } from "screens/private/Timeline/Context";
@@ -9,6 +16,13 @@ import standard from "screens/private/layouts/standard";
 
 
 function Timeline() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('matterActions', matterActions);
+    dispatch(matterActions.fetchList());
+  }, []);
+
   return (
     <Provider>
       <Context.Consumer>
