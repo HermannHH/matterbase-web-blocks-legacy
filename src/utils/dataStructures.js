@@ -1,4 +1,3 @@
-import React from 'react';
 import _ from 'lodash';
 
 // Takes array and returns indexed object & key array
@@ -7,12 +6,12 @@ const dataReduce = (array, keyName ) => {
     keyed: {},
     indexed: []
   } }
-  const keyedArray = array.reduce((obj, item) => {
+  const indexedObject = array.reduce((obj, item) => {
     obj[item[keyName]] = item
     return obj
   }, {});
 
-  const indexedObject = array.map( item => item[keyName]);
+  const keyedArray = array.map( item => item[keyName]);
 
   return {
     keyedArray,
@@ -21,49 +20,32 @@ const dataReduce = (array, keyName ) => {
 };
 
 // Appends item to indexed object & key array
-function appendToData({ keyArray, indexedObject, token, data }) {
-  const newKeyArray = keyArray.concat(token);
-  const newIndexedObject = {
+function appendToKeyedArray(keyArray, token) {
+  return keyArray.concat(token);
+};
+
+function removeFromKeyedArray(keyArray, token) {
+  return keyArray.filter( item => item !== token);
+};
+
+function writeToIndexedObject(indexedObject, token, data) {
+  return {
     ...indexedObject,
     [token] : {
       ...data,
     }
   };
-  return {
-    newKeyArray,
-    newIndexedObject
-  };
 };
 
-// Updates item to indexed object & key array
-function updateToData({ keyArray, indexedObject, token, data }) {
-  const newKeyArray = keyArray;
-  const newIndexedObject = {
-    ...indexedObject,
-    [token] : {
-      ...data,
-    }
-  };
-  return {
-    newKeyArray,
-    newIndexedObject
-  };
+function removeFromIndexedObject(indexedObject, token) {
+  return _.omit(indexedObject, token);
 };
-
-// Removes item from indexed object & key array
-function removeFromData({ keyArray, indexedObject, token }) {
-  const newKeyArray = keyArray.filter( item => item !== token);
-  const newIndexedObject = _.omit(indexedObject, token);
-  return {
-    newKeyArray,
-    newIndexedObject
-  };
-}
 
 
 export {
   dataReduce,
-  updateToData,
-  appendToData,
-  removeFromData
+  appendToKeyedArray,
+  writeToIndexedObject,
+  removeFromKeyedArray,
+  removeFromIndexedObject
 }

@@ -3,6 +3,8 @@ import { createReducer } from 'redux-act';
 
 import actions from './actions';
 
+import { appendToKeyedArray, writeToIndexedObject, removeFromKeyedArray, removeFromIndexedObject } from 'utils/dataStructures';
+
 const fetchListCompleted = createReducer({
   [actions.fetchListSuccess]: () => true,
   // [actions.resetList]: () => false,
@@ -10,26 +12,28 @@ const fetchListCompleted = createReducer({
 
 const keyedArray = createReducer({
   [actions.fetchListSuccess]: (state, payload) => {
-    console.log('payload', payload.data.indexedObject)
-    return payload.data.indexedObject
+    return payload.data.keyedArray;
   },
-  // [actions.resetList]: () => false,
+  [actions.createSuccess]: (state, payload) => appendToKeyedArray(state, payload.data.token),
+  [actions.destroySuccess]: (state, payload) => removeFromKeyedArray(state, payload.data.token),
 }, []);
 
 const indexedObject = createReducer({
   [actions.fetchListSuccess]: (state, payload) => {
-    return payload.data.keyedArray
+    return payload.data.indexedObject;
   },
-  // [actions.resetList]: () => false,
+  [actions.createSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
+  [actions.updateSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
+  [actions.destroySuccess]: (state, payload) => removeFromIndexedObject(state, payload.data.token),
 }, {});
 
 
 const list = combineReducers({
+  fetchListCompleted,
   keyedArray,
   indexedObject
 });
 
 export default combineReducers({
-  fetchListCompleted,
   list
 });

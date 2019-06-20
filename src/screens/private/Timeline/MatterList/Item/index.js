@@ -4,10 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown } from 'react-bootstrap';
 
+import { useDispatch } from 'react-redux';
+
 import replaceUrlParams from 'utils/replaceUrlParams';
 import routes from 'routes';
 
-function Item({ token, title, removeMatter, setEditToken}) {
+
+import {
+  // selectors as buyerAgentSelectors,
+  actions as matterActions,
+} from 'ducks/matter';
+
+function Item({ token, title, setEditToken}) {
+  const dispatch = useDispatch();
 
   return (
     <div className="col-12 my-4 d-flex align-items-stretch">
@@ -22,7 +31,7 @@ function Item({ token, title, removeMatter, setEditToken}) {
               <Dropdown.Item onClick={() => setEditToken(token)}>
                 Edit
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => removeMatter({ token })}>
+              <Dropdown.Item onClick={() => dispatch(matterActions.destroy({ token }))}>
                 Delete
               </Dropdown.Item>
             </Dropdown.Menu>

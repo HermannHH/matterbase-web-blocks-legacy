@@ -5,15 +5,23 @@ import { Formik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { object, string, setLocale } from "yup";
 
+import { useDispatch } from 'react-redux';
+
+import {
+  // selectors as buyerAgentSelectors,
+  actions as matterActions,
+} from 'ducks/matter';
+
 setLocale({
   mixed: {
     required: "Is required"
   },
 });
 
-function MatterModal({ matter, addMatter, updateMatter, showMatterModal, setShowMatterModal }) {
+function MatterModal({ matter, showMatterModal, setShowMatterModal }) {
 
   // const [state, setState] = useState({ isSubmitting: false });
+  const dispatch = useDispatch();
 
   const validationSchema = object().shape({
     title: string()
@@ -24,7 +32,6 @@ function MatterModal({ matter, addMatter, updateMatter, showMatterModal, setShow
   const isUpdate = Object.keys(matter).length;
   const initialTitle = isUpdate ? matter.title : '';
 
-  console.log('I am matter', matter, initialTitle   )
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
       <Modal.Header closeButton />
@@ -33,9 +40,9 @@ function MatterModal({ matter, addMatter, updateMatter, showMatterModal, setShow
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             if(isUpdate) {
-              await updateMatter({ token: matter.token, title: values.title });
+              await dispatch(matterActions.update({ token: matter.token, title: values.title }));
             } else {
-              await addMatter({ title: values.title });
+              await dispatch(matterActions.create({ title: values.title }));
             }
             
             setShowMatterModal(false);

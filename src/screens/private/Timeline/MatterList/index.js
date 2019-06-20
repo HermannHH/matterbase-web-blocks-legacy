@@ -1,29 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
 
 import NoResults from 'screens/private/components/NoResults';
 
 import Item from 'screens/private/Timeline/MatterList/Item';
 import MatterModal from 'screens/private/Timeline/MatterModal';
 
-function MatterList( {
-  data: { matters, mattersIndex, showMatterModal, editToken },
-  actions: { addMatter, removeMatter, updateMatter, setShowMatterModal, setEditToken } 
-}) {
+function MatterList() {
+
+  const [showMatterModal, setShowMatterModal] = useState(false);
+  const [editToken, setEditToken] = useState('');
+  useEffect(() => {
+    if (editToken) {
+      setShowMatterModal(true);
+    } else {
+      setShowMatterModal(false);
+    }
+  }, [editToken]);
+  useEffect(() => {
+    if (!showMatterModal) {
+      setEditToken('');
+    }
+  }, [showMatterModal]);
+
+
+  const matterListFetchListCompleted = useSelector(state => state.matter.list.fetchListCompleted);
+  const matterListIndexedObject = useSelector(state => state.matter.list.indexedObject);
+  const matterListKeyedArray = useSelector(state => state.matter.list.keyedArray);
 
   let content = <NoResults />;
-  if (mattersIndex.length) {
-    content = mattersIndex.map( matter => <Item key={matter} token={matter} title={matters[matter].title} removeMatter={removeMatter} setEditToken={setEditToken}/>)
+  if (matterListKeyedArray.length) {
+    content = matterListKeyedArray.map( matter => <Item key={matter} token={matter} title={matterListIndexedObject[matter].title} setEditToken={setEditToken}/>)
   }
 
   return (
     <div className="container">
-      <div className="my-5">
-        <Button variant="primary" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
-        <MatterModal matter={matters[editToken] || {}} addMatter={addMatter} updateMatter={updateMatter} setShowMatterModal={setShowMatterModal} showMatterModal={showMatterModal}/>
-        {content}
-      </div>
+      {matterListFetchListCompleted ?
+        <div className="my-5">
+          <Button variant="primary" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
+          <MatterModal matter={matterListIndexedObject[editToken] || {}} setShowMatterModal={setShowMatterModal} showMatterModal={showMatterModal} />
+          {content}
+        </div>
+        :
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      }
     </div>
   );
 }
