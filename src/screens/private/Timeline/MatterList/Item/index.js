@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown } from 'react-bootstrap';
+import { push } from 'connected-react-router';
 
 import { useDispatch } from 'react-redux';
 
@@ -38,7 +39,7 @@ function Item({ token, title, setEditToken}) {
           </Dropdown>
         </div>
         <div className="card-actions">
-          <a className="btn btn-light dodger-blue-text" href={replaceUrlParams(':matterId', routes.private.blocks.path, token)}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
+          <a className="btn btn-light dodger-blue-text" onClick={() => dispatch(push(replaceUrlParams(':matterId', routes.blocks.path, token)))}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
         </div>
       </div>
     </div>

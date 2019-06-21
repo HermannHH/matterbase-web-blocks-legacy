@@ -7,7 +7,7 @@ import { appendToKeyedArray, writeToIndexedObject, removeFromKeyedArray, removeF
 
 const fetchListCompleted = createReducer({
   [actions.fetchListSuccess]: () => true,
-  // [actions.resetList]: () => false,
+  [actions.resetList]: () => false,
 }, false);
 
 const keyedArray = createReducer({
@@ -16,6 +16,7 @@ const keyedArray = createReducer({
   },
   [actions.createSuccess]: (state, payload) => appendToKeyedArray(state, payload.data.token),
   [actions.destroySuccess]: (state, payload) => removeFromKeyedArray(state, payload.data.token),
+  [actions.resetList]: () => ([]),
 }, []);
 
 const indexedObject = createReducer({
@@ -25,6 +26,7 @@ const indexedObject = createReducer({
   [actions.createSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
   [actions.updateSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
   [actions.destroySuccess]: (state, payload) => removeFromIndexedObject(state, payload.data.token),
+  [actions.resetList]: () => ({}),
 }, {});
 
 

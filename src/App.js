@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Router } from '@reach/router';
+
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";

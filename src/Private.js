@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router } from '@reach/router';
+import { Route, Switch } from 'react-router';
 
 import routes from 'routes';
 
@@ -13,13 +14,10 @@ import Timeline from 'screens/private/Timeline';
 
 function Private() {
   return (
-    <Router>
-      <Timeline path={routes.home.path} />
-      {/* <ChangePassword path="/change_password" /> */}
-      <Notepad path={routes.private.notepad.path} />
-      <TaskList path={routes.private.tasklist.path} />
-      <Blocks path={routes.private.blocks.path} />
-    </Router>
+    <Switch>
+      <Route exact path={routes.home.path} render={() => (<Timeline />)} />
+      <Route exact path={routes.blocks.path} render={() => (<Blocks />)} />
+    </Switch>
   );
 }
 

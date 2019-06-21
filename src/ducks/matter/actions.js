@@ -30,6 +30,9 @@ function fetchList() {
   };
 };
 
+// Reset List
+const resetList = createAction('Resets matter list to original state');
+
 // Create Matter
 const createRequest = createAction('Create matter list mutation call started.');
 const createSuccess = createAction('Create matter list mutation success.', ({ data }) => ({ data }));
@@ -110,6 +113,7 @@ export default {
   fetchList,
   fetchListSuccess,
   fetchListFailure,
+  resetList,
   // 
   create,
   createSuccess,

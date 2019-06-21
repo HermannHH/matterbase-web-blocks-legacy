@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 import NoResults from 'screens/private/components/NoResults';
@@ -9,7 +9,21 @@ import NoResults from 'screens/private/components/NoResults';
 import Item from 'screens/private/Timeline/MatterList/Item';
 import MatterModal from 'screens/private/Timeline/MatterModal';
 
+
+import {
+  // selectors as buyerAgentSelectors,
+  actions as matterActions,
+} from 'ducks/matter';
+
 function MatterList() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(matterActions.fetchList());
+    return () => {
+      dispatch(matterActions.resetList());
+    };
+  }, []);
 
   const [showMatterModal, setShowMatterModal] = useState(false);
   const [editToken, setEditToken] = useState('');
@@ -40,8 +54,12 @@ function MatterList() {
     <div className="container">
       {matterListFetchListCompleted ?
         <div className="my-5">
-          <Button variant="primary" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
-          <MatterModal matter={matterListIndexedObject[editToken] || {}} setShowMatterModal={setShowMatterModal} showMatterModal={showMatterModal} />
+          <div className="row">
+            <div className="col-12">
+              <Button variant="primary" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
+              <MatterModal matter={matterListIndexedObject[editToken] || {}} setShowMatterModal={setShowMatterModal} showMatterModal={showMatterModal} />
+            </div>
+          </div>
           {content}
         </div>
         :
