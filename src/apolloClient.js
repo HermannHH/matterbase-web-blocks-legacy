@@ -15,9 +15,21 @@ const httpLink = new HttpLink({
 
 const cache = new InMemoryCache();
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
 const client = new ApolloClient({
   link: httpLink,
   cache,
+  defaultOptions: defaultOptions,
 });
 // const client = new ApolloClient({
 //   networkInterface: createNetworkInterface('http://localhost:5000/graphql'),

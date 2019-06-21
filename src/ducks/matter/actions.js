@@ -17,7 +17,7 @@ function fetchList() {
       const { data } = await apolloClient.query({
         query: listMatters
       });
-      console.log('request', data)
+      console.log('request', data.matters)
       dispatch(fetchListSuccess({
         data: dataReduce(data.matters, 'token'),
       }));
