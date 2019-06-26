@@ -61,10 +61,25 @@ mutation blockCreate($matterToken: String!, $scopeType: String!) {
 `;
 
 
+const blockDelete = gql`
+mutation blockDelete($token: String!) {
+  blockDelete(input: {
+    token: $token
+  }) {
+    block {
+      token
+    }
+    errors
+  }
+}
+`;
+
+
 export {
   matterCreate,
   matterDelete,
   matterUpdate,
   // 
-  blockCreate
+  blockCreate,
+  blockDelete
 }

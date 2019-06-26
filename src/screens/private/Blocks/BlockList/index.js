@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import Tasks from './Tasks';
+
 export default function BlockList() {
 
   const matterEntityFetchEntityCompleted = useSelector(state => state.matter.entity.fetchEntityCompleted);
@@ -13,7 +15,7 @@ export default function BlockList() {
   let content = <h1>No results</h1>;
   if (matterEntityFetchEntityCompleted && matterEntityContent.blocksCount > 0) {
     content = matterEntityBlocksKeyedArray.map( item => {
-      return <h1 key={matterEntityBlocksIndexedObject[item].token}>{matterEntityBlocksIndexedObject[item].token}</h1>
+      return <Tasks key={matterEntityBlocksIndexedObject[item].token} token={matterEntityBlocksIndexedObject[item].token}/>
     })
   }
 

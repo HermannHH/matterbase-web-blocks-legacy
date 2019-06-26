@@ -8,7 +8,8 @@ import {
   matterCreate,
   matterDelete,
   matterUpdate,
-  blockCreate
+  blockCreate,
+  blockDelete
 } from './mutations';
 
 // Fetch List
@@ -172,6 +173,30 @@ function createBlock({ matterToken, scopeType }) {
   };
 };
 
+// Delete Block
+const destroyBlockRequest = createAction('Destroy block mutation call started.');
+const destroyBlockSuccess = createAction('Destroy block mutation success.', ({ data }) => ({ data }));
+const destroyBlockFailure = createAction('Destroy block mutation failure.', ({ data }) => ({ data }));
+function destroyBlock({ token }) {
+  return async (dispatch) => {
+    dispatch(destroyBlockRequest());
+    try {
+      const { data } = await apolloClient.mutate({
+        variables: { token },
+        mutation: blockDelete
+      })
+      console.log('request', data)
+      dispatch(destroyBlockSuccess({
+        data: data.blockDelete.block,
+      }));
+    } catch (err) {
+      console.log('errrrrr', err)
+      dispatch(destroyBlockFailure({
+        ...err,
+      }));
+    }
+  };
+};
 export default {
   fetchList,
   fetchListSuccess,
@@ -199,4 +224,8 @@ export default {
   createBlock,
   createBlockSuccess,
   createBlockFailure,
+  // 
+  destroyBlock,
+  destroyBlockSuccess,
+  destroyBlockFailure,
 };

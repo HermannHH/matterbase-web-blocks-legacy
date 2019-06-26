@@ -47,6 +47,10 @@ const content = createReducer({
       ...state,
       blocksCount: state.blocksCount + 1
   }),
+  [actions.destroyBlockSuccess]: (state, payload) => ({
+      ...state,
+      blocksCount: state.blocksCount - 1
+  }),
   [actions.resetEntity]: () => ({}),
 }, {});
 
@@ -57,6 +61,7 @@ const blocksKeyedArray = createReducer({
     return data.keyedArray;
   },
   [actions.createBlockSuccess]: (state, payload) => appendToKeyedArray(state, payload.data.token),
+  [actions.destroyBlockSuccess]: (state, payload) => removeFromKeyedArray(state, payload.data.token),
   [actions.resetEntity]: () => ([]),
 }, []);
 
@@ -66,6 +71,7 @@ const blocksIndexedObject = createReducer({
     return data.indexedObject;
   },
   [actions.createBlockSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
+  [actions.destroyBlockSuccess]: (state, payload) => removeFromIndexedObject(state, payload.data.token),
   [actions.resetEntity]: () => ({}),
 }, {});
 
