@@ -52,6 +52,7 @@ const blocksKeyedArray = createReducer({
     const data = dataReduce(payload.data.blocks, 'token');
     return data.keyedArray;
   },
+  [actions.createBlockSuccess]: (state, payload) => appendToKeyedArray(state, payload.data.token),
   [actions.resetEntity]: () => ([]),
 }, []);
 
@@ -60,6 +61,7 @@ const blocksIndexedObject = createReducer({
     const data = dataReduce(payload.data.blocks, 'token');
     return data.indexedObject;
   },
+  [actions.createBlockSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
   [actions.resetEntity]: () => ({}),
 }, {});
 

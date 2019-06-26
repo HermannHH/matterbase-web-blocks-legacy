@@ -34,6 +34,16 @@ function AddBlock() {
 
   const [displayModal, setDisplayModal] = useState(false);
 
+  async function createTaskBlock() {
+    await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }));
+    setDisplayModal(false);
+  }
+
+  async function createStickyNoteBlock() {
+    await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }));
+    setDisplayModal(false);
+  }
+
   return (
     <Wrapper>
       <Button variant="secondary" size="lg" block onClick={() => setDisplayModal(true)}>
@@ -45,13 +55,13 @@ function AddBlock() {
           </Modal.Header>
           <Modal.Body>
             <Option
-              handleClick={() => dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }))}
+              handleClick={() => createTaskBlock()}
               heading="Task List"
               description="An easy and convenient way to manage tasks"
               icon={faTasks}
             />
             <Option
-              handleClick={() => dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }))}
+              handleClick={() => createStickyNoteBlock()}
               heading="Sticky Notes"
               description="An easy and convenient way to manage tasks"
               icon={faStickyNote}
