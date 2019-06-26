@@ -43,6 +43,10 @@ const fetchEntityCompleted = createReducer({
 
 const content = createReducer({
   [actions.fetchEntitySuccess]: (state, payload) => _.omit(payload.data, 'blocks'),
+  [actions.createBlockSuccess]: (state, payload) => ({
+      ...state,
+      blocksCount: state.blocksCount + 1
+  }),
   [actions.resetEntity]: () => ({}),
 }, {});
 
