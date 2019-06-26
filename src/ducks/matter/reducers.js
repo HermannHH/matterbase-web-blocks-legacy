@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from 'redux-act';
+import _ from 'lodash';
 
 import actions from './actions';
 
@@ -30,12 +31,39 @@ const indexedObject = createReducer({
 }, {});
 
 
+// Entity
+const fetchEntityCompleted = createReducer({
+  [actions.fetchEntitySuccess]: () => true,
+  // [actions.resetList]: () => false,
+}, false);
+
+
+const content = createReducer({
+  [actions.fetchEntitySuccess]: (state, payload) => _.omit(payload.data, 'blocks'),
+  // [actions.resetList]: () => false,
+}, {});
+
+
+const blocks = createReducer({
+  [actions.fetchEntitySuccess]: (state, payload) => payload.data.blocks,
+  // [actions.resetList]: () => false,
+}, []);
+
+
 const list = combineReducers({
   fetchListCompleted,
   keyedArray,
   indexedObject
 });
 
+
+const entity = combineReducers({
+  fetchEntityCompleted,
+  content,
+  blocks
+});
+
 export default combineReducers({
-  list
+  list,
+  entity
 });

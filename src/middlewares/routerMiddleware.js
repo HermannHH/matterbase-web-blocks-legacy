@@ -43,14 +43,24 @@ function matterListRoutes() {
   return ['home'];
 }
 
+function matterEntityRoutes() {
+  return ['blocks'];
+}
+
 const routerMiddleware = store => next => (action) => {
   if (action.type === '@@router/LOCATION_CHANGE') {
-    // clearData(store);
+    clearData(store);
     const state = store.getState();
     const routeData = createStructuredRouteData(action.payload.location.pathname);
-    // if (matterListRoutes().includes(routeData.key)) {
-    //   store.dispatch(matterActions.fetchList());
-    // };
+    if (matterListRoutes().includes(routeData.key)) {
+      store.dispatch(matterActions.fetchList());
+    };
+
+
+    if (matterEntityRoutes().includes(routeData.key)) {
+      store.dispatch(matterActions.fetchEntity({ token: routeData.route.params.matterId }));
+    // console.log('routeData', routeData.route.params.matterId)
+    };
     
   }
   next(action);

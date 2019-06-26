@@ -3,7 +3,7 @@ import { createAction } from 'redux-act';
 import apolloClient from 'apolloClient';
 
 import { dataReduce } from 'utils/dataStructures';
-import { listMatters } from './queries';
+import { listMatters, showEntity } from './queries';
 import { matterCreate, matterDelete, matterUpdate } from './mutations';
 
 // Fetch List
@@ -109,6 +109,33 @@ function update({ token, title }) {
   };
 };
 
+
+
+// Fetch Entity
+const fetchEntityRequest = createAction('Fetch matter entity query call started.');
+const fetchEntitySuccess = createAction('Fetch matter entity query success.', ({ data }) => ({ data }));
+const fetchEntityFailure = createAction('Fetch matter entity query failure.', ({ data }) => ({ data }));
+function fetchEntity({ token }) {
+  return async (dispatch) => {
+    dispatch(fetchEntityRequest());
+    try {
+      const { data } = await apolloClient.query({
+        query: showEntity,
+        variables: { token },
+      });
+      console.log('request', data)
+      dispatch(fetchEntitySuccess({
+        data: data.matter,
+      }));
+    } catch (err) {
+      console.log('errrrrr', err)
+      dispatch(fetchEntityFailure({
+        ...err,
+      }));
+    }
+  };
+};
+
 export default {
   fetchList,
   fetchListSuccess,
@@ -126,4 +153,10 @@ export default {
   update,
   updateSuccess,
   updateFailure,
+  // 
+  fetchEntity,
+  fetchEntitySuccess,
+  fetchEntityFailure,
+  // resetList,
+  // 
 };
