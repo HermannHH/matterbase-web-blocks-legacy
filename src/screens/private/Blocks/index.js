@@ -10,9 +10,8 @@ import standard from "screens/private/layouts/standard";
 
 import SubNavbar from "screens/private/components/SubNavbar";
 
-import AddBlock from "screens/private/Blocks/AddBlock";
-
-import Block from "components/Block";
+import AddBlock from "./AddBlock";
+import BlockList from "./BlockList";
 
 function Blocks({ token }) {
   return (
@@ -20,13 +19,8 @@ function Blocks({ token }) {
     <SubNavbar />
     <div className="container" style={{paddingTop: "66px"}}>
       <div className="row d-flex justify-content-center">
-        <div className="col-12 col-md-10 test">
-          <div className="row">
-              <div className="col-12">
-                <Block type="tasks"/>
-                <Block type="sticky_notes"/>
-              </div>          
-            </div>
+        <div className="col-12 col-md-10">
+          <BlockList />
           <div className="row">
             <div className="col-12">
               <AddBlock />

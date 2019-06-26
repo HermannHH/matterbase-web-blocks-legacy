@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 import { faTasks, faStickyNote } from '@fortawesome/free-solid-svg-icons';
 
-import Option from './AddBlock/Option';
+import Option from './Option';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
 
 
-export default function AddBlock() {
+function AddBlock() {
 
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -46,3 +46,6 @@ export default function AddBlock() {
     </Wrapper>
   )
 }
+
+
+export default AddBlock;
