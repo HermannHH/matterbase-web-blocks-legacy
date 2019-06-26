@@ -5,11 +5,16 @@ export default function BlockList() {
 
   const matterEntityFetchEntityCompleted = useSelector(state => state.matter.entity.fetchEntityCompleted);
   const matterEntityContent= useSelector(state => state.matter.entity.content);
-  // const matterListKeyedArray = useSelector(state => state.matter.list.keyedArray);
+  const matterEntityBlocksKeyedArray = useSelector(state => state.matter.entity.blocksKeyedArray);
+  const matterEntityBlocksIndexedObject = useSelector(state => state.matter.entity.blocksIndexedObject);
+
+
 
   let content = <h1>No results</h1>;
   if (matterEntityFetchEntityCompleted && matterEntityContent.blocksCount > 0) {
-    content = <h1>I have blocks</h1>
+    content = matterEntityBlocksKeyedArray.map( item => {
+      return <h1 key={matterEntityBlocksIndexedObject[item].token}>{matterEntityBlocksIndexedObject[item].token}</h1>
+    })
   }
 
 
