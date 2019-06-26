@@ -9,6 +9,7 @@ import {
 
 function clearData(store) {
   store.dispatch(matterActions.resetList());
+  store.dispatch(matterActions.resetEntity());
 }
 
 function findRoute(path) {

@@ -34,19 +34,19 @@ const indexedObject = createReducer({
 // Entity
 const fetchEntityCompleted = createReducer({
   [actions.fetchEntitySuccess]: () => true,
-  // [actions.resetList]: () => false,
+  [actions.resetEntity]: () => false,
 }, false);
 
 
 const content = createReducer({
   [actions.fetchEntitySuccess]: (state, payload) => _.omit(payload.data, 'blocks'),
-  // [actions.resetList]: () => false,
+  [actions.resetEntity]: () => ({}),
 }, {});
 
 
 const blocks = createReducer({
   [actions.fetchEntitySuccess]: (state, payload) => payload.data.blocks,
-  // [actions.resetList]: () => false,
+  [actions.resetEntity]: () => ([]),
 }, []);
 
 

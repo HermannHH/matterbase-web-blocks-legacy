@@ -136,6 +136,10 @@ function fetchEntity({ token }) {
   };
 };
 
+
+// Reset Entity
+const resetEntity = createAction('Resets matter entity to original state');
+
 export default {
   fetchList,
   fetchListSuccess,
@@ -157,6 +161,6 @@ export default {
   fetchEntity,
   fetchEntitySuccess,
   fetchEntityFailure,
-  // resetList,
-  // 
+  //
+  resetEntity
 };
