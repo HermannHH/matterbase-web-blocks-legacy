@@ -44,8 +44,27 @@ mutation matterUpdate($token: String!, $title: String) {
 `;
 
 
+// Blocks
+const blockCreate = gql`
+mutation blockCreate($matterToken: String!, $scopeType: String!) {
+  blockCreate(input: {
+    matterToken: $matterToken
+    scopeType: $scopeType
+  }) {
+    block {
+      token
+      scopeType
+    }
+    errors
+  }
+}
+`;
+
+
 export {
   matterCreate,
   matterDelete,
-  matterUpdate
+  matterUpdate,
+  // 
+  blockCreate
 }

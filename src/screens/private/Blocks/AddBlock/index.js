@@ -2,7 +2,17 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Button, Modal } from 'react-bootstrap';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { faTasks, faStickyNote } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
+import {
+  // selectors as buyerAgentSelectors,
+  actions as matterActions,
+} from 'ducks/matter';
 
 import Option from './Option';
 
@@ -16,6 +26,11 @@ const Wrapper = styled.div`
 
 
 function AddBlock() {
+  
+  const matterEntityContent= useSelector(state => state.matter.entity.content);
+
+  const dispatch = useDispatch();
+
 
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -30,13 +45,13 @@ function AddBlock() {
           </Modal.Header>
           <Modal.Body>
             <Option
-              handleClick={() => console.log('tt')}
+              handleClick={() => dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }))}
               heading="Task List"
               description="An easy and convenient way to manage tasks"
               icon={faTasks}
             />
             <Option
-              handleClick={() => console.log('tt')}
+              handleClick={() => dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }))}
               heading="Sticky Notes"
               description="An easy and convenient way to manage tasks"
               icon={faStickyNote}

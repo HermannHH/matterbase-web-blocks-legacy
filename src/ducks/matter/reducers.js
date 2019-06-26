@@ -4,6 +4,9 @@ import _ from 'lodash';
 
 import actions from './actions';
 
+
+import { dataReduce } from 'utils/dataStructures';
+
 import { appendToKeyedArray, writeToIndexedObject, removeFromKeyedArray, removeFromIndexedObject } from 'utils/dataStructures';
 
 const fetchListCompleted = createReducer({
@@ -44,11 +47,21 @@ const content = createReducer({
 }, {});
 
 
-const blocks = createReducer({
-  [actions.fetchEntitySuccess]: (state, payload) => payload.data.blocks,
+const blocksKeyedArray = createReducer({
+  [actions.fetchEntitySuccess]: (state, payload) => {
+    const data = dataReduce(payload.data.blocks, 'token');
+    return data.keyedArray;
+  },
   [actions.resetEntity]: () => ([]),
 }, []);
 
+const blocksIndexedObject = createReducer({
+  [actions.fetchEntitySuccess]: (state, payload) => {
+    const data = dataReduce(payload.data.blocks, 'token');
+    return data.indexedObject;
+  },
+  [actions.resetEntity]: () => ({}),
+}, {});
 
 const list = combineReducers({
   fetchListCompleted,
@@ -60,7 +73,8 @@ const list = combineReducers({
 const entity = combineReducers({
   fetchEntityCompleted,
   content,
-  blocks
+  blocksKeyedArray,
+  blocksIndexedObject
 });
 
 export default combineReducers({

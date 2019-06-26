@@ -4,7 +4,12 @@ import apolloClient from 'apolloClient';
 
 import { dataReduce } from 'utils/dataStructures';
 import { listMatters, showEntity } from './queries';
-import { matterCreate, matterDelete, matterUpdate } from './mutations';
+import {
+  matterCreate,
+  matterDelete,
+  matterUpdate,
+  blockCreate
+} from './mutations';
 
 // Fetch List
 const fetchListRequest = createAction('Fetch matter list query call started.');
@@ -140,6 +145,33 @@ function fetchEntity({ token }) {
 // Reset Entity
 const resetEntity = createAction('Resets matter entity to original state');
 
+
+// Create Block
+const createBlockRequest = createAction('Create block list mutation call started.');
+const createBlockSuccess = createAction('Create block list mutation success.', ({ data }) => ({ data }));
+const createBlockFailure = createAction('Create block list mutation failure.', ({ data }) => ({ data }));
+function createBlock({ matterToken, scopeType }) {
+  return async (dispatch) => {
+    dispatch(createBlockRequest());
+    try {
+      const { data } = await apolloClient.mutate({
+        variables: { matterToken, scopeType },
+        mutation: blockCreate
+      })
+      console.log('request', data)
+      dispatch(createBlockSuccess({
+        data: data.blockCreate.block,
+      }));
+      // console.log('apolloClient', apolloClient)
+    } catch (err) {
+      console.log('errrrrr', err)
+      dispatch(createBlockFailure({
+        ...err,
+      }));
+    }
+  };
+};
+
 export default {
   fetchList,
   fetchListSuccess,
@@ -162,5 +194,9 @@ export default {
   fetchEntitySuccess,
   fetchEntityFailure,
   //
-  resetEntity
+  resetEntity,
+  // 
+  createBlock,
+  createBlockSuccess,
+  createBlockFailure,
 };
