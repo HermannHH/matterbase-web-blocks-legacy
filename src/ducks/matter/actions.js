@@ -9,7 +9,8 @@ import {
   matterDelete,
   matterUpdate,
   blockCreate,
-  blockDelete
+  blockDelete,
+  taskCreate
 } from './mutations';
 
 // Fetch List
@@ -197,6 +198,33 @@ function destroyBlock({ token }) {
     }
   };
 };
+
+
+// Create Task
+const createTaskRequest = createAction('Create task mutation call started.');
+const createTaskSuccess = createAction('Create task mutation success.', ({ data }) => ({ data }));
+const createTaskFailure = createAction('Create task mutation failure.', ({ data }) => ({ data }));
+function createTask({ blockToken, body }) {
+  return async (dispatch) => {
+    dispatch(createTaskRequest());
+    try {
+      const { data } = await apolloClient.mutate({
+        variables: { blockToken, body },
+        mutation: taskCreate
+      })
+      console.log('request', data)
+      dispatch(createTaskSuccess({
+        data: data.taskCreate.task,
+      }));
+      // console.log('apolloClient', apolloClient)
+    } catch (err) {
+      console.log('errrrrr', err)
+      dispatch(createTaskFailure({
+        ...err,
+      }));
+    }
+  };
+};
 export default {
   fetchList,
   fetchListSuccess,
@@ -228,4 +256,8 @@ export default {
   destroyBlock,
   destroyBlockSuccess,
   destroyBlockFailure,
+  // 
+  createTask,
+  createTaskSuccess,
+  createTaskFailure,
 };

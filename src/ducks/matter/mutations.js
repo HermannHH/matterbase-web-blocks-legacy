@@ -74,6 +74,23 @@ mutation blockDelete($token: String!) {
 }
 `;
 
+// Tasks
+const taskCreate = gql`
+mutation taskCreate($blockToken: String!, $body: String!) {
+  taskCreate(input: {
+    blockToken: $blockToken
+    body: $body
+  }) {
+    task {
+      body
+      token
+      isCompleted
+    }
+    errors
+  }
+}
+`;
+
 
 export {
   matterCreate,
@@ -81,5 +98,7 @@ export {
   matterUpdate,
   // 
   blockCreate,
-  blockDelete
+  blockDelete,
+  // 
+  taskCreate
 }

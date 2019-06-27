@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Tasks from './Tasks';
+import StickyNotes from './StickyNotes';
 
 export default function BlockList() {
 
@@ -15,7 +16,17 @@ export default function BlockList() {
   let content = <h1>No results</h1>;
   if (matterEntityFetchEntityCompleted && matterEntityContent.blocksCount > 0) {
     content = matterEntityBlocksKeyedArray.map( item => {
-      return <Tasks key={matterEntityBlocksIndexedObject[item].token} token={matterEntityBlocksIndexedObject[item].token}/>
+      const block = matterEntityBlocksIndexedObject[item];
+      switch (block.general.scopeType) {
+        case 'tasks':
+          return <Tasks key={item} token={item}/>;
+    
+        case 'sticky_notes':
+          return <StickyNotes key={item} token={item}/>;
+    
+        default:
+          break;
+      }
     })
   }
 
