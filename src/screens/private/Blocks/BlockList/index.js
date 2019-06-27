@@ -19,7 +19,7 @@ export default function BlockList() {
       const block = matterEntityBlocksIndexedObject[item];
       switch (block.general.scopeType) {
         case 'tasks':
-          return <Tasks key={item} token={item}/>;
+          return <Tasks key={item} token={item} contentKeyedArray={block.contentKeyedArray} contentIndexedObject={block.contentIndexedObject}/>;
     
         case 'sticky_notes':
           return <StickyNotes key={item} token={item}/>;
