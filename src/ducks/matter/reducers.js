@@ -66,32 +66,7 @@ const blocksKeyedArray = createReducer({
 }, []);
 
 const blocksIndexedObject = createReducer({
-  [actions.fetchEntitySuccess]: (state, payload) => {
-    let output = {};
-    const data = dataReduce(payload.data.blocks, 'token');
-    data.keyedArray.forEach(x => {
-      const indexedObject = data.indexedObject[x];
-      const reducedBlockContentData = dataReduce(indexedObject.content, 'token');
-      output =  {
-        ...output,
-        [x] : {
-          general: _.omit(indexedObject, 'content'),
-          contentKeyedArray: reducedBlockContentData.keyedArray,
-          contentIndexedObject: reducedBlockContentData.indexedObject,
-        }
-      };
-
-      // console.log('output', output)
-      return {
-        ...output
-      }
-    });
-    console.log('output', output)
-    // const generalData = _.omit(data, 'content');
-    // const reducedItemData = dataReduce(data.content, 'token');
-    
-    return output;
-  },
+  [actions.fetchEntitySuccess]: (state, payload) => payload.data,
   [actions.createBlockSuccess]: (state, payload) => writeToIndexedObject(state, payload.data.token, payload.data),
   [actions.destroyBlockSuccess]: (state, payload) => removeFromIndexedObject(state, payload.data.token),
   [actions.resetEntity]: () => ({}),

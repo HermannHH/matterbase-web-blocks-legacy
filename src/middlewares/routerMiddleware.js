@@ -6,6 +6,8 @@ import {
   actions as matterActions,
 } from 'ducks/matter';
 
+import * as events from 'core/events';
+
 
 function clearData(store) {
   store.dispatch(matterActions.resetList());
@@ -55,6 +57,7 @@ const routerMiddleware = store => next => (action) => {
     const routeData = createStructuredRouteData(action.payload.location.pathname);
     if (matterListRoutes().includes(routeData.key)) {
       store.dispatch(matterActions.fetchList());
+      store.dispatch(events.mattersEvents.listMattersRequest());
     };
 
 

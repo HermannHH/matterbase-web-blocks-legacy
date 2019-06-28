@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useQuery } from 'react-apollo-hooks';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -9,7 +10,13 @@ import NoResults from 'screens/private/components/NoResults';
 import Item from 'screens/private/Timeline/MatterList/Item';
 import MatterModal from 'screens/private/Timeline/MatterModal';
 
+import { listMatters } from './queries';
+
 function MatterList() {
+
+  const { data, error, loading } = useQuery(listMatters);
+
+  console.log('data, error, loading', data, error, loading)
 
 
   const [showMatterModal, setShowMatterModal] = useState(false);

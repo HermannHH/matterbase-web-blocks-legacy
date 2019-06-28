@@ -12,23 +12,31 @@ export default function BlockList() {
   const matterEntityBlocksIndexedObject = useSelector(state => state.matter.entity.blocksIndexedObject);
 
 
+  
 
   let content = <h1>No results</h1>;
   if (matterEntityFetchEntityCompleted && matterEntityContent.blocksCount > 0) {
     content = matterEntityBlocksKeyedArray.map( item => {
       const block = matterEntityBlocksIndexedObject[item];
-      switch (block.general.scopeType) {
-        case 'tasks':
-          return <Tasks key={item} token={item} contentKeyedArray={block.contentKeyedArray} contentIndexedObject={block.contentIndexedObject}/>;
-    
-        case 'sticky_notes':
-          return <StickyNotes key={item} token={item}/>;
-    
-        default:
-          break;
+      console.log('block', block)
+      if (block.general.scopeType === "tasks") {
+        return <Tasks key={item} token={item} contentKeyedArray={block.contentKeyedArray} contentIndexedObject={block.contentIndexedObject}/>;
+      } else if (block.general.scopeType === "sticky_notes") {
+        return <StickyNotes key={item} token={item}/>;
       }
-    })
-  }
+  //     switch (block.general.scopeType) {
+  //       case 'tasks':
+  //         return <Tasks key={item} token={item} contentKeyedArray={block.contentKeyedArray} contentIndexedObject={block.contentIndexedObject}/>;
+    
+  //       case 'sticky_notes':
+  //         return <StickyNotes key={item} token={item}/>;
+    
+  //       default:
+  //         break;
+  //     }
+  //   })
+    console.log('okay')
+    })}
 
 
   return (

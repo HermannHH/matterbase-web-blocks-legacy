@@ -1,6 +1,7 @@
 import { createAction } from 'redux-act';
 
 import apolloClient from 'apolloClient';
+import _ from 'lodash';
 
 import { dataReduce } from 'utils/dataStructures';
 import { listMatters, showEntity } from './queries';
@@ -130,9 +131,26 @@ function fetchEntity({ token }) {
         query: showEntity,
         variables: { token },
       });
-      console.log('request', data)
+      // console.log('request', data)
+      let output = {};
+      const transformedData = dataReduce(data.matter.blocks, 'token');
+      transformedData.keyedArray.forEach(x => {
+        const indexedObject = transformedData.indexedObject[x];
+        const reducedBlockContentData = dataReduce(indexedObject.content, 'token');
+        output =  {
+          ...output,
+          [x] : {
+            general: _.omit(indexedObject, 'content'),
+            contentKeyedArray: reducedBlockContentData.keyedArray,
+            contentIndexedObject: reducedBlockContentData.indexedObject,
+          }
+        };
+      });
+
+      console.log('zssszssz', output)
+
       dispatch(fetchEntitySuccess({
-        data: data.matter,
+        data: output,
       }));
     } catch (err) {
       console.log('errrrrr', err)
