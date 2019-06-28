@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
-import MatterList from "screens/private/Timeline/MatterList";
-import standard from "screens/private/layouts/standard";
-
+import standard from 'screens/private/layouts/standard';
 
 function Timeline() {
-
   return (
-    <div className="container">
-        <div className="my-5">
-          <MatterList/>
-        </div>
+    <div>
+      Hello
     </div>
-  );
-}
-
-Timeline.propTypes = {};
+  )
+};
 
 export default standard(Timeline);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown } from 'react-bootstrap';
-import { push } from 'connected-react-router';
 
 import { useDispatch } from 'react-redux';
 

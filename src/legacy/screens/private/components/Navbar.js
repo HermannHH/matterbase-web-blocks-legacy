@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { navigate } from "@reach/router"
 
 import { Navbar as BootstrapNavbar, Dropdown } from 'react-bootstrap';
 
@@ -18,7 +17,7 @@ const Wrapper = withTheme(styled.nav`
 function Navbar() {
   return (
     <BootstrapNavbar className="navbar navbar-expand-lg navbar-light sticky-top white-background has-shadow">
-    <NavbarBrand onClick={() => navigate(routes.private.home.path)} />
+    <NavbarBrand href={routes.home.path} />
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" className="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
       <span className="navbar-toggler-icon"></span>
     </button>
