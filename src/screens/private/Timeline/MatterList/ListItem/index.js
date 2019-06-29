@@ -4,8 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown } from 'react-bootstrap';
 // dispatch(push(replaceUrlParams(':matterId', routes.blocks.path, token)))
-function ListItem({ token, data, handleDestroyItem }) {
-  console.log('data', token, data)
+function ListItem({
+  token,
+  data,
+  handleDestroyItem,
+  setEditToken
+}) {
+  // console.log('data', token, data)
   return (
     <div className="col-12 my-4 d-flex align-items-stretch">
       <div className="card">
@@ -16,7 +21,7 @@ function ListItem({ token, data, handleDestroyItem }) {
               <FontAwesomeIcon icon={faEllipsisH} />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => console.log('setEditToken')}>
+              <Dropdown.Item onClick={() => setEditToken(token)}>
                 Edit
               </Dropdown.Item>
               <Dropdown.Item onClick={() => handleDestroyItem({ token })}>

@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-apollo-hooks';
-import { withApollo } from 'react-apollo';
+import React from 'react';
 
-
-import { dataReduce, removeFromKeyedArray, removeFromIndexedObject } from 'utils/dataStructures';
-
-import { LIST_MATTERS } from './queries';
-import { DESTROY_MATTER } from './mutations';
 import ListItem from './ListItem';
-import matterListContextProvider from './matterListContextProvider';
 
 
 function MatterList({
-  data: {
-    keyedArray,
-    indexedObject,
-    error,
-    loading
-  },
-  actions: {
-    destroyItem
-  }
+  keyedArray,
+  indexedObject,
+  error,
+  loading,
+  destroyItem,
+  setEditToken
 }) {
-
   let content = <h1>Loading...</h1>;
   if (!loading && !error) {
     content = keyedArray.map( token => (
@@ -31,6 +19,7 @@ function MatterList({
       token={token}
       data={indexedObject[token]}
       handleDestroyItem={destroyItem}
+      setEditToken={setEditToken}
     />));
   }
 
@@ -45,4 +34,4 @@ function MatterList({
   )
 };
 
-export default matterListContextProvider(withApollo(MatterList));
+export default MatterList;

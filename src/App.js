@@ -7,7 +7,7 @@ import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 import apolloClient from './apolloClient';
 import AppContext from 'contextuals/AppContext';
 import AppContextProvider from 'contextuals/AppContextProvider';
-import PageNotFound from 'screens/errors/PageNotFound';
+// import PageNotFound from 'screens/errors/PageNotFound';
 import theme from 'utils/theme';
 import Public from './Public';
 import Private from './Private';
