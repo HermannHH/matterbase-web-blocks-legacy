@@ -47,13 +47,19 @@ function Blocks({ client, matterId }) {
     }
   }, [loading]);
 
+
+  const [showBlockModal, setShowBlockModal] = useState(false);
+
   return (
     <div>
       <SubNavbar />
       <div className="container" style={{paddingTop: "66px"}}>
         <div className="row d-flex justify-content-center">
           <div className="col-12 col-md-10">
-            <BlockAdd />
+            <BlockAdd
+              showBlockModal={showBlockModal}
+              setShowBlockModal={setShowBlockModal}
+            />
           </div>
         </div>
       </div>

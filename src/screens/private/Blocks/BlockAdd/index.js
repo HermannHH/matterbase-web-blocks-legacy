@@ -16,7 +16,10 @@ const Wrapper = styled.div`
 
 
 
-function BlockAdd() {
+function BlockAdd({
+  setShowBlockModal,
+  showBlockModal
+}) {
   
   // const matterEntityContent= useSelector(state => state.matter.entity.content);
 
@@ -25,34 +28,34 @@ function BlockAdd() {
 
   // const [displayModal, setDisplayModal] = useState(false);
 
-  // async function createTaskBlock() {
-  //   await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }));
-  //   setDisplayModal(false);
-  // }
+  async function createTaskBlock() {
+    // await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }));
+    setShowBlockModal(false);
+  }
 
-  // async function createStickyNoteBlock() {
-  //   await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }));
-  //   setDisplayModal(false);
-  // }
+  async function createStickyNoteBlock() {
+    // await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }));
+    setShowBlockModal(false);
+  }
 
   return (
     <Wrapper>
-      <Button variant="secondary" size="lg" block onClick={() => console.log('vevf')}>
+      <Button variant="secondary" size="lg" block onClick={() => setShowBlockModal(true)}>
         Add Block
       </Button>
-      <Modal show={false} onHide={() => console.log('vevf')}>
+      <Modal show={showBlockModal} onHide={() => setShowBlockModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Blocks</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <BlockOption
-              handleClick={() => console.log('vevf')}
+              handleClick={() => createTaskBlock()}
               heading="Task List"
               description="An easy and convenient way to manage tasks"
               icon={faTasks}
             />
             <BlockOption
-              handleClick={() => console.log('vevf')}
+              handleClick={() => createStickyNoteBlock()}
               heading="Sticky Notes"
               description="An easy and convenient way to manage tasks"
               icon={faStickyNote}
