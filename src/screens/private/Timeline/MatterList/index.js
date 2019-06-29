@@ -8,33 +8,20 @@ import { dataReduce, removeFromKeyedArray, removeFromIndexedObject } from 'utils
 import { LIST_MATTERS } from './queries';
 import { DESTROY_MATTER } from './mutations';
 import ListItem from './ListItem';
+import matterListContextProvider from './matterListContextProvider';
 
 
-function MatterList({ client }) {
-  const [keyedArray, setKeyedArray] = useState([]);
-  const [indexedObject, setIndexedObject] = useState({});
-
-  const { data, error, loading } = useQuery(LIST_MATTERS);
-  useEffect(() => {
-    if (!loading  && !error) {
-      const reducedData = dataReduce(data.matters, 'token');
-      setKeyedArray(reducedData.keyedArray);
-      setIndexedObject(reducedData.indexedObject);
-    } else {
-      setKeyedArray([]);
-      setIndexedObject({});
-    }
-  }, [loading]);
-
-  async function destroyItem({ token }) {
-    const { data } = await client.mutate({
-      variables: { token },
-      mutation: DESTROY_MATTER
-    });
-    console.log('data', data)
-    setKeyedArray(removeFromKeyedArray(keyedArray, data.matterDelete.matter.token));
-    setIndexedObject(removeFromIndexedObject(indexedObject, data.matterDelete.matter.token));
-  };
+function MatterList({
+  data: {
+    keyedArray,
+    indexedObject,
+    error,
+    loading
+  },
+  actions: {
+    destroyItem
+  }
+}) {
 
   let content = <h1>Loading...</h1>;
   if (!loading && !error) {
@@ -58,4 +45,4 @@ function MatterList({ client }) {
   )
 };
 
-export default withApollo(MatterList);
+export default matterListContextProvider(withApollo(MatterList));
