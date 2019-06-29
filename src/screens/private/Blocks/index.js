@@ -8,6 +8,8 @@ import SubNavbar from "screens/private/components/SubNavbar";
 
 import { SHOW_MATTER } from './queries';
 
+import BlockAdd from './BlockAdd';
+
 import {
   dataReduce,
   removeFromKeyedArray,
@@ -48,7 +50,13 @@ function Blocks({ client, matterId }) {
   return (
     <div>
       <SubNavbar />
-      Hello
+      <div className="container" style={{paddingTop: "66px"}}>
+        <div className="row d-flex justify-content-center">
+          <div className="col-12 col-md-10">
+            <BlockAdd />
+          </div>
+        </div>
+      </div>
     </div>
   )
 };
