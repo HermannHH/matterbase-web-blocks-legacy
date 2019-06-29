@@ -18,7 +18,9 @@ const Wrapper = withTheme(styled.nav`
 function Navbar() {
   return (
     <BootstrapNavbar className="navbar navbar-expand-lg navbar-light sticky-top white-background has-shadow">
-    <NavbarBrand onClick={() => navigate(routes.private.home.path)} />
+      <div onClick={() => navigate(routes.private.home.path)} style={{ cursor: "pointer" }}>
+        <NavbarBrand  />
+      </div>
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" className="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
       <span className="navbar-toggler-icon"></span>
     </button>

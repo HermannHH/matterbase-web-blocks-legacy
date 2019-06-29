@@ -48,4 +48,4 @@ export {
   CREATE_MATTER,
   UPDATE_MATTER,
   DESTROY_MATTER
-}
+};

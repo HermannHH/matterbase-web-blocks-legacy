@@ -18,6 +18,7 @@ export default {
   },
   private: {
     home: { path: '/' },
+    blocks: { path: '/blocks/:matterId' },
   }
   
   // Protected
