@@ -7,7 +7,7 @@ import standard from 'screens/private/layouts/standard';
 import SubNavbar from "screens/private/components/SubNavbar";
 
 import { SHOW_MATTER } from './queries';
-import { CREATE_BLOCK } from './mutations';
+import { CREATE_BLOCK, DESTROY_BLOCK } from './mutations';
 
 import BlockAdd from './BlockAdd';
 import BlocksList from './BlocksList';
@@ -63,15 +63,15 @@ function Blocks({ client, matterId }) {
     await setBlocksKeyedArray(appendToKeyedArray(blocksKeyedArray, data.blockCreate.block.token));
   };
 
-  // async function destroyItem({ token }) {
-  //   const { data } = await client.mutate({
-  //     variables: { token },
-  //     mutation: DESTROY_MATTER
-  //   });
-  //   await setKeyedArray(removeFromKeyedArray(keyedArray, data.matterDelete.matter.token));
-  //   await setIndexedObject(removeFromIndexedObject(indexedObject, data.matterDelete.matter.token));
+  async function destroyItem({ token }) {
+    const { data } = await client.mutate({
+      variables: { token },
+      mutation: DESTROY_BLOCK
+    });
+    await setBlocksKeyedArray(removeFromKeyedArray(blocksKeyedArray, data.blockDelete.block.token));
+    await setBlocksIndexedObject(removeFromIndexedObject(blocksIndexedObject, data.blockDelete.block.token));
 
-  // };
+  };
 
   return (
     <div>
@@ -84,6 +84,7 @@ function Blocks({ client, matterId }) {
               error={error}
               blocksKeyedArray={blocksKeyedArray}
               blocksIndexedObject={blocksIndexedObject}
+              destroyItem={destroyItem}
             />
             <BlockAdd
               showBlockModal={showBlockModal}
