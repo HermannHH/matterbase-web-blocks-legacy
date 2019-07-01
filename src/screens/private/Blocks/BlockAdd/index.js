@@ -18,7 +18,9 @@ const Wrapper = styled.div`
 
 function BlockAdd({
   setShowBlockModal,
-  showBlockModal
+  showBlockModal,
+  matterToken,
+  createItem
 }) {
   
   // const matterEntityContent= useSelector(state => state.matter.entity.content);
@@ -29,11 +31,12 @@ function BlockAdd({
   // const [displayModal, setDisplayModal] = useState(false);
 
   async function createTaskBlock() {
-    // await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "tasks" }));
+    await createItem({ matterToken, scopeType: "tasks" });
     setShowBlockModal(false);
   }
 
   async function createStickyNoteBlock() {
+    await createItem({ matterToken, scopeType: "sticky_notes" });
     // await dispatch(matterActions.createBlock({ matterToken: matterEntityContent.token, scopeType: "sticky_notes" }));
     setShowBlockModal(false);
   }
