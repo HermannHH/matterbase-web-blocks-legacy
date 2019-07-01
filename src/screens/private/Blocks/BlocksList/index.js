@@ -12,7 +12,7 @@ export default function BlocksList({
   console.log('loading && !error', loading, error);
   let content = <h1>Loading...</h1>;
   if (!loading && !error && blocksKeyedArray.length) {
-    content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} destroyItem={destroyItem}/>)
+    content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} destroyItem={destroyItem} data={blocksIndexedObject[token]}/>)
   } else if (!loading && !error) {
     content = <h1>No Results</h1>
   }
