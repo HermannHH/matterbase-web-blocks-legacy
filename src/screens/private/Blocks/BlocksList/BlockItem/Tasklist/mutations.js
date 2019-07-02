@@ -17,7 +17,7 @@ mutation taskCreate($blockToken: String!, $body: String!) {
 `;
 
 const DESTROY_TASK = gql`
-mutation taskCreate($token: String!) {
+mutation taskDelete($token: String!) {
   taskDelete(input: {
     token: $token
   }) {
