@@ -23,7 +23,9 @@ export default function BlockItem({ token, destroyItem, data }) {
       </div>
       <div className="col-12">
         <div className="card">
-          {content}
+          <div className="card-content">
+            {content}
+          </div>
         </div>
       </div>
     </div>
