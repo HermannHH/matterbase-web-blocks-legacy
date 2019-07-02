@@ -29,13 +29,7 @@ function TaskAddForm({
           initialValues={{ body: '' }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            // if(isUpdate) {
-            //   await updateItem({ token: matter.token, title: values.title });
-            // } else {
-            //   await createItem({ title: values.title });
-            // }
             await createItem({ blockToken, body: values.body });
-            // setShowMatterModal(false);
             resetForm();
             setSubmitting(false);
           }}
@@ -58,7 +52,6 @@ function TaskAddForm({
                   type="text"
                   name="body"
                   onChange={handleChange}
-                  // ref={input => input && input.focus()}
                   onBlur={handleBlur}
                   value={values.body}
                   placeholder="Enter task body"
