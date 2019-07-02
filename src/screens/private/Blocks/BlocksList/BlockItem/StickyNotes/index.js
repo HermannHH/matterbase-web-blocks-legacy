@@ -31,8 +31,8 @@ function StickyNotes({ client, blockToken, data }) {
       mutation: CREATE_STICKY_NOTE
     });
     console.log('data', data)
-    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.taskCreate.task.token, data.taskCreate.task));
-    await setStickyNotesKeyedArray(appendToKeyedArray(stickyNotesKeyedArray, data.taskCreate.task.token));
+    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.stickyNoteCreate.stickyNote.token, data.stickyNoteCreate.stickyNote));
+    await setStickyNotesKeyedArray(appendToKeyedArray(stickyNotesKeyedArray, data.stickyNoteCreate.stickyNote.token));
   };
 
   async function updateItem({ token, body, isCompleted }) {
@@ -42,7 +42,7 @@ function StickyNotes({ client, blockToken, data }) {
       mutation: UPDATE_STICKY_NOTE
     });
     console.log('data', data)    
-    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.taskUpdate.task.token, data.taskUpdate.task));
+    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.stickyNoteUpdate.stickyNote.token, data.stickyNoteUpdate.stickyNote));
   };
 
   async function destroyItem({ token }) {
@@ -50,22 +50,22 @@ function StickyNotes({ client, blockToken, data }) {
       variables: { token },
       mutation: DESTROY_STICKY_NOTE
     });
-    await setStickyNotesKeyedArray(removeFromKeyedArray(stickyNotesKeyedArray, data.taskDelete.task.token));
-    await setStickyNotesIndexedObject(removeFromIndexedObject(stickyNotesIndexedObject, data.taskDelete.task.token, data.taskDelete.task));
+    await setStickyNotesKeyedArray(removeFromKeyedArray(stickyNotesKeyedArray, data.stickyNoteDelete.stickyNote.token));
+    await setStickyNotesIndexedObject(removeFromIndexedObject(stickyNotesIndexedObject, data.stickyNoteDelete.stickyNote.token, data.stickyNoteDelete.stickyNote));
   };
 
-  let tasksContent;
+  let stickyNotesContent;
   if (stickyNotesKeyedArray.length) {
-    tasksContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
+    stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
   } else {
-    tasksContent = <h3>No tasks</h3>;
+    stickyNotesContent = <h3>No stickyNotes</h3>;
   }
 
 
   return (
     <div>
       <StickyNoteAdd createItem={createItem} blockToken={blockToken}/>
-      {tasksContent}
+      {stickyNotesContent}
     </div>
   )
 };

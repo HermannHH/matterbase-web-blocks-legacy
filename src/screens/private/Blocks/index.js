@@ -58,7 +58,7 @@ function Blocks({ client, matterId }) {
       variables: { matterToken, scopeType },
       mutation: CREATE_BLOCK
     });
-    console.log('data', data)
+    // console.log('data', data)
     await setBlocksIndexedObject(writeToIndexedObject(blocksIndexedObject, data.blockCreate.block.token, data.blockCreate.block));
     await setBlocksKeyedArray(appendToKeyedArray(blocksKeyedArray, data.blockCreate.block.token));
   };
@@ -75,8 +75,10 @@ function Blocks({ client, matterId }) {
 
   return (
     <div>
-      <SubNavbar />
-      <div className="container" style={{paddingTop: "66px"}}>
+      <div styles={{ zIndex: 9}}>
+        <SubNavbar />
+      </div>
+      <div className="container" style={{paddingTop: "66px", zIndex: 8}}>
         <div className="row d-flex justify-content-center">
           <div className="col-12 col-md-10">
             <BlocksList 
