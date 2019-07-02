@@ -16,10 +16,14 @@ export default function TaskItem({ token, data, destroyItem, updateItem }) {
         updateItem={updateItem}
       />
       :
-      <div>
-        {data.body}
-        <a onClick={() => destroyItem({ token })}>Delete</a>
-        <a onClick={() => setIsEditing(true)}>Edit</a>
+      <div className="tasklist-item">
+        <div>
+          {data.body}
+        </div>
+        <div>
+          <a onClick={() => destroyItem({ token })}>Delete</a>
+          <a onClick={() => setIsEditing(true)}>Edit</a>
+        </div>
       </div>
       }
     </div>

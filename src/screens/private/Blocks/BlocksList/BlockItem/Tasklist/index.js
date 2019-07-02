@@ -63,7 +63,7 @@ function Tasklist({ client, blockToken, data }) {
 
 
   return (
-    <div>
+    <div className="tasklist">
       <TaskAdd createItem={createItem} blockToken={blockToken}/>
       {tasksContent}
     </div>
