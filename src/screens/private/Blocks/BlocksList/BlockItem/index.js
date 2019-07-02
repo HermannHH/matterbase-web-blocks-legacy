@@ -7,9 +7,9 @@ export default function BlockItem({ token, destroyItem, data }) {
 
   let content;
   if (data.scopeType === 'tasks') {
-    content = <Tasklist token={token} data={data.content}/>;
+    content = <Tasklist blockToken={token} data={data.content}/>;
   } else if (data.scopeType === 'sticky_notes') {
-    content = <StickyNotes token={token} data={data.content} />;
+    content = <StickyNotes blockToken={token} data={data.content} />;
   };
 
   return (

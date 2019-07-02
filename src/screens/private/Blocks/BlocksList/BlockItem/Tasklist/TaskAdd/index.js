@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-export default function TaskAdd() {
+import TaskAddForm from './TaskAddForm';
+
+export default function TaskAdd({blockToken, createItem}) {
   return (
     <div>
-      <h1>Add task</h1>
+      <TaskAddForm blockToken={blockToken} createItem={createItem}/>
     </div>
   )
 }
