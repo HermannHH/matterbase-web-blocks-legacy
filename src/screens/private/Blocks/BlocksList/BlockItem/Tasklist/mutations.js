@@ -31,7 +31,7 @@ mutation taskCreate($token: String!) {
 
 const UPDATE_TASK = gql`
 mutation taskUpdate($token: String!, $body: String!, $isCompleted: Boolean!) {
-  taskCreate(input: {
+  taskUpdate(input: {
     token: $token
     body: $body
     isCompleted: $isCompleted

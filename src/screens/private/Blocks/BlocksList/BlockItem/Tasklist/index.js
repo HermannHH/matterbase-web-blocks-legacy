@@ -9,7 +9,7 @@ import {
   writeToIndexedObject
 } from 'utils/dataStructures';
 
-import { CREATE_TASK, DESTROY_TASK } from './mutations';
+import { CREATE_TASK, DESTROY_TASK, UPDATE_TASK } from './mutations';
 
 import TaskAdd from './TaskAdd';
 import TaskItem from './TaskItem';
@@ -35,19 +35,28 @@ function Tasklist({ client, blockToken, data }) {
     await setTasksKeyedArray(appendToKeyedArray(tasksKeyedArray, data.taskCreate.task.token));
   };
 
+  async function updateItem({ token, body, isCompleted }) {
+    console.log('data', token, body)
+    const { data } = await client.mutate({
+      variables: { token, body, isCompleted },
+      mutation: UPDATE_TASK
+    });
+    console.log('data', data)    
+    await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.taskUpdate.task.token, data.taskUpdate.task));
+  };
+
   async function destroyItem({ token }) {
     const { data } = await client.mutate({
       variables: { token },
       mutation: DESTROY_TASK
     });
-    console.log('data', data)
     await setTasksKeyedArray(removeFromKeyedArray(tasksKeyedArray, data.taskDelete.task.token));
     await setTasksIndexedObject(removeFromIndexedObject(tasksIndexedObject, data.taskDelete.task.token, data.taskDelete.task));
   };
 
   let tasksContent;
   if (tasksKeyedArray.length) {
-    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} data={tasksIndexedObject[token]} destroyItem={destroyItem}/>)
+    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
   } else {
     tasksContent = <h3>No tasks</h3>;
   }
