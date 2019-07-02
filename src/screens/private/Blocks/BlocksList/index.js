@@ -9,7 +9,7 @@ export default function BlocksList({
   blocksIndexedObject,
   destroyItem
 }) {
-  console.log('loading && !error', loading, error);
+  // console.log('loading && !error', loading, error);
   let content = <h1>Loading...</h1>;
   if (!loading && !error && blocksKeyedArray.length) {
     content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} destroyItem={destroyItem} data={blocksIndexedObject[token]}/>)

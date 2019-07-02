@@ -1,0 +1,19 @@
+.btn-link {
+  &-dodger-blue {
+    font-weight: 500;
+    padding: 7px 15px;
+    background-color: inherit;
+    color: $dodgerBlue !important;
+    @include border-radius(4px);
+    > svg {
+      font-size: 14px;
+      margin-right: 5px;
+    }
+    &:hover {
+      border-color: darken($selago, 6);
+      background-color: darken($selago, 6);
+      color: $dodgerBlue;
+      cursor: pointer;
+    }
+  }
+}
