@@ -18,7 +18,7 @@ export default function BlockItem({ token, destroyItem, data }) {
   return (
     <div className="row my-5">
       <div className="col-12 d-flex justify-content-between align-items-center my-2">
-        <h3>{data.scopeType === 'sticky_notes' ? 'Sticky Notes' : 'Tasklist'}</h3>
+        <h3 className="tundora-text">{data.scopeType === 'sticky_notes' ? 'Sticky Notes' : 'Tasklist'}</h3>
         <a className="btn-link-dodger-blue" onClick={() => destroyItem({ token })}><FontAwesomeIcon icon={faTrashAlt} /> Delete</a>
       </div>
       <div className="col-12">

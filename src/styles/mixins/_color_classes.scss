@@ -5,8 +5,9 @@
 
 	.#{ $name }-text{
 		 color: $color;
-     a{ color: $color; }
+     a{ color: $color !important; }
      i{ color: $color; }
+     svg{ color: $color; }
 	}
 
 	.#{ $name }-border{

@@ -55,22 +55,22 @@ function TaskAddForm({
                     onBlur={handleBlur}
                     value={values.body}
                     placeholder="Enter your new task..."
-                    isInvalid={errors.body && touched.body}
+                    // isInvalid={errors.body && touched.body}
                   />
                   <InputGroup.Append>
                     <Button
                       type="submit"
-                      // disabled={isSubmitting || !isValid}
+                      disabled={isSubmitting || !isValid}
                       className="btn btn-primary btn-block"
                     >
                       {isSubmitting ? "Adding..." : "Hit return to add"}
                     </Button>
                   </InputGroup.Append>
-                  {errors.body && touched.body &&
+                  {/* {errors.body && touched.body &&
                     <Form.Control.Feedback type="invalid">
                       {errors.body}
                     </Form.Control.Feedback>
-                  }
+                  } */}
               </InputGroup>
                 
               </Form.Group>

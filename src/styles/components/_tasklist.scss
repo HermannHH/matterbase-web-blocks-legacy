@@ -1,11 +1,23 @@
 .tasklist {
   .tasklist-item {
-    @include border-radius(5px);
-    padding: 7px 15px;
     margin: 10px 0px;
-    background-color: $mercury;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    &-text {
+      padding: 7px 15px;
+      background-color: $mercury;
+      @include border-radius(5px);
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    };
+    &-actions {
+      padding: 7px 0px 7px 15px;
+      > a {
+        cursor: pointer;
+      }
+    };
   }
 }

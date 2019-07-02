@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import TaskUpdateForm from './TaskUpdateForm';
 
 export default function TaskItem({ token, data, destroyItem, updateItem }) {
@@ -17,12 +20,11 @@ export default function TaskItem({ token, data, destroyItem, updateItem }) {
       />
       :
       <div className="tasklist-item">
-        <div>
+        <div className="tasklist-item-text" onDoubleClick={() => setIsEditing(true)}>
           {data.body}
         </div>
-        <div>
-          <a onClick={() => destroyItem({ token })}>Delete</a>
-          <a onClick={() => setIsEditing(true)}>Edit</a>
+        <div className="tasklist-item-actions">
+          <a className="tall-poppy-text" styles={{ cursor: "pointer"}} onClick={() => destroyItem({ token })}><FontAwesomeIcon icon={faTimes} /></a>
         </div>
       </div>
       }
