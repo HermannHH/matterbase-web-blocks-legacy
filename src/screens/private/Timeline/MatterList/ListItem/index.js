@@ -21,7 +21,7 @@ function ListItem({
           <div className="card-head">
             <h3>{data.title}</h3>
             <Dropdown alignRight >
-              <Dropdown.Toggle variant="light" className="clear-dropdown">
+              <Dropdown.Toggle className="clear-dropdown">
                 <FontAwesomeIcon icon={faEllipsisH} />
               </Dropdown.Toggle>
               <Dropdown.Menu>

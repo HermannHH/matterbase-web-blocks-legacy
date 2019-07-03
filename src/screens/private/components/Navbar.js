@@ -31,7 +31,7 @@ function Navbar() {
       </a>
 
         <Dropdown as={Navbar.Item} alignRight >
-          <Dropdown.Toggle as={Navbar.Link} variant="light">
+          <Dropdown.Toggle as={Navbar.Link}  className="clear-dropdown">
             <FontAwesomeIcon icon={faUser} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
