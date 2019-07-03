@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import TaskUpdateForm from './TaskUpdateForm';
 
@@ -19,7 +19,16 @@ export default function TaskItem({ token, data, destroyItem, updateItem }) {
         updateItem={updateItem}
       />
       :
-      <div className="tasklist-item">
+      <div className={`${data.isCompleted ? "completed tasklist-item" : "tasklist-item"}`}>
+        <div className="tasklist-item-checkbox">
+          <a styles={{ cursor: "pointer"}} onClick={() => updateItem({ token, body: data.body, isCompleted: !data.isCompleted })}>
+            {data.isCompleted ?
+              <FontAwesomeIcon icon={faCheck} />
+            :
+              <FontAwesomeIcon icon={faCheck} />
+            }
+          </a>
+        </div>
         <div className="tasklist-item-text" onDoubleClick={() => setIsEditing(true)}>
           {data.body}
         </div>

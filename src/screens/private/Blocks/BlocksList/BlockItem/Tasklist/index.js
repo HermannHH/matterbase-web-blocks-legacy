@@ -9,6 +9,8 @@ import {
   writeToIndexedObject
 } from 'utils/dataStructures';
 
+import BlockNoResuts from 'components/BlockNoResults';
+
 import { CREATE_TASK, DESTROY_TASK, UPDATE_TASK } from './mutations';
 
 import TaskAdd from './TaskAdd';
@@ -58,7 +60,7 @@ function Tasklist({ client, blockToken, data }) {
   if (tasksKeyedArray.length) {
     tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
   } else {
-    tasksContent = <h3>No tasks</h3>;
+    tasksContent = <BlockNoResuts text="No tasks added yet"/>;
   }
 
 

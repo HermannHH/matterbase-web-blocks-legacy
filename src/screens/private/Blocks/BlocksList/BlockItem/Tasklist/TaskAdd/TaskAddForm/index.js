@@ -54,7 +54,7 @@ function TaskAddForm({
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.body}
-                    placeholder="Enter your new task..."
+                    placeholder="Describe a new task..."
                     // isInvalid={errors.body && touched.body}
                   />
                   <InputGroup.Append>
