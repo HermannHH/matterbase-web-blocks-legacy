@@ -19,13 +19,13 @@ export default function StickyNoteItem({ token, data, destroyItem, updateItem })
         updateItem={updateItem}
       />
       :
-      <div className="sticky-notes-item-paper">
+      <div className="sticky-notes-item-paper" onDoubleClick={() => setIsEditing(true)}>
         <div className="remover"  onClick={() => destroyItem({ token })}>
           <FontAwesomeIcon icon={faTimes} />
         </div>
-        {data.body}
-        
-        <a onClick={() => setIsEditing(true)}>Edit</a>
+        <div>
+          {data.body}
+        </div>
       </div>
       }
     </div>

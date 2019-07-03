@@ -49,8 +49,7 @@ function StickyNoteUpdateForm({
             /* and other goodies */
           }) => (
             <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Label>Task Body</Form.Label>
+              <Form.Group>  
                 <Form.Control
                   type="text"
                   name="body"
@@ -60,11 +59,11 @@ function StickyNoteUpdateForm({
                   placeholder="Enter task body"
                   isInvalid={errors.body && touched.body}
                 />
-                {errors.body && touched.body &&
+                {/* {errors.body && touched.body &&
                   <Form.Control.Feedback type="invalid">
                     {errors.body}
                   </Form.Control.Feedback>
-                }
+                } */}
               </Form.Group>
           {/* <Button
             type="submit"

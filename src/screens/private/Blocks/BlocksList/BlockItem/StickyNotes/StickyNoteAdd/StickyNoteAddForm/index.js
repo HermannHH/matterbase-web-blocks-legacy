@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import { object, string, setLocale } from "yup";
 
-setLocale({
-  mixed: {
-    required: "Is required"
-  },
-});
 
 function StickyNoteAddForm({
   blockToken,
@@ -17,17 +11,9 @@ function StickyNoteAddForm({
 }) {
 
   
-
-
-  const validationSchema = object().shape({
-    body: string()
-      .required()
-  });
-
   return (
       <Formik
           initialValues={{ body: '' }}
-          validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             await createItem({ blockToken, body: values.body });
             resetForm();
@@ -45,31 +31,31 @@ function StickyNoteAddForm({
             isValid
             /* and other goodies */
           }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Label>Task Body</Form.Label>
+            <Form onSubmit={handleSubmit} className="sticky-notes-item-form">
+              <Form.Group style={{ margin: "0px"}}>
                 <Form.Control
                   type="text"
+                  as="textarea"
+                  // rows="3"
                   name="body"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.body}
-                  placeholder="Enter task body"
-                  isInvalid={errors.body && touched.body}
+                  placeholder="Add sticky note content..."
+                  // isInvalid={errors.body && touched.body}
+                  className="sticky-notes-item-form-input"
                 />
-                {errors.body && touched.body &&
-                  <Form.Control.Feedback type="invalid">
-                    {errors.body}
-                  </Form.Control.Feedback>
-                }
+            
               </Form.Group>
-          <Button
-            type="submit"
-            // disabled={isSubmitting || !isValid}
-            className="btn btn-primary btn-block"
-          >
-            {isSubmitting ? "Saving..." : "Save"}
-          </Button>
+              <div className="sticky-notes-item-form-actions">
+                <Button
+                  type="submit"
+                  // disabled={isSubmitting || !isValid}
+                  className="btn btn-primary btn-block"
+                >
+                  {isSubmitting ? "Adding..." : "Add"}
+                </Button>
+              </div>
             </Form>
           )}
         </Formik>

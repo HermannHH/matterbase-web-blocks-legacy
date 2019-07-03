@@ -9,7 +9,7 @@
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 33.33%;
-    @extend .p-2;
+    @extend .p-4;
     &-paper {
       height: 200px;
       background-color: $marigoldYellow;
@@ -24,6 +24,50 @@
         > svg {
           color: $tundora;
         }
+      }
+    };
+    &-form {
+      height: 200px;
+      background-color: $marigoldYellow;
+      @extend .has-shadow;
+      // padding: 15px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      &-input {
+        background-color: $marigoldYellow;
+        // display: flex;
+        // flex-basis: 80%;
+        height: 164px !important;
+        // flex: 1 1 150px;
+        resize: none;
+        border: none;
+        @include border-top-radius(5px);
+        @include border-bottom-radius(0px);
+        box-shadow: none;
+       -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+       -moz-transition: none;
+       -webkit-transition: none;
+       background-color: $marigoldYellow !important;
+       &:focus {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -moz-transition: none;
+        -webkit-transition: none;
+       }
+      };
+      &-actions {
+        background-color: $marigoldYellow;
+        > button {
+          @include border-top-radius(0px);
+          border: 0px;
+        }
+        // flex: 1 1 20%;
+        // display: flex;
+        // flex-basis: 20%;
+        // flex: 1 1 auto;
       }
     }
   }

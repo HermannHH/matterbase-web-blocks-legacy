@@ -34,7 +34,6 @@ mutation stickyNoteUpdate($token: String!, $body: String!) {
   stickyNoteUpdate(input: {
     token: $token
     body: $body
-    isCompleted: $isCompleted
   }) {
     stickyNote {
       body
