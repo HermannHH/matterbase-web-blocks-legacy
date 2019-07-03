@@ -48,30 +48,29 @@ function StickyNoteUpdateForm({
             isValid
             /* and other goodies */
           }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>  
+            <Form onSubmit={handleSubmit} className="sticky-notes-item-form">
+              <Form.Group style={{ margin: "0px"}}>  
                 <Form.Control
                   type="text"
+                  as="textarea"
                   name="body"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.body}
-                  placeholder="Enter task body"
-                  isInvalid={errors.body && touched.body}
+                  placeholder="Add sticky note content..."
+                  // isInvalid={errors.body && touched.body}
+                  className="sticky-notes-item-form-input"
                 />
-                {/* {errors.body && touched.body &&
-                  <Form.Control.Feedback type="invalid">
-                    {errors.body}
-                  </Form.Control.Feedback>
-                } */}
               </Form.Group>
-          {/* <Button
-            type="submit"
-            // disabled={isSubmitting || !isValid}
-            className="btn btn-primary btn-block"
-          >
-            {isSubmitting ? "Saving..." : "Save"}
-          </Button> */}
+              <div className="sticky-notes-item-form-actions">
+                <Button
+                  type="submit"
+                  // disabled={isSubmitting || !isValid}
+                  className="btn btn-primary btn-block"
+                >
+                  {isSubmitting ? "Saving..." : "Save"}
+                </Button>
+              </div>
             </Form>
           )}
         </Formik>
