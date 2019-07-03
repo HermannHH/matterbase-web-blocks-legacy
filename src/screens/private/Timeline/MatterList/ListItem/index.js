@@ -16,26 +16,26 @@ function ListItem({
 }) {
   // console.log('data', token, data)
   return (
-    <div className="col-12 my-4 d-flex align-items-stretch">
+    <div className="col-12 col-md-6 p-4 d-flex align-items-stretch">
       <div className="card">
-        <div className="card-body">
-          <h3>{data.title}</h3>
-          <Dropdown alignRight >
-            <Dropdown.Toggle variant="light">
-              <FontAwesomeIcon icon={faEllipsisH} />
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setEditToken(token)}>
-                Edit
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleDestroyItem({ token })}>
-                Delete
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+          <div className="card-head">
+            <h3>{data.title}</h3>
+            <Dropdown alignRight >
+              <Dropdown.Toggle variant="light" className="clear-dropdown">
+                <FontAwesomeIcon icon={faEllipsisH} />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setEditToken(token)}>
+                  Edit
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleDestroyItem({ token })}>
+                  Delete
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         <div className="card-actions">
-          <a className="btn btn-light dodger-blue-text" onClick={() => navigate(replaceUrlParams(':matterId', routes.private.blocks.path, token))}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
+          <a className="btn-link-dodger-blue" style={{ cursor: "pointer" }} onClick={() => navigate(replaceUrlParams(':matterId', routes.private.blocks.path, token))}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
         </div>
       </div>
     </div>

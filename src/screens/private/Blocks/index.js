@@ -79,7 +79,7 @@ function Blocks({ client, matterId }) {
       <div styles={{ zIndex: 9}}>
         <SubNavbar />
       </div>
-      <div className="container" style={{paddingTop: "66px", zIndex: 8}}>
+      <div className="container" style={{paddingTop: "66px", zIndex: 8, paddingBottom: "150px"}}>
         <div className="row d-flex justify-content-center">
           <div className="col-12 col-md-10">
             <BlocksList 

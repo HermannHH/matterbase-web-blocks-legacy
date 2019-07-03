@@ -1,0 +1,12 @@
+.clear-dropdown {
+  background-color: inherit !important;
+  color: $osloGray !important;
+  border: 0px !important;
+  &::after {
+    display:none;
+  };
+  &:focus {
+    border: 0px;
+    box-shadow: none !important;
+  };
+}

@@ -66,11 +66,6 @@ function TaskAddForm({
                       {isSubmitting ? "Adding..." : "Hit return to add"}
                     </Button>
                   </InputGroup.Append>
-                  {/* {errors.body && touched.body &&
-                    <Form.Control.Feedback type="invalid">
-                      {errors.body}
-                    </Form.Control.Feedback>
-                  } */}
               </InputGroup>
                 
               </Form.Group>
