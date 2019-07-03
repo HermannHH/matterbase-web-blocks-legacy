@@ -50,6 +50,7 @@ function StickyNotes({ client, blockToken, data }) {
       variables: { token },
       mutation: DESTROY_STICKY_NOTE
     });
+    console.log('data', data)
     await setStickyNotesKeyedArray(removeFromKeyedArray(stickyNotesKeyedArray, data.stickyNoteDelete.stickyNote.token));
     await setStickyNotesIndexedObject(removeFromIndexedObject(stickyNotesIndexedObject, data.stickyNoteDelete.stickyNote.token, data.stickyNoteDelete.stickyNote));
   };
@@ -63,9 +64,9 @@ function StickyNotes({ client, blockToken, data }) {
 
 
   return (
-    <div>
-      <StickyNoteAdd createItem={createItem} blockToken={blockToken}/>
+    <div className="sticky-notes">
       {stickyNotesContent}
+      <StickyNoteAdd createItem={createItem} blockToken={blockToken}/>
     </div>
   )
 };

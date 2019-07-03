@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import StickyNoteUpdateForm from './StickyNoteUpdateForm';
 
 export default function StickyNoteItem({ token, data, destroyItem, updateItem }) {
@@ -7,7 +10,7 @@ export default function StickyNoteItem({ token, data, destroyItem, updateItem })
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <div>
+    <div className="sticky-notes-item">
       {isEditing ?
       <StickyNoteUpdateForm
         token={token}
@@ -16,9 +19,12 @@ export default function StickyNoteItem({ token, data, destroyItem, updateItem })
         updateItem={updateItem}
       />
       :
-      <div>
+      <div className="sticky-notes-item-paper">
+        <div className="remover"  onClick={() => destroyItem({ token })}>
+          <FontAwesomeIcon icon={faTimes} />
+        </div>
         {data.body}
-        <a onClick={() => destroyItem({ token })}>Delete</a>
+        
         <a onClick={() => setIsEditing(true)}>Edit</a>
       </div>
       }

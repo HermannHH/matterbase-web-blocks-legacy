@@ -17,8 +17,8 @@ mutation stickyNoteCreate($blockToken: String!, $body: String!) {
 `;
 
 const DESTROY_STICKY_NOTE = gql`
-mutation taskDelete($token: String!) {
-  taskDelete(input: {
+mutation stickyNoteDelete($token: String!) {
+  stickyNoteDelete(input: {
     token: $token
   }) {
     stickyNote {

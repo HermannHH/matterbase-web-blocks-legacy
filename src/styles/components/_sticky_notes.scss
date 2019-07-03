@@ -1,0 +1,30 @@
+.sticky-notes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  &-item {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 33.33%;
+    @extend .p-2;
+    &-paper {
+      height: 200px;
+      background-color: $marigoldYellow;
+      @extend .has-shadow;
+      padding: 15px;
+      position: relative;
+      > .remover {
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        cursor: pointer;
+        > svg {
+          color: $tundora;
+        }
+      }
+    }
+  }
+}
