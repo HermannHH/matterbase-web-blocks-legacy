@@ -9,6 +9,7 @@ mutation blockCreate($matterToken: String!, $scopeType: String!) {
     block {
       token
       scopeType
+      content
     }
     errors
   }

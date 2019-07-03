@@ -32,7 +32,7 @@ function Tasklist({ client, blockToken, data }) {
       variables: { blockToken, body },
       mutation: CREATE_TASK
     });
-    console.log('data', data)
+    // console.log('data', data)
     await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.taskCreate.task.token, data.taskCreate.task));
     await setTasksKeyedArray(appendToKeyedArray(tasksKeyedArray, data.taskCreate.task.token));
   };
@@ -43,7 +43,7 @@ function Tasklist({ client, blockToken, data }) {
       variables: { token, body, isCompleted },
       mutation: UPDATE_TASK
     });
-    console.log('data', data)    
+    // console.log('data', data)    
     await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.taskUpdate.task.token, data.taskUpdate.task));
   };
 

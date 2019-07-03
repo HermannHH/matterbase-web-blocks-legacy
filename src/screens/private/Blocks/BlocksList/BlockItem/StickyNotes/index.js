@@ -58,8 +58,6 @@ function StickyNotes({ client, blockToken, data }) {
   let stickyNotesContent;
   if (stickyNotesKeyedArray.length) {
     stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
-  } else {
-    stickyNotesContent = <h3>No stickyNotes</h3>;
   }
 
 

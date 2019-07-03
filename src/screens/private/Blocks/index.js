@@ -58,7 +58,6 @@ function Blocks({ client, matterId }) {
       variables: { matterToken, scopeType },
       mutation: CREATE_BLOCK
     });
-    // console.log('data', data)
     await setBlocksIndexedObject(writeToIndexedObject(blocksIndexedObject, data.blockCreate.block.token, data.blockCreate.block));
     await setBlocksKeyedArray(appendToKeyedArray(blocksKeyedArray, data.blockCreate.block.token));
   };
@@ -72,6 +71,8 @@ function Blocks({ client, matterId }) {
     await setBlocksIndexedObject(removeFromIndexedObject(blocksIndexedObject, data.blockDelete.block.token));
 
   };
+
+  console.log('checkers', blocksKeyedArray, blocksIndexedObject)
 
   return (
     <div>
