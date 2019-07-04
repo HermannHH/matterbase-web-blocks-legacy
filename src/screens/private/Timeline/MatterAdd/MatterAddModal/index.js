@@ -34,7 +34,9 @@ function MatterAddModal({
 
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
-      <Modal.Header closeButton />
+      <Modal.Header closeButton >
+        <Modal.Title>{isUpdate ? "Edit Matter" : "Add a Matter"}</Modal.Title>
+      </Modal.Header>
       <Formik
           initialValues={{ title: initialTitle }}
           validationSchema={validationSchema}
@@ -75,7 +77,7 @@ function MatterAddModal({
                   ref={input => input && input.focus()}
                   onBlur={handleBlur}
                   value={values.title}
-                  placeholder="Enter matter name"
+                  placeholder="Describe this Matter..."
                   isInvalid={errors.name && touched.name}
                 />
                 {errors.name && touched.name &&
@@ -88,8 +90,8 @@ function MatterAddModal({
       <Modal.Footer>
           <Button
             type="submit"
-            // disabled={isSubmitting || !isValid}
-            className="btn btn-primary btn-block"
+            disabled={isSubmitting || !isValid}
+            className="btn btn-primary"
           >
             {isSubmitting ? "Saving..." : "Save"}
           </Button></Modal.Footer>
