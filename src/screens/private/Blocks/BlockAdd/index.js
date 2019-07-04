@@ -60,7 +60,7 @@ function BlockAdd({
             <BlockOption
               handleClick={() => createStickyNoteBlock()}
               heading="Sticky Notes"
-              description="An easy and convenient way to manage tasks"
+              description="Scribble down ideas & thoughts"
               icon={faStickyNote}
             />
           </Modal.Body>
