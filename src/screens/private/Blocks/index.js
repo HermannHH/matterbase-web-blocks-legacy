@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { withApollo } from 'react-apollo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
 
 import standard from 'screens/private/layouts/standard';
 
@@ -77,7 +82,13 @@ function Blocks({ client, matterId }) {
   return (
     <div>
       <div styles={{ zIndex: 9}}>
-        <SubNavbar />
+        <SubNavbar 
+          actionsLeft={
+            <div>
+              <a id="sub-navbar--title" style={{ cursor: "pointer"}} onClick={() => navigate(routes.private.home.path)}><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
+            </div>
+          }
+        />
       </div>
       <div className="container" style={{paddingTop: "66px", zIndex: 8, paddingBottom: "150px"}}>
         <div className="row d-flex justify-content-center">

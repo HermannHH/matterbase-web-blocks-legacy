@@ -4,6 +4,8 @@ import { withApollo } from 'react-apollo';
 
 import standard from 'screens/private/layouts/standard';
 
+import SubNavBar from 'screens/private/components/SubNavbar';
+
 import {
   dataReduce,
   removeFromKeyedArray,
@@ -81,9 +83,10 @@ function Timeline({
   }, [showMatterModal]);
 
   return (
-    <div className="container">
-      <div className="my-5">
-        <MatterAdd
+    <div>
+      <div style={{ zIndex: 9}}>
+        <SubNavBar actionsRight={
+          <MatterAdd
           showMatterModal={showMatterModal}
           editToken={editToken}
           setEditToken={setEditToken}
@@ -92,14 +95,18 @@ function Timeline({
           createItem={createItem}
           updateItem={updateItem}
         />
-        <MatterList
-          keyedArray={keyedArray}
-          indexedObject={indexedObject}
-          error={error}
-          loading={loading}
-          destroyItem={destroyItem}
-          setEditToken={setEditToken}
-        />
+        }/>
+      </div>
+      
+      <div  style={{paddingTop: "80px", zIndex: 8, paddingBottom: "150px"}}>
+          <MatterList
+            keyedArray={keyedArray}
+            indexedObject={indexedObject}
+            error={error}
+            loading={loading}
+            destroyItem={destroyItem}
+            setEditToken={setEditToken}
+          />
       </div>
     </div>
   )

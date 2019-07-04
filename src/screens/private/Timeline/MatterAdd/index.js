@@ -12,9 +12,7 @@ function MatterAdd({
   updateItem
 }) {
   return (
-    <div className="container my-5">
-      <div className="row">
-        <div className="col-12">
+    <div>
           <MatterAddModal
             showMatterModal={showMatterModal}
             editToken={editToken}
@@ -27,8 +25,6 @@ function MatterAdd({
             showMatterModal={showMatterModal}
             setShowMatterModal={setShowMatterModal}
           />
-        </div>
-      </div>
     </div>
   )
 };

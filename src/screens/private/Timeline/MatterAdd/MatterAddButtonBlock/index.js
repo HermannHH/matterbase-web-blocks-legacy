@@ -7,9 +7,7 @@ function MatterAddButtonBlock({
   setShowMatterModal
 }) {
   return (
-    <div className="d-flex justify-content-end">
-      <Button variant="primary" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
-    </div>
+      <Button variant="success" onClick={() => setShowMatterModal(!showMatterModal)}>Add Matter</Button>
   )
 }
 
