@@ -77,7 +77,7 @@ function Blocks({ client, matterId }) {
 
   };
 
-  console.log('checkers', blocksKeyedArray, blocksIndexedObject)
+  // console.log('checkers', blocksKeyedArray, blocksIndexedObject)
 
   return (
     <div>
@@ -101,6 +101,8 @@ function Blocks({ client, matterId }) {
               destroyItem={destroyItem}
             />
             <BlockAdd
+              loading={loading}
+              error={error}
               showBlockModal={showBlockModal}
               setShowBlockModal={setShowBlockModal}
               createItem={createItem}

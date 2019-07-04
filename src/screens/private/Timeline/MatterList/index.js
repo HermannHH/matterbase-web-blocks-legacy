@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Loading from 'components/Loading';
+
 import ListItem from './ListItem';
 
 
@@ -11,7 +13,7 @@ function MatterList({
   destroyItem,
   setEditToken
 }) {
-  let content = <h1>Loading...</h1>;
+  let content = <Loading />;
   if (!loading && !error) {
     content = keyedArray.map( token => (
     <ListItem

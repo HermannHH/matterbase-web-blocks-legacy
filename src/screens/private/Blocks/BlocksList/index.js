@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Loading from 'components/Loading';
+
 import BlockItem from './BlockItem';
 
 export default function BlocksList({
@@ -10,7 +12,7 @@ export default function BlocksList({
   destroyItem
 }) {
   // console.log('loading && !error', loading, error);
-  let content = <h1>Loading...</h1>;
+  let content = <Loading />;
   if (!loading && !error && blocksKeyedArray.length) {
     content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} destroyItem={destroyItem} data={blocksIndexedObject[token]}/>)
   } else if (!loading && !error) {

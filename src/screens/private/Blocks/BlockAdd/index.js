@@ -20,7 +20,9 @@ function BlockAdd({
   setShowBlockModal,
   showBlockModal,
   matterToken,
-  createItem
+  createItem,
+  loading,
+  error
 }) {
   
   // const matterEntityContent= useSelector(state => state.matter.entity.content);
@@ -42,30 +44,34 @@ function BlockAdd({
   }
 
   return (
-    <Wrapper>
-      <Button variant="secondary" size="lg" block onClick={() => setShowBlockModal(true)}>
-        Add Block
-      </Button>
-      <Modal show={showBlockModal} onHide={() => setShowBlockModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Blocks</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <BlockOption
-              handleClick={() => createTaskBlock()}
-              heading="Task List"
-              description="An easy and convenient way to manage tasks"
-              icon={faTasks}
-            />
-            <BlockOption
-              handleClick={() => createStickyNoteBlock()}
-              heading="Sticky Notes"
-              description="Scribble down ideas & thoughts"
-              icon={faStickyNote}
-            />
-          </Modal.Body>
-        </Modal>
-    </Wrapper>
+    <div>
+      {!loading && !error &&
+      <Wrapper>
+        <Button variant="secondary" size="lg" block onClick={() => setShowBlockModal(true)}>
+          Add Block
+        </Button>
+        <Modal show={showBlockModal} onHide={() => setShowBlockModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Blocks</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <BlockOption
+                handleClick={() => createTaskBlock()}
+                heading="Task List"
+                description="An easy and convenient way to manage tasks"
+                icon={faTasks}
+              />
+              <BlockOption
+                handleClick={() => createStickyNoteBlock()}
+                heading="Sticky Notes"
+                description="Scribble down ideas & thoughts"
+                icon={faStickyNote}
+              />
+            </Modal.Body>
+          </Modal>
+      </Wrapper>
+      }
+    </div>
   )
 }
 
