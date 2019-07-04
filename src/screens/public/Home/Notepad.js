@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 import constants from 'utils/constants';
+import Button from 'react-bootstrap/Button';
 import routes from 'routes';
 
-import Button from 'components/Button';
 import FeatureSetWrapper from './components/FeatureSetWrapper';
 
 function Notepad({ theme }) {

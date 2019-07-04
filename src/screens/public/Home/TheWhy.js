@@ -17,7 +17,7 @@ function TheWhy({ theme }) {
               without having to switch between apps. This is why I decided to
               build Matterbase"
             </h4>
-            <h6 className="tundora-text" style={{ lineHeight: '2.5rem;' }}>
+            <h6 className="tundora-text" style={{ lineHeight: '2.5rem' }}>
               - Hermann (Maker)
             </h6>
           </div>

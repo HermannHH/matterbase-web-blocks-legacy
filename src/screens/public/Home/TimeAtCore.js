@@ -1,9 +1,13 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 import constants from 'utils/constants';
+import Button from 'react-bootstrap/Button';
+
+import { navigate } from '@reach/router';
+
 import routes from 'routes';
 
-import Button from 'components/Button';
+// import Button from 'components/Button';
 import FeatureSetWrapper from './components/FeatureSetWrapper';
 
 function TimeAtCore({ theme }) {
@@ -21,7 +25,7 @@ function TimeAtCore({ theme }) {
             with blocks of time.
           </h4>
           <div className="mt-5">
-            <Button>I WANT TO BE MORE FOCUSED</Button>
+            <Button onClick={() => navigate(routes.public.register.path)}>I WANT TO BE MORE FOCUSED</Button>
           </div>
         </div>
         <div className="col-sm-10 col-lg-6 d-flex justify-content-center align-items-center">

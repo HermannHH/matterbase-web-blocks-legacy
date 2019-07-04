@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import constants from 'utils/constants';
+
+import { navigate } from '@reach/router';
+
 import routes from 'routes';
 
 const AtlWrapper = styled.div`
@@ -47,8 +50,10 @@ export default function AboveTheFold() {
               </h4>
               <div className="mt-5">
                 <a
-                  className="btn btn-primary btn-lg"
-                  href={routes.public.register.path}
+                  className="btn btn-primary btn-lg white-text"
+                  onClick={() => navigate(routes.public.register.path)}
+                  style={{ color: "white", cursor: "pointer"}}
+
                 >
                   TRY IT FOR FREE
                 </a>
