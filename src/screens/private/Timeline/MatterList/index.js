@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Loading from 'components/Loading';
+import NoResults from 'components/NoResults';
 
 import ListItem from './ListItem';
 
@@ -11,10 +12,11 @@ function MatterList({
   error,
   loading,
   destroyItem,
-  setEditToken
+  setEditToken,
+  matterDataInitialised
 }) {
   let content = <Loading />;
-  if (!loading && !error) {
+  if (!loading && !error && matterDataInitialised && keyedArray.length) {
     content = keyedArray.map( token => (
     <ListItem
       key={token}
@@ -23,6 +25,8 @@ function MatterList({
       handleDestroyItem={destroyItem}
       setEditToken={setEditToken}
     />));
+  } else if (!loading && !error && matterDataInitialised) {
+    content = <NoResults text="You have not added any Matters yet"/>
   }
 
   return (

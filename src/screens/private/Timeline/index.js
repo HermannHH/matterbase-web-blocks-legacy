@@ -27,6 +27,7 @@ function Timeline({
 
   const [keyedArray, setKeyedArray] = useState([]);
   const [indexedObject, setIndexedObject] = useState({});
+  const [matterDataInitialised, setMatterDataInitialised] = useState(false);
 
   const { data, error, loading } = useQuery(LIST_MATTERS);
   useEffect(() => {
@@ -37,6 +38,7 @@ function Timeline({
     } else {
       setKeyedArray([]);
       setIndexedObject({});
+      setMatterDataInitialised(true);
     }
   }, [loading]);
 
@@ -106,6 +108,7 @@ function Timeline({
             loading={loading}
             destroyItem={destroyItem}
             setEditToken={setEditToken}
+            matterDataInitialised={matterDataInitialised}
           />
       </div>
     </div>
