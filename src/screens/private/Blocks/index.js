@@ -32,6 +32,7 @@ function Blocks({ client, matterId }) {
 
   const [blocksKeyedArray, setBlocksKeyedArray] = useState([]);
   const [blocksIndexedObject, setBlocksIndexedObject] = useState({});
+  const [blocksDataInitialised, setBlocksDataInitialised] = useState(false);
 
   const { data, error, loading } = useQuery(SHOW_MATTER, {
     variables: { token: matterId },
@@ -48,6 +49,7 @@ function Blocks({ client, matterId }) {
       });
       setBlocksIndexedObject(reducedData.indexedObject);
       setBlocksKeyedArray(reducedData.keyedArray);
+      setBlocksDataInitialised(true)
     } else {
       setMatter({});
     }
@@ -99,6 +101,7 @@ function Blocks({ client, matterId }) {
               blocksKeyedArray={blocksKeyedArray}
               blocksIndexedObject={blocksIndexedObject}
               destroyItem={destroyItem}
+              blocksDataInitialised={blocksDataInitialised}
             />
             <BlockAdd
               loading={loading}
