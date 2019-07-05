@@ -8,7 +8,14 @@
     flex-direction: column;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 33.33%;
+    // flex-basis: 33.33%;
+    flex-basis: 100%;
+    @include media-breakpoint-up(md) {
+      flex-basis: 50%;
+    };
+    @include media-breakpoint-up(lg) {
+      flex-basis: 33.33%;
+    };
     @extend .p-3;
     &-paper {
       height: 200px;
