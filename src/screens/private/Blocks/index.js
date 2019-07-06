@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-apollo-hooks';
-import { withApollo } from 'react-apollo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { navigate } from '@reach/router';
@@ -13,8 +11,6 @@ import standard from 'screens/private/layouts/standard';
 
 import SubNavbar from "screens/private/components/SubNavbar";
 
-import { SHOW_MATTER } from './queries';
-import { CREATE_BLOCK, DESTROY_BLOCK } from './mutations';
 
 import BlockAdd from './BlockAdd';
 import BlocksList from './BlocksList';
@@ -102,4 +98,4 @@ function Blocks({ matterId }) {
 };
 
 
-export default standard(withApollo(Blocks));
+export default standard(Blocks);

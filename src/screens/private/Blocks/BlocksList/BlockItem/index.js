@@ -10,9 +10,9 @@ export default function BlockItem({ token, destroyItem, data, matterToken }) {
 
   let content;
   if (data.scope_type === 'tasks') {
-    content = <Tasklist blockToken={token} data={data.content}/>;
+    content = <Tasklist blockToken={token} data={data.content} matterToken={matterToken}/>;
   } else if (data.scope_type === 'sticky_notes') {
-    content = <StickyNotes blockToken={token} data={data.content} />;
+    content = <StickyNotes blockToken={token} data={data.content} matterToken={matterToken} />;
   };
 
   return (

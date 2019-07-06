@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { withApollo } from 'react-apollo';
 
 import {
   dataReduce,
@@ -11,12 +10,12 @@ import {
 
 import NoResuts from 'components/NoResults';
 
-import { CREATE_TASK, DESTROY_TASK, UPDATE_TASK } from './mutations';
+import { createTask, destroyTask, updateTask } from 'api/matters/blocks/tasks';
 
 import TaskAdd from './TaskAdd';
 import TaskItem from './TaskItem';
 
-function Tasklist({ client, blockToken, data }) {
+function Tasklist({ blockToken, data,  matterToken }) {
 
   const [tasksKeyedArray, setTasksKeyedArray] = useState([]);
   const [tasksIndexedObject, setTasksIndexedObject] = useState({});
@@ -25,40 +24,29 @@ function Tasklist({ client, blockToken, data }) {
     setTasksIndexedObject(reducedData.indexedObject);
     setTasksKeyedArray(reducedData.keyedArray);
   }, []);
-  // console.log('tasklist data', token, tasksKeyedArray, tasksIndexedObject);
-
-  async function createItem({ blockToken, body }) {
-    const { data } = await client.mutate({
-      variables: { blockToken, body },
-      mutation: CREATE_TASK
-    });
+  
+  async function createItem({ matterToken, blockToken, body }) {
+    const data = await createTask({ matterToken, blockToken, body });
     // console.log('data', data)
-    await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.taskCreate.task.token, data.taskCreate.task));
-    await setTasksKeyedArray(appendToKeyedArray(tasksKeyedArray, data.taskCreate.task.token));
+    await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.token, data));
+    await setTasksKeyedArray(appendToKeyedArray(tasksKeyedArray, data.token));
   };
 
-  async function updateItem({ token, body, isCompleted }) {
-    console.log('data', token, body)
-    const { data } = await client.mutate({
-      variables: { token, body, isCompleted },
-      mutation: UPDATE_TASK
-    });
+  async function updateItem({ matterToken, blockToken, token, body, isCompleted }) {
+    const data = await updateTask({ matterToken, blockToken, token, body, isCompleted });
     // console.log('data', data)    
-    await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.taskUpdate.task.token, data.taskUpdate.task));
+    await setTasksIndexedObject(writeToIndexedObject(tasksIndexedObject, data.token, data));
   };
 
-  async function destroyItem({ token }) {
-    const { data } = await client.mutate({
-      variables: { token },
-      mutation: DESTROY_TASK
-    });
-    await setTasksKeyedArray(removeFromKeyedArray(tasksKeyedArray, data.taskDelete.task.token));
-    await setTasksIndexedObject(removeFromIndexedObject(tasksIndexedObject, data.taskDelete.task.token, data.taskDelete.task));
+  async function destroyItem({ matterToken, blockToken, token }) {
+    const data = await destroyTask({ matterToken, blockToken, token });
+    await setTasksKeyedArray(removeFromKeyedArray(tasksKeyedArray, data.token));
+    await setTasksIndexedObject(removeFromIndexedObject(tasksIndexedObject, data.token, data));
   };
 
   let tasksContent;
   if (tasksKeyedArray.length) {
-    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
+    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
   } else {
     tasksContent = <NoResuts text="No tasks added yet"/>;
   }
@@ -66,10 +54,10 @@ function Tasklist({ client, blockToken, data }) {
 
   return (
     <div className="tasklist">
-      <TaskAdd createItem={createItem} blockToken={blockToken}/>
+      <TaskAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
       {tasksContent}
     </div>
   )
 };
 
-export default withApollo(Tasklist);
+export default Tasklist;

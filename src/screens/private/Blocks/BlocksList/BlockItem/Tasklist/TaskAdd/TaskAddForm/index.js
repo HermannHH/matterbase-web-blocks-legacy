@@ -13,7 +13,8 @@ setLocale({
 
 function TaskAddForm({
   blockToken,
-  createItem
+  createItem,
+  matterToken
 }) {
 
   
@@ -29,7 +30,7 @@ function TaskAddForm({
           initialValues={{ body: '' }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            await createItem({ blockToken, body: values.body });
+            await createItem({ matterToken, blockToken, body: values.body });
             resetForm();
             setSubmitting(false);
           }}
