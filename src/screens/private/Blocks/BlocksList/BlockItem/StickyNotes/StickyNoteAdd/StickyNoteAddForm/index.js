@@ -7,7 +7,8 @@ import { Form, Button } from 'react-bootstrap';
 
 function StickyNoteAddForm({
   blockToken,
-  createItem
+  createItem,
+  matterToken
 }) {
 
   
@@ -15,7 +16,7 @@ function StickyNoteAddForm({
       <Formik
           initialValues={{ body: '' }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            await createItem({ blockToken, body: values.body });
+            await createItem({ blockToken, matterToken, body: values.body });
             resetForm();
             setSubmitting(false);
           }}

@@ -15,7 +15,9 @@ function StickyNoteUpdateForm({
   token,
   updateItem,
   data,
-  setIsEditing
+  setIsEditing,
+  matterToken,
+  blockToken
 }) {
 
   
@@ -31,7 +33,7 @@ function StickyNoteUpdateForm({
           initialValues={{ body: data.body }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            await updateItem({ token, body: values.body });
+            await updateItem({ token, body: values.body, matterToken, blockToken });
             resetForm();
             setSubmitting(false);
             setIsEditing(false);

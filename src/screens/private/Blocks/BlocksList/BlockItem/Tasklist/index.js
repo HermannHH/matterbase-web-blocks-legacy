@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import {
   dataReduce,
@@ -14,15 +14,18 @@ import { createTask, destroyTask, updateTask } from 'api/matters/blocks/tasks';
 
 import TaskAdd from './TaskAdd';
 import TaskItem from './TaskItem';
+import Loading from 'components/Loading';
 
 function Tasklist({ blockToken, data,  matterToken }) {
 
+  const [loading, setLoading] = useState(true);
   const [tasksKeyedArray, setTasksKeyedArray] = useState([]);
   const [tasksIndexedObject, setTasksIndexedObject] = useState({});
   useEffect(() => {
     const reducedData = dataReduce(data, 'token');
     setTasksIndexedObject(reducedData.indexedObject);
     setTasksKeyedArray(reducedData.keyedArray);
+    setLoading(false);
   }, []);
   
   async function createItem({ matterToken, blockToken, body }) {
@@ -54,8 +57,14 @@ function Tasklist({ blockToken, data,  matterToken }) {
 
   return (
     <div className="tasklist">
-      <TaskAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
-      {tasksContent}
+      {loading ?
+        <Loading />
+      :
+      <Fragment>
+        <TaskAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+        {tasksContent}
+      </Fragment>
+      }
     </div>
   )
 };

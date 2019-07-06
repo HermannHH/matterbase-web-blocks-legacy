@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { withApollo } from 'react-apollo';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import {
   dataReduce,
@@ -9,64 +8,62 @@ import {
   writeToIndexedObject
 } from 'utils/dataStructures';
 
-import { CREATE_STICKY_NOTE, DESTROY_STICKY_NOTE, UPDATE_STICKY_NOTE } from './mutations';
+import { createStickyNote, destroyStickyNote, updateStickyNote } from 'api/matters/blocks/stickyNotes';
 
 import StickyNoteAdd from './StickyNoteAdd';
 import StickyNoteItem from './StickyNoteItem';
+import Loading from 'components/Loading';
 
-function StickyNotes({ client, blockToken, data }) {
+function StickyNotes({ blockToken, data, matterToken }) {
 
+  const [loading, setLoading] = useState(true);
   const [stickyNotesKeyedArray, setStickyNotesKeyedArray] = useState([]);
   const [stickyNotesIndexedObject, setStickyNotesIndexedObject] = useState({});
   useEffect(() => {
     const reducedData = dataReduce(data, 'token');
     setStickyNotesIndexedObject(reducedData.indexedObject);
     setStickyNotesKeyedArray(reducedData.keyedArray);
+    setLoading(false)
   }, []);
   // console.log('StickyNotes data', token, stickyNotesKeyedArray, stickyNotesIndexedObject);
 
-  async function createItem({ blockToken, body }) {
-    const { data } = await client.mutate({
-      variables: { blockToken, body },
-      mutation: CREATE_STICKY_NOTE
-    });
+  async function createItem({ matterToken, blockToken, body }) {
+    const data = await createStickyNote({ matterToken, blockToken, body });
     console.log('data', data)
-    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.stickyNoteCreate.stickyNote.token, data.stickyNoteCreate.stickyNote));
-    await setStickyNotesKeyedArray(appendToKeyedArray(stickyNotesKeyedArray, data.stickyNoteCreate.stickyNote.token));
+    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.token, data));
+    await setStickyNotesKeyedArray(appendToKeyedArray(stickyNotesKeyedArray, data.token));
   };
 
-  async function updateItem({ token, body, isCompleted }) {
-    console.log('data', token, body)
-    const { data } = await client.mutate({
-      variables: { token, body, isCompleted },
-      mutation: UPDATE_STICKY_NOTE
-    });
+  async function updateItem({ matterToken, blockToken, token, body }) {
+    const data = await updateStickyNote({ matterToken, blockToken, token, body });
     console.log('data', data)    
-    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.stickyNoteUpdate.stickyNote.token, data.stickyNoteUpdate.stickyNote));
+    await setStickyNotesIndexedObject(writeToIndexedObject(stickyNotesIndexedObject, data.token, data));
   };
 
-  async function destroyItem({ token }) {
-    const { data } = await client.mutate({
-      variables: { token },
-      mutation: DESTROY_STICKY_NOTE
-    });
-    console.log('data', data)
-    await setStickyNotesKeyedArray(removeFromKeyedArray(stickyNotesKeyedArray, data.stickyNoteDelete.stickyNote.token));
-    await setStickyNotesIndexedObject(removeFromIndexedObject(stickyNotesIndexedObject, data.stickyNoteDelete.stickyNote.token, data.stickyNoteDelete.stickyNote));
+  async function destroyItem({ matterToken, blockToken, token }) {
+    const data = await destroyStickyNote({ matterToken, blockToken, token });
+    await setStickyNotesKeyedArray(removeFromKeyedArray(stickyNotesKeyedArray, data.token));
+    await setStickyNotesIndexedObject(removeFromIndexedObject(stickyNotesIndexedObject, data.token, data));
   };
 
   let stickyNotesContent;
   if (stickyNotesKeyedArray.length) {
-    stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
+    stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
   }
 
 
   return (
     <div className="sticky-notes">
-      {stickyNotesContent}
-      <StickyNoteAdd createItem={createItem} blockToken={blockToken}/>
+      {loading ?
+        <Loading />
+      :
+      <Fragment>
+        {stickyNotesContent}
+        <StickyNoteAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+      </Fragment>
+      }
     </div>
   )
 };
 
-export default withApollo(StickyNotes);
+export default StickyNotes;
