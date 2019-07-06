@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 
-import apolloClient from './apolloClient';
 import AppContext from 'contextuals/AppContext';
 import AppContextProvider from 'contextuals/AppContextProvider';
 // import PageNotFound from 'screens/errors/PageNotFound';
@@ -22,15 +19,11 @@ function App() {
         <AppContext.Consumer>
           {context => (
             <ThemeProvider theme={theme}>
-              <ApolloProvider client={apolloClient}>
-                <ApolloProviderHooks client={apolloClient}>
-                  <Fragment>
-                    {!context.data.isAuthenticated && <Public />}
-                    {context.data.isAuthenticated && <Private />}
-                    <Protected />
-                  </Fragment>
-                </ApolloProviderHooks>
-              </ApolloProvider>
+                <Fragment>
+                  {!context.data.isAuthenticated && <Public />}
+                  {context.data.isAuthenticated && <Private />}
+                  <Protected />
+                </Fragment>
             </ThemeProvider>
           )}
         </AppContext.Consumer>
