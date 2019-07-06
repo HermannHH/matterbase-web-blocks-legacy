@@ -49,7 +49,7 @@ function Blocks({ client, matterId }) {
       });
       setBlocksIndexedObject(reducedData.indexedObject);
       setBlocksKeyedArray(reducedData.keyedArray);
-      setBlocksDataInitialised(true)
+      setBlocksDataInitialised(true);
     } else {
       setMatter({});
     }

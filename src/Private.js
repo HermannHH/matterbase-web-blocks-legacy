@@ -8,13 +8,14 @@ import routes from 'routes';
 // import ChangePassword from 'screens/private/ChangePassword';
 // import Notepad from 'screens/private/Notepad';
 // import TaskList from 'screens/private/TaskList';
-import { Timeline, Blocks } from 'screens/private';
+import { Timeline, Blocks, Onboarding } from 'screens/private';
 
 
 function Private() {
   return (
     <Router>
       <Timeline path={routes.private.home.path} />
+      <Onboarding path={routes.private.onboarding.path} />
       <Blocks path={routes.private.blocks.path} />
     </Router>
   );

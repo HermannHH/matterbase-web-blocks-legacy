@@ -19,6 +19,7 @@ export default {
   },
   private: {
     home: { path: '/' },
+    onboarding: { path: '/onboarding' },
     blocks: { path: '/blocks/:matterId' },
   }
   
