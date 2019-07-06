@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { withApollo } from 'react-apollo';
 
-import standard from 'screens/private/layouts/standard';
+import { mattersList, createMatter, updateMatter, destroyMatter } from 'api/matters';
 
+import standard from 'screens/private/layouts/standard';
 import SubNavBar from 'screens/private/components/SubNavbar';
 
 import {
@@ -25,47 +26,40 @@ function Timeline({
   client
 }) {
 
+  const [loading, setLoading] = useState(true);
   const [keyedArray, setKeyedArray] = useState([]);
   const [indexedObject, setIndexedObject] = useState({});
   const [matterDataInitialised, setMatterDataInitialised] = useState(false);
 
-  const { data, error, loading } = useQuery(LIST_MATTERS);
+  async function fetchMattersList() {
+    const data = await mattersList();
+    const reducedData = await dataReduce(data, 'token');
+    setKeyedArray(reducedData.keyedArray);
+    setIndexedObject(reducedData.indexedObject);
+    setMatterDataInitialised(true);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    if (!loading  && !error) {
-      const reducedData = dataReduce(data.matters, 'token');
-      setKeyedArray(reducedData.keyedArray);
-      setIndexedObject(reducedData.indexedObject);
-    } else {
-      setKeyedArray([]);
-      setIndexedObject({});
-      setMatterDataInitialised(true);
-    }
-  }, [loading]);
+    fetchMattersList();
+  }, []);
+
 
   async function createItem({ title }) {
-    const { data } = await client.mutate({
-      variables: { title },
-      mutation: CREATE_MATTER
-    });
-    await setIndexedObject(writeToIndexedObject(indexedObject, data.matterCreate.matter.token, data.matterCreate.matter));
-    await setKeyedArray(appendToKeyedArray(keyedArray, data.matterCreate.matter.token));
+    const data = await createMatter({ title });
+    await setIndexedObject(writeToIndexedObject(indexedObject, data.token, data));
+    await setKeyedArray(appendToKeyedArray(keyedArray, data.token));
   };
 
   async function updateItem({ token, title }) {
-    const { data } = await client.mutate({
-      variables: { token, title },
-      mutation: UPDATE_MATTER
-    });
-    await setIndexedObject(writeToIndexedObject(indexedObject, data.matterUpdate.matter.token, data.matterUpdate.matter));
+    const data = await updateMatter({ token, title });
+    await setIndexedObject(writeToIndexedObject(indexedObject, data.token, data));
   };
 
   async function destroyItem({ token }) {
-    const { data } = await client.mutate({
-      variables: { token },
-      mutation: DESTROY_MATTER
-    });
-    await setKeyedArray(removeFromKeyedArray(keyedArray, data.matterDelete.matter.token));
-    await setIndexedObject(removeFromIndexedObject(indexedObject, data.matterDelete.matter.token));
+    const data = await destroyMatter({ token });
+    await setKeyedArray(removeFromKeyedArray(keyedArray, data.token));
+    await setIndexedObject(removeFromIndexedObject(indexedObject, data.token));
 
   };
 
@@ -104,7 +98,7 @@ function Timeline({
           <MatterList
             keyedArray={keyedArray}
             indexedObject={indexedObject}
-            error={error}
+            // error={error}
             loading={loading}
             destroyItem={destroyItem}
             setEditToken={setEditToken}

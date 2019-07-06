@@ -9,14 +9,14 @@ import ListItem from './ListItem';
 function MatterList({
   keyedArray,
   indexedObject,
-  error,
+  // error,
   loading,
   destroyItem,
   setEditToken,
   matterDataInitialised
 }) {
   let content = <Loading />;
-  if (!loading && !error && matterDataInitialised && keyedArray.length) {
+  if (!loading && matterDataInitialised && keyedArray.length) {
     content = keyedArray.map( token => (
     <ListItem
       key={token}
@@ -25,7 +25,7 @@ function MatterList({
       handleDestroyItem={destroyItem}
       setEditToken={setEditToken}
     />));
-  } else if (!loading && !error && matterDataInitialised) {
+  } else if (!loading && matterDataInitialised) {
     content = <NoResults text="You have not added any Matters yet"/>
   }
 
