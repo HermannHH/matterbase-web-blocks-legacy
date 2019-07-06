@@ -21,8 +21,7 @@ function BlockAdd({
   showBlockModal,
   matterToken,
   createItem,
-  loading,
-  error
+  loading
 }) {
   
   // const matterEntityContent= useSelector(state => state.matter.entity.content);
@@ -45,7 +44,7 @@ function BlockAdd({
 
   return (
     <div>
-      {!loading && !error &&
+      {!loading &&
       <Wrapper>
         <Button variant="secondary" size="lg" block onClick={() => setShowBlockModal(true)}>
           Add Block

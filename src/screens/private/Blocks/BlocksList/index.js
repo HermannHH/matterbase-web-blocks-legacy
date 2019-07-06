@@ -7,17 +7,17 @@ import BlockItem from './BlockItem';
 
 export default function BlocksList({
   loading,
-  error,
   blocksKeyedArray,
   blocksIndexedObject,
   destroyItem,
-  blocksDataInitialised
+  blocksDataInitialised,
+  matterToken,
 }) {
   // console.log('loading && !error', loading, error);
   let content = <Loading />;
-  if (!loading && !error && blocksDataInitialised && blocksKeyedArray.length) {
-    content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} destroyItem={destroyItem} data={blocksIndexedObject[token]}/>)
-  } else if (!loading && !error && blocksDataInitialised) {
+  if (!loading && blocksDataInitialised && blocksKeyedArray.length) {
+    content = blocksKeyedArray.map(token => <BlockItem key={token} token={token} matterToken={matterToken} destroyItem={destroyItem} data={blocksIndexedObject[token]}/>)
+  } else if (!loading && blocksDataInitialised) {
     content = <NoResults text="You have not added any blocks to this Matter yet"/>
   }
   return (

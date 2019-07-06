@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-apollo-hooks';
-import { withApollo } from 'react-apollo';
 
 import { mattersList, createMatter, updateMatter, destroyMatter } from 'api/matters';
 
@@ -14,9 +12,6 @@ import {
   appendToKeyedArray,
   writeToIndexedObject
 } from 'utils/dataStructures';
-
-import { LIST_MATTERS } from './queries';
-import { CREATE_MATTER, UPDATE_MATTER,DESTROY_MATTER } from './mutations';
 
 
 import MatterAdd from './MatterAdd';
@@ -109,4 +104,4 @@ function Timeline({
   )
 };
 
-export default standard(withApollo(Timeline));
+export default standard(Timeline);

@@ -7,6 +7,8 @@ import { navigate } from '@reach/router';
 
 import routes from 'routes';
 
+import { blocksList, createBlock, destroyBlock } from 'api/matters/blocks';
+
 import standard from 'screens/private/layouts/standard';
 
 import SubNavbar from "screens/private/components/SubNavbar";
@@ -25,58 +27,40 @@ import {
   writeToIndexedObject
 } from 'utils/dataStructures';
 
-function Blocks({ client, matterId }) {
+function Blocks({ matterId }) {
 
-  // const [keyedArray, setKeyedArray] = useState([]);
-  const [matter, setMatter] = useState({});
-
+  const [loading, setLoading] = useState(true);
   const [blocksKeyedArray, setBlocksKeyedArray] = useState([]);
   const [blocksIndexedObject, setBlocksIndexedObject] = useState({});
   const [blocksDataInitialised, setBlocksDataInitialised] = useState(false);
 
-  const { data, error, loading } = useQuery(SHOW_MATTER, {
-    variables: { token: matterId },
-  });
-  useEffect(() => {
-    if (!loading  && !error) {
-      const { title, token, blocksCount, blockScopeTypes, blocks } = data.matter;
-      const reducedData = dataReduce(blocks, 'token');
-      setMatter({
-        title,
-        token,
-        blocksCount,
-        blockScopeTypes
-      });
-      setBlocksIndexedObject(reducedData.indexedObject);
-      setBlocksKeyedArray(reducedData.keyedArray);
-      setBlocksDataInitialised(true);
-    } else {
-      setMatter({});
-    }
-  }, [loading]);
+  async function fetchBlocksList() {
+    const data = await blocksList({ matterToken: matterId });
+    console.log('Blocks list data', data)
+    const reducedData = dataReduce(data, 'token');
+    console.log('reduced', reducedData)
+    setBlocksIndexedObject(reducedData.indexedObject);
+    setBlocksKeyedArray(reducedData.keyedArray);
+    setBlocksDataInitialised(true);
+    setLoading(false);
+  };
 
+  useEffect(() => {
+    fetchBlocksList();
+  }, []);
 
   const [showBlockModal, setShowBlockModal] = useState(false);
 
-
-
   async function createItem({ matterToken, scopeType }) {
-    const { data } = await client.mutate({
-      variables: { matterToken, scopeType },
-      mutation: CREATE_BLOCK
-    });
-    await setBlocksIndexedObject(writeToIndexedObject(blocksIndexedObject, data.blockCreate.block.token, data.blockCreate.block));
-    await setBlocksKeyedArray(appendToKeyedArray(blocksKeyedArray, data.blockCreate.block.token));
+    const data = await createBlock({ matterToken, scopeType });
+    await setBlocksIndexedObject(writeToIndexedObject(blocksIndexedObject, data.token, data));
+    await setBlocksKeyedArray(appendToKeyedArray(blocksKeyedArray, data.token));
   };
 
-  async function destroyItem({ token }) {
-    const { data } = await client.mutate({
-      variables: { token },
-      mutation: DESTROY_BLOCK
-    });
-    await setBlocksKeyedArray(removeFromKeyedArray(blocksKeyedArray, data.blockDelete.block.token));
-    await setBlocksIndexedObject(removeFromIndexedObject(blocksIndexedObject, data.blockDelete.block.token));
-
+  async function destroyItem({ matterToken, token }) {
+    const data = await destroyBlock({ matterToken, token });
+    await setBlocksKeyedArray(removeFromKeyedArray(blocksKeyedArray, data.token));
+    await setBlocksIndexedObject(removeFromIndexedObject(blocksIndexedObject, data.token));
   };
 
   // console.log('checkers', blocksKeyedArray, blocksIndexedObject)
@@ -97,15 +81,14 @@ function Blocks({ client, matterId }) {
           <div className="col-12 col-md-10">
             <BlocksList 
               loading={loading}
-              error={error}
               blocksKeyedArray={blocksKeyedArray}
               blocksIndexedObject={blocksIndexedObject}
               destroyItem={destroyItem}
               blocksDataInitialised={blocksDataInitialised}
+              matterToken={matterId}
             />
             <BlockAdd
               loading={loading}
-              error={error}
               showBlockModal={showBlockModal}
               setShowBlockModal={setShowBlockModal}
               createItem={createItem}
