@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { navigate } from '@reach/router';
 
-import replaceUrlParams from 'utils/replaceUrlParams';
 import routes from 'routes';
 
 import { signOut } from 'api/sessions';

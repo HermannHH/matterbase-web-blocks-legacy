@@ -15,7 +15,7 @@ async function signIn({ email, password }) {
     url: `${ENV.API_V1_ROOT_PATH}/sessions`,
     method: 'post',
     data,
-    onSuccess: (resp) => setCookie("authToken", resp.data.auth_token)
+    onSuccess: (resp) => setCookie("authToken", resp.data.jwt_auth_token)
   });
 };
 

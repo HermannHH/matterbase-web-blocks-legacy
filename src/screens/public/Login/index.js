@@ -20,8 +20,9 @@ function Login({ appContext: { actions }}) {
     actions.setLoading(true);
     actions.setIsAuthenticated(true);
     navigate(routes.private.home.path);
-    actions.setLoading(false);
-
+    setTimeout(() => {
+      actions.setLoading(false);
+    }, 1000);
   };
 
   return (
