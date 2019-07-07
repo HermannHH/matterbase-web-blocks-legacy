@@ -4,7 +4,7 @@ import constants from 'utils/constants';
 import Button from 'react-bootstrap/Button';
 import routes from 'routes';
 
-import FeatureSetWrapper from './components/FeatureSetWrapper';
+import FeatureSetWrapper from 'screens/public/Home/components/FeatureSetWrapper';
 
 function Notepad({ theme }) {
   return (

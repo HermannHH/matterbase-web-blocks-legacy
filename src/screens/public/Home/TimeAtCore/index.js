@@ -8,7 +8,7 @@ import { navigate } from '@reach/router';
 import routes from 'routes';
 
 // import Button from 'components/Button';
-import FeatureSetWrapper from './components/FeatureSetWrapper';
+import FeatureSetWrapper from 'screens/public/Home/components/FeatureSetWrapper';
 
 function TimeAtCore({ theme }) {
   return (

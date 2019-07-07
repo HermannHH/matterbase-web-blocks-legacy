@@ -4,7 +4,7 @@ import constants from 'utils/constants';
 import routes from 'routes';
 
 import Button from 'components/Button';
-import FeatureSetWrapper from './components/FeatureSetWrapper';
+import FeatureSetWrapper from 'screens/public/Home/components/FeatureSetWrapper';
 
 function EverythingYouNeed({ theme }) {
   return (
