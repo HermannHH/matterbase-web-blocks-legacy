@@ -21,7 +21,7 @@ export default function standard(WrappedComponent) {
         <Navbar handleSignOut={props.appContext.actions.handleSignOut}/>
         <WrappedComponent {...props} />
         {!props.appContext.data.user.isEmailVerified &&
-          <FooterBanner text={ verificationSent ? "We have sent you an email containing verification instructions" : "Please verify your account"} handleSendConfirmationEmail={handleSendConfirmationEmail} verificationSent={verificationSent}/>
+          <FooterBanner text={ verificationSent ? "We have sent you an email containing verification instructions" : "Your account is not verified yet. Click on the button on the right to resend the confirmation instuctions"} handleSendConfirmationEmail={handleSendConfirmationEmail} verificationSent={verificationSent}/>
         }
       </div>
     );
