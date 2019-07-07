@@ -3,34 +3,27 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import { object, string, setLocale } from "yup";
-
-setLocale({
-  mixed: {
-    required: "Is required"
-  },
-  string: {
-    email: "Must be a valid email address"
-  }
-});
 
 function CardForm(props) {
 
   // const [state, setState] = useState({ isSubmitting: false });
-
-  const validationSchema = object().shape({
-    email: string()
-      .required()
-      .email()
-  });
-
 
   return (
     <div className="card">
       <div className="card-body">
       <Formik
           initialValues={{ email: '', password: '' }}
-          validationSchema={validationSchema}
+          validate={values => {
+            let errors = {};
+            if (!values.email) {
+              errors.email = 'Required';
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = 'Invalid email address';
+            }
+            return errors;
+          }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -50,26 +43,42 @@ function CardForm(props) {
             /* and other goodies */
           }) => (
             <Form onSubmit={handleSubmit}>
+
               <Form.Group>
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
-                  type="email"
-                  name="email"
+                  type="password"
+                  name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.email}
-                  placeholder="Enter email"
-                  isInvalid={errors.email && touched.email}
+                  value={values.password}
+                  placeholder="Enter password"
+                  isInvalid={errors.password && touched.password}
                 />
-                {errors.email && touched.email &&
+                {errors.password && touched.password &&
                   <Form.Control.Feedback type="invalid">
-                    {errors.email}
+                    {errors.password}
                   </Form.Control.Feedback>
                 }
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
               </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Password Confirmation</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                placeholder="Enter password"
+                isInvalid={errors.password && touched.password}
+              />
+              {errors.password && touched.password &&
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              }
+            </Form.Group>
               <Button
                 type="submit"
                 disabled={isSubmitting || !isValid}

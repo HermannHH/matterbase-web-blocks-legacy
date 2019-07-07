@@ -31,7 +31,7 @@ function AuthActionButtons() {
     </div>
     )}
     </Match>
-    <Match path={routes.public.noConfirmationInstructions.path}>
+    {/* <Match path={routes.public.noConfirmationInstructions.path}>
     {props => !props.match && (
     <div className="my-4">
       <a className="btn btn-primary btn-block btn-ghost-selago" onClick={() => navigate(routes.public.noConfirmationInstructions.path)} style={{ cursor: "pointer"}}>Didn't receive confirmation instructions?</a>
@@ -44,7 +44,7 @@ function AuthActionButtons() {
       <a className="btn btn-primary btn-block btn-ghost-selago" onClick={() => navigate(routes.public.noUnlockInstructions.path)} style={{ cursor: "pointer"}}>Didn't receive unlock instructions?</a>
     </div>
     )}
-    </Match>
+    </Match> */}
   </div>
 
   );
