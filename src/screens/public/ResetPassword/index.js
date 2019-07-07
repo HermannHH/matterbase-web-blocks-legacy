@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
 import { resetPassword } from 'api/passwords';
 
 
@@ -12,7 +16,7 @@ function ResetPassword({ resetPasswordToken }) {
 
   async function handleResetPassword({ resetPasswordToken, password, passwordConfirmation }) {
     const data = await resetPassword({ resetPasswordToken, password, passwordConfirmation });
-    console.log('sign in data', data)
+    navigate(routes.public.login.path);
   };
 
   // useEffect(() => {

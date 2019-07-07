@@ -13,7 +13,6 @@ function ForgotPassword() {
 
   async function handleForgotPassword({ email }) {
     const data = await forgotPassword({  email  });
-    console.log('sign in data', data)
   };
 
   return (
