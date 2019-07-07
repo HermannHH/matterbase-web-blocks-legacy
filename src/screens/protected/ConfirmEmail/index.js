@@ -1,14 +1,26 @@
 import React, { useEffect } from 'react';
 
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
 import { confirmEmail } from 'api/users';
 
 
-export default function ConfirmEmail({ confirmationToken }) {
+export default function ConfirmEmail({ confirmationToken, appContext: { data, actions } }) {
 
 
   async function handleConfirmEmail({ confirmationToken }) {
-    const data = await confirmEmail({  confirmationToken  });
-    console.log('sign in data', data)
+    await confirmEmail({  confirmationToken  });
+    if (data.isAuthenticated) {
+      await actions.handleGetCurrentUser();
+      navigate(routes.private.home.path);
+    } else {
+      navigate(routes.public.login.path);
+    }
+    setTimeout(() => {
+      actions.setLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
