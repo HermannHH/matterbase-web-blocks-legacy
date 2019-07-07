@@ -4,31 +4,17 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 
-function CardForm(props) {
-
-  // const [state, setState] = useState({ isSubmitting: false });
-
+function CardForm({ handleResetPassword, resetPasswordToken }) {
   return (
     <div className="card">
       <div className="card-body">
       <Formik
-          initialValues={{ email: '', password: '' }}
-          validate={values => {
-            let errors = {};
-            if (!values.email) {
-              errors.email = 'Required';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'Invalid email address';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          initialValues={{ password: '', passwordConfirmation: '' }}
+          onSubmit={async (values, { setSubmitting, resetForm  }) => {
+            await handleResetPassword({ resetPasswordToken, password: values.password, passwordConfirmation: values.passwordConfirmation });
+            resetForm();
+            setSubmitting(false);
+           
           }}
         >
           {({
@@ -52,7 +38,7 @@ function CardForm(props) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
-                  placeholder="Enter password"
+                  placeholder="Enter a new password"
                   isInvalid={errors.password && touched.password}
                 />
                 {errors.password && touched.password &&
@@ -66,16 +52,16 @@ function CardForm(props) {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 type="password"
-                name="password"
+                name="passwordConfirmation"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
-                placeholder="Enter password"
-                isInvalid={errors.password && touched.password}
+                value={values.passwordConfirmation}
+                placeholder="Confirm your new password"
+                isInvalid={errors.passwordConfirmation && touched.passwordConfirmation}
               />
-              {errors.password && touched.password &&
+              {errors.passwordConfirmation && touched.passwordConfirmation &&
                 <Form.Control.Feedback type="invalid">
-                  {errors.password}
+                  {errors.passwordConfirmation}
                 </Form.Control.Feedback>
               }
             </Form.Group>
@@ -84,7 +70,7 @@ function CardForm(props) {
                 disabled={isSubmitting || !isValid}
                 className="btn btn-primary btn-block"
               >
-                {isSubmitting ? "Logging In..." : "Log In"}
+                {isSubmitting ? "Resetting..." : "Reset Password"}
               </Button>
             </Form>
           )}

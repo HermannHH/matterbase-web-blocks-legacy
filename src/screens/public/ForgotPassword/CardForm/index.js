@@ -14,7 +14,7 @@ setLocale({
   }
 });
 
-function CardForm(props) {
+function CardForm({ handleForgotPassword }) {
 
   // const [state, setState] = useState({ isSubmitting: false });
 
@@ -31,11 +31,11 @@ function CardForm(props) {
       <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting, resetForm  }) => {
+            await handleForgotPassword({ email: values.email });
+            resetForm();
+            setSubmitting(false);
+           
           }}
         >
           {({
@@ -75,7 +75,7 @@ function CardForm(props) {
                 disabled={isSubmitting || !isValid}
                 className="btn btn-primary btn-block"
               >
-                {isSubmitting ? "Logging In..." : "Log In"}
+                {isSubmitting ? "Sending..." : "Send reset instructions"}
               </Button>
             </Form>
           )}

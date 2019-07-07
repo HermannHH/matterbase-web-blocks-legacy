@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 
-function CardForm(props) {
+function CardForm({
+  handleSignUp
+}) {
 
   // const [state, setState] = useState({ isSubmitting: false });
 
@@ -12,7 +14,7 @@ function CardForm(props) {
     <div className="card">
       <div className="card-body">
       <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ email: '', password: '', passwordConfirmation: '' }}
           validate={values => {
             let errors = {};
             if (!values.email) {
@@ -24,11 +26,11 @@ function CardForm(props) {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting, resetForm  }) => {
+            await handleSignUp({ email: values.email, password: values.password, passwordConfirmation: values.passwordConfirmation });
+            resetForm();
+            setSubmitting(false);
+           
           }}
         >
           {({
@@ -86,16 +88,16 @@ function CardForm(props) {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 type="password"
-                name="password"
+                name="passwordConfirmation"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
-                placeholder="Enter password"
-                isInvalid={errors.password && touched.password}
+                value={values.passwordConfirmation}
+                placeholder="Confirm your password"
+                isInvalid={errors.passwordConfirmation && touched.passwordConfirmation}
               />
-              {errors.password && touched.password &&
+              {errors.passwordConfirmation && touched.passwordConfirmation &&
                 <Form.Control.Feedback type="invalid">
-                  {errors.password}
+                  {errors.passwordConfirmation}
                 </Form.Control.Feedback>
               }
             </Form.Group>
@@ -104,7 +106,7 @@ function CardForm(props) {
                 disabled={isSubmitting || !isValid}
                 className="btn btn-primary btn-block"
               >
-                {isSubmitting ? "Logging In..." : "Log In"}
+                {isSubmitting ? "Registering..." : "Register"}
               </Button>
             </Form>
           )}

@@ -1,18 +1,16 @@
 import React, {Fragment} from 'react';
 import { Router } from '@reach/router';
+import routes from 'routes';
 
-
-const Home = () => <div>Protected Home</div>;
-const Dash = () => <div>Protected Dash</div>;
+import ConfirmEmail from 'screens/protected/ConfirmEmail';
 
 
 
 function Protected() {
   return (
-    <Fragment>
-      {/* <Home path="/" />
-      <Dash path="dashboard" /> */}
-    </Fragment>
+    <Router>
+      <ConfirmEmail path={routes.protected.confirmEmail.path} />
+    </Router>
   );
 }
 

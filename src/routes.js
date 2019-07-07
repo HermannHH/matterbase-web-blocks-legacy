@@ -10,10 +10,10 @@ export default {
     login: { path: '/auth/login' },
     register: { path: '/auth/register' },
     forgotPassword: { path: '/auth/forgot-password' },
-    resetPassword: { path: '/auth/reset-password' },
+    resetPassword: { path: '/auth/reset-password/:resetPasswordToken' },
   },
   protected: {
-
+    confirmEmail: { path: '/auth/confirm-email/:confirmationToken'}
   },
   private: {
     home: { path: '/' },
