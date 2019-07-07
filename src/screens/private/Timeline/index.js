@@ -18,7 +18,6 @@ import MatterAdd from './MatterAdd';
 import MatterList from './MatterList';
 
 function Timeline({
-  client
 }) {
 
   const [loading, setLoading] = useState(true);

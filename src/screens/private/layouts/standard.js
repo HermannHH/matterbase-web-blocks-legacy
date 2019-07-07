@@ -4,9 +4,10 @@ import Navbar from 'screens/private/components/Navbar';
 
 export default function standard(WrappedComponent) {
   function Standard(props) {
+    console.log('standard props', props)
     return (
       <div className="min-full-height snow-grey-background">
-        <Navbar />
+        <Navbar handleSignOut={props.appContext.actions.handleSignOut}/>
         <WrappedComponent {...props} />
       </div>
     );

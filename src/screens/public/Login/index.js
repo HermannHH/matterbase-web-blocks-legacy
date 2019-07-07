@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
 import { signIn } from 'api/sessions';
 
 import auth from 'screens/public/layouts/auth';
@@ -8,13 +12,16 @@ import auth from 'screens/public/layouts/auth';
 import CardForm from 'screens/public/Login/CardForm';
 import AuthActionButtons from 'screens/public/components/AuthActionButtons';
 
-function Login() {
+function Login({ appContext: { actions }}) {
 
-
+  // console.log('i are sam', props)
   async function handleSignIn({ email, password }) {
-    const data = await signIn({  email, password  });
-    const authToken = data.auth_token;
-    console.log('sign in data', authToken)
+    await signIn({  email, password  });
+    actions.setLoading(true);
+    actions.setIsAuthenticated(true);
+    navigate(routes.private.home.path);
+    actions.setLoading(false);
+
   };
 
   return (

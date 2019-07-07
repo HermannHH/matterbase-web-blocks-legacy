@@ -20,9 +20,9 @@ function App() {
           {context => (
             <ThemeProvider theme={theme}>
                 <Fragment>
-                  {!context.data.isAuthenticated && <Public />}
-                  {context.data.isAuthenticated && <Private />}
-                  <Protected />
+                  {!context.data.isAuthenticated && <Public appContext={context}/>}
+                  {context.data.isAuthenticated && <Private appContext={context} />}
+                  <Protected appContext={context} />
                 </Fragment>
             </ThemeProvider>
           )}

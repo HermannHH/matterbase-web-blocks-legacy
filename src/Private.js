@@ -3,6 +3,7 @@ import { Router } from '@reach/router';
 
 import routes from 'routes';
 
+import FourOhFour from 'screens/errors/FourOhFour'
 
 // import Blocks from 'screens/private/Blocks';
 // import ChangePassword from 'screens/private/ChangePassword';
@@ -11,12 +12,13 @@ import routes from 'routes';
 import { Timeline, Blocks, Onboarding } from 'screens/private';
 
 
-function Private() {
+function Private({ appContext }) {
   return (
     <Router>
-      <Timeline path={routes.private.home.path} />
-      <Onboarding path={routes.private.onboarding.path} />
-      <Blocks path={routes.private.blocks.path} />
+      <Timeline path={routes.private.home.path} appContext={appContext}/>
+      <Onboarding path={routes.private.onboarding.path} appContext={appContext}/>
+      <Blocks path={routes.private.blocks.path} appContext={appContext}/>
+      <FourOhFour default />
     </Router>
   );
 }

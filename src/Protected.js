@@ -6,10 +6,10 @@ import ConfirmEmail from 'screens/protected/ConfirmEmail';
 
 
 
-function Protected() {
+function Protected({ appContext }) {
   return (
     <Router>
-      <ConfirmEmail path={routes.protected.confirmEmail.path} />
+      <ConfirmEmail path={routes.protected.confirmEmail.path} appContext={appContext} />
     </Router>
   );
 }

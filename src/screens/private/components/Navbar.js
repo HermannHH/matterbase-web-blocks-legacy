@@ -15,7 +15,7 @@ const Wrapper = withTheme(styled.nav`
   `}
 `);
 
-function Navbar() {
+function Navbar({ handleSignOut }) {
   return (
     <BootstrapNavbar className="navbar navbar-expand-lg navbar-light sticky-top white-background has-shadow">
       <div onClick={() => navigate(routes.private.home.path)} style={{ cursor: "pointer" }}>
@@ -35,7 +35,7 @@ function Navbar() {
             <FontAwesomeIcon icon={faUser} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSignOut()}>Sign Out</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
     </ul>

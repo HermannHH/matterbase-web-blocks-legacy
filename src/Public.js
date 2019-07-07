@@ -11,16 +11,16 @@ import ForgotPassword from 'screens/public/ForgotPassword';
 import ResetPassword from 'screens/public/ResetPassword';
 
 
-function Public() {
+function Public({ appContext }) {
   return (
     <Router>
-      <Home path={routes.public.home.path} />
-      <AboutUs path={routes.public.aboutUs.path} />
-      <Pricing path={routes.public.pricing.path} />
-      <Login path={routes.public.login.path} />
-      <Register path={routes.public.register.path} />
-      <ForgotPassword path={routes.public.forgotPassword.path} />
-      <ResetPassword path={routes.public.resetPassword.path} />
+      <Home path={routes.public.home.path} appContext={appContext} />
+      <AboutUs path={routes.public.aboutUs.path} appContext={appContext} />
+      <Pricing path={routes.public.pricing.path} appContext={appContext} />
+      <Login path={routes.public.login.path} appContext={appContext} />
+      <Register path={routes.public.register.path} appContext={appContext} />
+      <ForgotPassword path={routes.public.forgotPassword.path} appContext={appContext} />
+      <ResetPassword path={routes.public.resetPassword.path} appContext={appContext} />
     </Router>
   );
 }
