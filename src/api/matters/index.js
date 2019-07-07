@@ -1,62 +1,53 @@
-import axios from 'axios';
-
+import httpRequest from 'utils/httpRequest';
 import envInit from "env";
 
 const ENV = envInit[process.env.REACT_APP_ENV];
 
 async function mattersList() {
-  try {
-    const response = await axios.get(`${ENV.API_V1_ROOT_PATH}/matters`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters`,
+    method: 'get'
+  });
 };
 
 async function createMatter({
   title
 }) {
-  try {
-    const response = await axios.post(`${ENV.API_V1_ROOT_PATH}/matters`, {
-      matter: {
-        title
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    matter: {
+      title
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters`,
+    method: 'post',
+    data
+  });
 };
 
 async function destroyMatter({
   token
 }) {
-  try {
-    const response = await axios.delete(`${ENV.API_V1_ROOT_PATH}/matters/${token}`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${token}`,
+    method: 'delete'
+  });
 };
 
 async function updateMatter({
   token,
   title
 }) {
-  try {
-    const response = await axios.patch(`${ENV.API_V1_ROOT_PATH}/matters/${token}`, {
-      matter: {
-        title
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    matter: {
+      title
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${token}`,
+    method: 'patch',
+    data
+  });
 };
 
 

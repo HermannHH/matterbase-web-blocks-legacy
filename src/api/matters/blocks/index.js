@@ -1,48 +1,41 @@
-import axios from 'axios';
+import httpRequest from 'utils/httpRequest';
 
 import envInit from "env";
 
 const ENV = envInit[process.env.REACT_APP_ENV];
 
 async function blocksList({ matterToken }) {
-  try {
-    const response = await axios.get(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks`,
+    method: 'get'
+  });
 };
 
 async function createBlock({
   matterToken,
   scopeType
 }) {
-  try {
-    const response = await axios.post(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks`, {
-      block: {
-        matterToken,
-        scope_type: scopeType
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    block: {
+      matterToken,
+      scope_type: scopeType
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks`,
+    method: 'post',
+    data
+  });
 };
 
 async function destroyBlock({
   matterToken,
   token
 }) {
-  try {
-    const response = await axios.delete(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${token}`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${token}`,
+    method: 'delete'
+  });
 };
 
 

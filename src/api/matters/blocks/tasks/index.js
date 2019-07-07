@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import httpRequest from 'utils/httpRequest';
 import envInit from "env";
 
 const ENV = envInit[process.env.REACT_APP_ENV];
@@ -9,17 +8,16 @@ async function createTask({
   blockToken,
   body
 }) {
-  try {
-    const response = await axios.post(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks`, {
-      task: {
-        body
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    task: {
+      body
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks`,
+    method: 'post',
+    data
+  });
 };
 
 async function destroyTask({
@@ -27,13 +25,10 @@ async function destroyTask({
   blockToken,
   token
 }) {
-  try {
-    const response = await axios.delete(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks/${token}`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks/${token}`,
+    method: 'delete'
+  });
 };
 
 async function updateTask({
@@ -43,18 +38,17 @@ async function updateTask({
   body,
   isCompleted
 }) {
-  try {
-    const response = await axios.patch(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks/${token}`, {
-      task: {
-        body,
-        is_completed: isCompleted
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    task: {
+      body,
+      is_completed: isCompleted
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/tasks/${token}`,
+    method: 'patch',
+    data
+  });
 };
 
 

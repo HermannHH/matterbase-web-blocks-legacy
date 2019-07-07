@@ -1,4 +1,4 @@
-import axios from 'axios';
+import httpRequest from 'utils/httpRequest';
 
 import envInit from "env";
 
@@ -9,17 +9,16 @@ async function createStickyNote({
   blockToken,
   body
 }) {
-  try {
-    const response = await axios.post(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes`, {
-      sticky_note: {
-        body
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    sticky_note: {
+      body
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes`,
+    method: 'post',
+    data
+  });
 };
 
 async function destroyStickyNote({
@@ -27,13 +26,10 @@ async function destroyStickyNote({
   blockToken,
   token
 }) {
-  try {
-    const response = await axios.delete(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes/${token}`);
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes/${token}`,
+    method: 'delete'
+  });
 };
 
 async function updateStickyNote({
@@ -42,17 +38,16 @@ async function updateStickyNote({
   token,
   body
 }) {
-  try {
-    const response = await axios.patch(`${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes/${token}`, {
-      sticky_note: {
-        body
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    sticky_note: {
+      body
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${matterToken}/blocks/${blockToken}/sticky_notes/${token}`,
+    method: 'patch',
+    data
+  });
 };
 
 

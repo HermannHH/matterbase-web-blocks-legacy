@@ -1,37 +1,38 @@
-import axios from 'axios';
+import httpRequest from 'utils/httpRequest';
+import { setCookie } from "utils/cookiesHelper";
 
 import envInit from "env";
 
 const ENV = envInit[process.env.REACT_APP_ENV];
 
 async function signUp({ email, password, passwordConfirmation }) {
-  try {
-    const response = await axios.post(`${ENV.API_V1_ROOT_PATH}/users`, {
-      user: {
-        email,
-        password,
-        password_confirmation: passwordConfirmation
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    user: {
+      email,
+      password,
+      password_confirmation: passwordConfirmation
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/users`,
+    method: 'post',
+    data,
+    onSuccess: (resp) => setCookie("authToken", resp.data.auth_token)
+  });
 };
 
 async function confirmEmail({ confirmationToken }) {
-  try {
-    const response = await axios.patch(`${ENV.API_V1_ROOT_PATH}/users/confirm`, {
-      user: {
-        confirmation_token: confirmationToken
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log('error', error);
-    throw new Error(error);
-  }
+  const data = {
+    user: {
+      confirmation_token: confirmationToken
+    }
+  };
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/users/confirm`,
+    method: 'patch',
+    data,
+    // onSuccess: (resp) => setCookie("authToken", resp.data.auth_token)
+  });
 };
 
 
