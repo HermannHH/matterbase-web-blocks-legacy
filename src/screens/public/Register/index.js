@@ -16,9 +16,10 @@ function Register({ appContext: { actions }}) {
 
 
   async function handleSignUp({ email, password, passwordConfirmation }) {
-    const data = await signUp({  email, password, passwordConfirmation });
+    await signUp({  email, password, passwordConfirmation });
     actions.setLoading(true);
     actions.setIsAuthenticated(true);
+    await actions.handleGetCurrentUser();
     navigate(routes.private.home.path);
     setTimeout(() => {
       actions.setLoading(false);

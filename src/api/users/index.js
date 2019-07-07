@@ -35,8 +35,28 @@ async function confirmEmail({ confirmationToken }) {
   });
 };
 
+async function getCurrentUser() {
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/users/current`,
+    method: 'get',
+    // data,
+    // onSuccess: (resp) => setCookie("authToken", resp.data.auth_token)
+  });
+};
+
+async function sendConfirmationEmail() {
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/users/send_email_confirm`,
+    method: 'post',
+    // data,
+    // onSuccess: (resp) => setCookie("authToken", resp.data.auth_token)
+  });
+};
+
 
 export {
   signUp,
-  confirmEmail
+  confirmEmail,
+  getCurrentUser,
+  sendConfirmationEmail
 };
