@@ -96,57 +96,16 @@ function OnboardingForm({
                   </Form.Control.Feedback>
                 }
               </Form.Group>
-
-
-              {/* <Form.Group>
-                <Form.Label>Timezone</Form.Label>
-                  <Form.Control
-                    as={FormikSelect}
-                    name="timezone"
-                    handleChange={setFieldValue}
-                    handleOnBlur={setFieldTouched}
-                    value={values.timezone}
-                    placeholder="Add sticky note content..."
-                    isInvalid={errors.timezone && touched.timezone}
-                    options={options}
-                    touched={touched.timezone}
-                    error={errors.timezone}
-                  />
-                  {errors.timezone && touched.timezone &&
-                    <Form.Control.Feedback type="invalid">
-                      {errors.timezone}
-                    </Form.Control.Feedback>
-                  } */}
-
-{/* <FormikSelect 
-                    options={options}
-                    name="timezone"
-                    handleChange={setFieldValue}
-                    handleOnBlur={setFieldTouched}
-                  /> */}
-                  
-                  {/* <Select
-                    value={values.timezone}
-                    onChange={(val) => console.log('selected value', val)}
-                    options={options}
-                  /> */}
-                {/* <Form.Control
-                  type="text"
-                  // rows="3"
-                  name="timezone"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.timezone}
-                  placeholder="Add sticky note content..."
-                  isInvalid={errors.timezone && touched.timezone}
-                /> */}
-                {/* {errors.timezone && touched.timezone &&
-                  <Form.Control.Feedback type="invalid">
-                    {errors.timezone}
-                  </Form.Control.Feedback>
-                }
-              </Form.Group> */}
-              
+              <FormikSelect
+                value={values.timezone}
+                onChange={setFieldValue}
+                onBlur={setFieldTouched}
+                errors={errors}
+                touched={touched}
+                options={options}
+                name="timezone"
+                label="Timezone"
+              />
               <div>
                 <Button
                   type="submit"

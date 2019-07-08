@@ -2,25 +2,42 @@ import React from 'react';
 import Select from 'react-select';
 
 function FormikSelect({
+  value,
+  onChange,
+  onBlur,
+  errors,
+  touched,
   options,
-  field, // { name, value, onChange, onBlur }
-  form: { touched, errors, setFieldValue },
+  name,
+  label
 }) {
-
+  const hasError = errors[name] && touched[name];
   return (
-    <div>
-      <label htmlFor={field.name}>chi chi</label>
-      <Select
-        {...field}
-        // {...props}
-        options={options}
-        value={(options ? options.find(option => option.value === field.value) : '')}
-        onChange={option => setFieldValue(field.name, option.value)}
-      />
-      {touched[field.name] && errors[field.name] && (
-        <p>{errors[field.name]}</p>
-      )}
-    </div>
+    <div style={{ margin: '1rem 0' }}>
+        <label htmlFor={name} >{label}</label>
+        <Select
+          id={name}
+          name={name}
+          styles={{
+              control: (provided) => ((hasError) ? {
+                  ...provided, borderColor: '#dc3545', 
+              } : provided)
+          }}
+          options={options}
+          multi={true}
+          onChange={(value) => onChange(name, value)}
+          onBlur={() => onBlur(name, true)}
+          value={value}
+        />
+        {hasError &&
+          <div style={{
+            width: "100%",
+            marginTop: "0.25rem",
+            fontSize: "80%",
+            color: "#dc3545",
+          }}>{errors[name]}</div>
+        } 
+      </div>
   )
 };
 

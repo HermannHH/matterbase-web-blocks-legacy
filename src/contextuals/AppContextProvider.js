@@ -47,7 +47,6 @@ export default function AppContextProvider({ children }) {
     } else if (profileCompleted && currentPath === routes.private.onboarding.path) {
       navigate(routes.private.home.path);
     } else if (nextPath) {
-      console.log(nextPath)
       navigate(nextPath);
     };
   }
