@@ -40,7 +40,19 @@ export default function AppContextProvider({ children }) {
     // setLoading(false);
   };
 
-  async function handleGetCurrentUser() {
+  async function handleOnboardRedirect({ profileCompleted, nextPath }) {
+    const currentPath = window.location.pathname;
+    if (!profileCompleted && currentPath !== routes.private.onboarding.path ) {
+      navigate(routes.private.onboarding.path);
+    } else if (profileCompleted && currentPath === routes.private.onboarding.path) {
+      navigate(routes.private.home.path);
+    } else if (nextPath) {
+      console.log(nextPath)
+      navigate(nextPath);
+    };
+  }
+
+  async function handleGetCurrentUser({ nextPath }) {
     const resp = await getCurrentUser();
     setUser({
       email: resp.email,
@@ -52,18 +64,14 @@ export default function AppContextProvider({ children }) {
         timezone: resp.timezone,
       }
     });
-    if (!resp.profile_completed && window.location.pathname !== routes.private.onboarding.path ) {
-      await navigate(routes.private.onboarding.path);
-    } else if (resp.profile_completed && window.location.pathname === routes.private.onboarding.path) {
-      await navigate(routes.private.home.path);
-    };
+    await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });
   }
 
 
   useEffect(() => {
     const authToken = getCookie('authToken');
     if (authToken) {
-      handleGetCurrentUser();
+      handleGetCurrentUser({});
       setIsAuthenticated(true);
       setConfirmHandshake(true);
       setTimeout(() => {

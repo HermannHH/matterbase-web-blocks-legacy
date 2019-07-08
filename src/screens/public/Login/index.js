@@ -19,8 +19,8 @@ function Login({ appContext: { actions }}) {
     await signIn({  email, password  });
     actions.setLoading(true);
     actions.setIsAuthenticated(true);
-    await actions.handleGetCurrentUser();
-    navigate(routes.private.home.path);
+    await actions.handleGetCurrentUser({ nextPath: routes.private.home.path});
+    // navigate(routes.private.home.path);
     setTimeout(() => {
       actions.setLoading(false);
     }, 1000);
