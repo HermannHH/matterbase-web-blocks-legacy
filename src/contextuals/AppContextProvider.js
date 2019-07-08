@@ -17,7 +17,12 @@ export default function AppContextProvider({ children }) {
   const [handshakeConfirmed, setConfirmHandshake] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({ isEmailVerified: null, email: null});
+  const [user, setUser] = useState({ isEmailVerified: null, email: null, profileCompleted: null, profile: {
+    firstName: null,
+    lastName: null,
+    timezone: null,
+  },
+  });
 
 
   async function handleSignOut() {
@@ -39,8 +44,19 @@ export default function AppContextProvider({ children }) {
     const resp = await getCurrentUser();
     setUser({
       email: resp.email,
-      isEmailVerified: resp.is_email_verified
+      isEmailVerified: resp.is_email_verified,
+      profileCompleted: resp.profile_completed,
+      profile: {
+        firstName: resp.first_name,
+        lastName: resp.last_name,
+        timezone: resp.timezone,
+      }
     });
+    if (!resp.profile_completed && window.location.pathname !== routes.private.onboarding.path ) {
+      await navigate(routes.private.onboarding.path);
+    } else if (resp.profile_completed && window.location.pathname === routes.private.onboarding.path) {
+      await navigate(routes.private.home.path);
+    };
   }
 
 
@@ -49,11 +65,16 @@ export default function AppContextProvider({ children }) {
     if (authToken) {
       handleGetCurrentUser();
       setIsAuthenticated(true);
+      setConfirmHandshake(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      
     } else {
       setIsAuthenticated(false);
+      setConfirmHandshake(true);
+      setLoading(false);
     };
-    setConfirmHandshake(true);
-    setLoading(false);
   }, []);
 
   if (!handshakeConfirmed || loading) {
