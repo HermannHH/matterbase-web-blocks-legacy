@@ -14,16 +14,9 @@ setLocale({
   },
 });
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
-
 function OnboardingForm({
   blockToken,
-  createItem
+  timezoneOptionsArray
 }) {
 
   const validationSchema = object().shape({
@@ -102,7 +95,7 @@ function OnboardingForm({
                 onBlur={setFieldTouched}
                 errors={errors}
                 touched={touched}
-                options={options}
+                options={timezoneOptionsArray}
                 name="timezone"
                 label="Timezone"
               />
