@@ -3,10 +3,31 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
+import { object, string, setLocale, ref, mixed, bool } from "yup";
+
+setLocale({
+  mixed: {
+    required: "Is required"
+  },
+  string: {
+    email: "Must be a valid email address"
+  }
+});
 
 function CardForm({
   handleSignUp
 }) {
+
+  const validationSchema = object().shape({
+    email: string()
+      .required()
+      .email(),
+    password: string()
+      .required(),
+    passwordConfirmation: string()
+      .required()
+      .oneOf([ref("password")], "Passwords do not match")
+  });
 
   // const [state, setState] = useState({ isSubmitting: false });
 
@@ -15,17 +36,7 @@ function CardForm({
       <div className="card-body">
       <Formik
           initialValues={{ email: '', password: '', passwordConfirmation: '' }}
-          validate={values => {
-            let errors = {};
-            if (!values.email) {
-              errors.email = 'Required';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'Invalid email address';
-            }
-            return errors;
-          }}
+          validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm  }) => {
             await handleSignUp({ email: values.email, password: values.password, passwordConfirmation: values.passwordConfirmation });
             resetForm();

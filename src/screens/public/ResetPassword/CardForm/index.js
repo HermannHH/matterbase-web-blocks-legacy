@@ -3,13 +3,30 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
+import { object, string, setLocale, ref} from "yup";
+
+setLocale({
+  mixed: {
+    required: "Is required"
+  }
+});
 
 function CardForm({ handleResetPassword, resetPasswordToken }) {
+
+  const validationSchema = object().shape({
+    password: string()
+      .required(),
+    passwordConfirmation: string()
+      .required()
+      .oneOf([ref("password")], "Passwords do not match")
+  });
+
   return (
     <div className="card">
       <div className="card-body">
       <Formik
           initialValues={{ password: '', passwordConfirmation: '' }}
+          validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm  }) => {
             await handleResetPassword({ resetPasswordToken, password: values.password, passwordConfirmation: values.passwordConfirmation });
             resetForm();
