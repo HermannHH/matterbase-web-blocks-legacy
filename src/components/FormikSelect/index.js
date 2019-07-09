@@ -9,7 +9,8 @@ function FormikSelect({
   touched,
   options,
   name,
-  label
+  label,
+  placeholder
 }) {
   const hasError = errors[name] && touched[name];
   return (
@@ -28,6 +29,7 @@ function FormikSelect({
           onChange={(value) => onChange(name, value)}
           onBlur={() => onBlur(name, true)}
           value={value}
+          placeholder={placeholder}
         />
         {hasError &&
           <div style={{

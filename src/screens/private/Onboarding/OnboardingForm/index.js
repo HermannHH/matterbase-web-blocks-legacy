@@ -60,7 +60,7 @@ function OnboardingForm({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.firstName}
-                  placeholder="Add sticky note content..."
+                  placeholder="Your First Name"
                   isInvalid={errors.firstName && touched.firstName}
                 />
                 {errors.firstName && touched.firstName &&
@@ -80,7 +80,7 @@ function OnboardingForm({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.lastName}
-                  placeholder="Add sticky note content..."
+                  placeholder="Your Last Name"
                   isInvalid={errors.lastName && touched.lastName}
                 />
                 {errors.lastName && touched.lastName &&
@@ -98,6 +98,7 @@ function OnboardingForm({
                 options={timezoneOptionsArray}
                 name="timezone"
                 label="Timezone"
+                placeholder="Your timezone"
               />
               <div>
                 <Button
@@ -105,7 +106,7 @@ function OnboardingForm({
                   // disabled={isSubmitting || !isValid}
                   className="btn btn-primary btn-block"
                 >
-                  {isSubmitting ? "Saving..." : "Save"}
+                  {isSubmitting ? "Saving..." : "Save & Continue"}
                 </Button>
               </div>
             </Form>

@@ -7,24 +7,34 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     @include media-breakpoint-up(lg) {
       width: 50%;
-      // Styles
+    };
+    > form {
+      width: 80%;
+      button {
+        margin-top: 30px;
+      }
+    };
+    #nav-logo{
+      position: fixed;
+      top: 25px;
+      left: 25px;
     }
   };
   &-right {
     display: none;
     @include media-breakpoint-up(lg) {
-      background-color: $dodgerBlue;
+      background-color: $selago;
       display: flex;
       width: 50%;
       justify-content: center;
       align-items: center;
     }
-    // width: 50%;
-    // border: thin solid blue;
-    // justify-content: center;
-    // align-items: center;
+    > #info-panel {
+      width: 75%;
+    }
 
   };
 }

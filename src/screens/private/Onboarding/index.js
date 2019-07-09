@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { timezonesList } from 'api/timezones';
 
 import OnboardingForm from './OnboardingForm';
+import InfoPanel from './InfoPanel';
 
 import Loading from 'components/Loading';
+import NavbarBrand from 'components/NavbarBrand';
 
 function Onboarding() {
 
@@ -24,6 +26,9 @@ function Onboarding() {
   return (
     <div id="onboarding">
         <div id="onboarding-left">
+          <div id="nav-logo">
+            <NavbarBrand />
+          </div>
           {loading ?
             <Loading />
             :
@@ -31,7 +36,7 @@ function Onboarding() {
           }
         </div>
         <div id="onboarding-right">
-          <OnboardingForm />
+          <InfoPanel />
         </div>
     </div>
   )
