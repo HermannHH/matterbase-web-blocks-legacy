@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {Helmet} from "react-helmet";
 
 import standard from 'screens/public/layouts/standard';
 
 function AboutUs(props) {
   return (
     <div className="container">
+      <Helmet>
+          <title>Matterbase | About Us</title>
+      </Helmet>
       <div className="row">
         <div className="col-12">
           <div className="my-5">

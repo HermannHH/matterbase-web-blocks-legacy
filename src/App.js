@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { ThemeProvider } from 'styled-components';
+import {Helmet} from "react-helmet";
 
 import AppContext from 'contextuals/AppContext';
 import AppContextProvider from 'contextuals/AppContextProvider';
@@ -20,6 +21,11 @@ function App() {
           {context => (
             <ThemeProvider theme={theme}>
                 <Fragment>
+                  <Helmet>
+                      <meta charSet="utf-8" />
+                      <title>Matterbase</title>
+                      <link rel="canonical" href="https://matterbase.io" />
+                  </Helmet>
                   {!context.data.isAuthenticated && <Public appContext={context}/>}
                   {context.data.isAuthenticated && <Private appContext={context} />}
                   <Protected appContext={context} />

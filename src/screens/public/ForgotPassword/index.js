@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Helmet} from "react-helmet";
 
 import { forgotPassword } from 'api/passwords';
 
@@ -17,6 +18,9 @@ function ForgotPassword() {
 
   return (
     <div>
+      <Helmet>
+          <title>Matterbase | Forgot Password</title>
+      </Helmet>
       <CardForm handleForgotPassword={handleForgotPassword}/>
       <AuthActionButtons />
     </div>

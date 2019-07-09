@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { navigate } from '@reach/router';
+import {Helmet} from "react-helmet";
 
 import routes from 'routes';
 
@@ -32,9 +33,9 @@ function Blocks({ matterId }) {
 
   async function fetchBlocksList() {
     const data = await blocksList({ matterToken: matterId });
-    console.log('Blocks list data', data)
+    // console.log('Blocks list data', data)
     const reducedData = dataReduce(data, 'token');
-    console.log('reduced', reducedData)
+    // console.log('reduced', reducedData)
     setBlocksIndexedObject(reducedData.indexedObject);
     setBlocksKeyedArray(reducedData.keyedArray);
     setBlocksDataInitialised(true);
@@ -63,6 +64,9 @@ function Blocks({ matterId }) {
 
   return (
     <div>
+      <Helmet>
+          <title>Matterbase | Blocks</title>
+      </Helmet>
       <div styles={{ zIndex: 9}}>
         <SubNavbar 
           actionsLeft={

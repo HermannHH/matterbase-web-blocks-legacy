@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {Helmet} from "react-helmet";
 
 import { navigate } from '@reach/router';
 
@@ -12,8 +13,6 @@ import CardForm from 'screens/public/ResetPassword/CardForm';
 
 function ResetPassword({ resetPasswordToken }) {
 
-  // TODO: Verify token before allowing form to show
-
   async function handleResetPassword({ resetPasswordToken, password, passwordConfirmation }) {
     const data = await resetPassword({ resetPasswordToken, password, passwordConfirmation });
     navigate(routes.public.login.path);
@@ -25,6 +24,9 @@ function ResetPassword({ resetPasswordToken }) {
 
   return (
     <div className="selago-background">
+      <Helmet>
+          <title>Matterbase | Reset Password</title>
+      </Helmet>
       <div className="container">
         <div className="row d-flex align-items-center justify-content-center min-full-height">
           <div className="col-10 col-md-6 col-lg-4">

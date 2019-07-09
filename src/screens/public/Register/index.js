@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {Helmet} from "react-helmet";
 
-import { navigate } from '@reach/router';
+// import { navigate } from '@reach/router';
 
 import routes from 'routes';
 
@@ -27,6 +28,9 @@ function Register({ appContext: { actions }}) {
 
   return (
     <div>
+      <Helmet>
+          <title>Matterbase | Register Account</title>
+      </Helmet>
       <CardForm handleSignUp={handleSignUp}/>
       <AuthActionButtons />
     </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Helmet} from "react-helmet";
 
 import { timezonesList } from 'api/timezones';
 import { updateCurrentProfile } from 'api/users/profiles';
@@ -37,6 +38,9 @@ function Onboarding({ appContext: { actions }}) {
 
   return (
     <div id="onboarding">
+        <Helmet>
+            <title>Matterbase | Onboarding</title>
+        </Helmet>
         <div id="onboarding-left">
           <div id="nav-logo">
             <NavbarBrand />

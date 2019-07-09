@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import {Helmet} from "react-helmet";
 
 import { navigate } from '@reach/router';
 
@@ -29,6 +30,9 @@ export default function ConfirmEmail({ confirmationToken, appContext: { data, ac
 
   return (
     <div id="confirm-email">
+      <Helmet>
+          <title>Matterbase | Confirm Account</title>
+      </Helmet>
       <h4>Confirming Account...</h4>
     </div>
   )

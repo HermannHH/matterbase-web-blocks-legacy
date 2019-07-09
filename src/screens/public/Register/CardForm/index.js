@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import { object, string, setLocale, ref, mixed, bool } from "yup";
+import { object, string, setLocale, ref} from "yup";
 
 setLocale({
   mixed: {

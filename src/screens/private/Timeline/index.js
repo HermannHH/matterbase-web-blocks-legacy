@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Helmet} from "react-helmet";
 
 import { mattersList, createMatter, updateMatter, destroyMatter } from 'api/matters';
 
@@ -74,6 +75,9 @@ function Timeline({
 
   return (
     <div>
+      <Helmet>
+          <title>Matterbase | Timeline</title>
+      </Helmet>
       <div style={{ zIndex: 9}}>
         <SubNavBar actionsRight={
           <MatterAdd

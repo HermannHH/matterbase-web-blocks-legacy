@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {Helmet} from "react-helmet";
 
 import styled from 'styled-components';
 
@@ -49,6 +50,9 @@ function Pricing(props) {
       background: "#007bff",
       background: "linear-gradient(to right, #0062E6, #33AEFF)"
     }}>
+    <Helmet>
+        <title>Matterbase | Pricing</title>
+    </Helmet>
   <div className="container py-5">
     <div className="row d-flex flex-column justify-content-center align-items-center">
       <div className="col-10 col-md-6 text-center text-white py-5">
