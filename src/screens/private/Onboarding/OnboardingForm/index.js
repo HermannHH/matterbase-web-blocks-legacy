@@ -15,7 +15,7 @@ setLocale({
 });
 
 function OnboardingForm({
-  blockToken,
+  handleUpdateCurrentProfile,
   timezoneOptionsArray
 }) {
 
@@ -31,10 +31,9 @@ function OnboardingForm({
           initialValues={{ firstName: '',  lastName: '',  timezone: '' }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            // await createItem({ blockToken, body: values.body });
+            await handleUpdateCurrentProfile({ firstName: values.firstName, lastName: values.lastName, timezone: values.timezone.value });
             // resetForm();
             // setSubmitting(false);
-            console.log('values', values)
           }}
         >
           {({
