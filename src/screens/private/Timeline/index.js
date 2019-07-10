@@ -19,6 +19,7 @@ import MatterAdd from './MatterAdd';
 import MatterList from './MatterList';
 
 function Timeline({
+  appContext: { actions }
 }) {
 
   const [loading, setLoading] = useState(true);
@@ -27,12 +28,12 @@ function Timeline({
   const [matterDataInitialised, setMatterDataInitialised] = useState(false);
 
   async function fetchMattersList() {
-    const data = await mattersList();
-    const reducedData = await dataReduce(data, 'token');
-    setKeyedArray(reducedData.keyedArray);
-    setIndexedObject(reducedData.indexedObject);
-    setMatterDataInitialised(true);
-    setLoading(false);
+      const data = await mattersList();
+      const reducedData = await dataReduce(data, 'token');
+      setKeyedArray(reducedData.keyedArray);
+      setIndexedObject(reducedData.indexedObject);
+      setMatterDataInitialised(true);
+      setLoading(false);
   };
 
   useEffect(() => {

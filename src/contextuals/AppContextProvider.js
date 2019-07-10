@@ -12,6 +12,8 @@ import AppContext from './AppContext';
 
 import Loading from 'components/Loading';
 
+
+
 export default function AppContextProvider({ children }) {
 
   const [handshakeConfirmed, setConfirmHandshake] = useState(false);
@@ -39,6 +41,24 @@ export default function AppContextProvider({ children }) {
     }, 1000);
     // setLoading(false);
   };
+
+  async function handleError(err) {
+    const errorObject = JSON.parse(JSON.stringify(err));
+    const { status } = errorObject;
+    if (status && status === 422 ) {
+      console.log('in catcher')
+      setLoading(true);
+      setUser({
+        email: null,
+        isEmailVerified: null
+      });
+      navigate(routes.public.home.path);
+      setIsAuthenticated(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    };
+  }
 
   async function handleOnboardRedirect({ profileCompleted, nextPath }) {
     const currentPath = window.location.pathname;
@@ -99,7 +119,8 @@ export default function AppContextProvider({ children }) {
           handleSignOut,
           setLoading,
           setIsAuthenticated,
-          handleGetCurrentUser
+          handleGetCurrentUser,
+          handleError
         }
       }}
     >

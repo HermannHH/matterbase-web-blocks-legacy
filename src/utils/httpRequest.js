@@ -1,6 +1,23 @@
 import axios from 'axios';
 import { getCookie } from './cookiesHelper';
 
+class PermissionError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'PermissionError';
+    this.message = message;
+  };
+
+  toJSON() {
+    return {
+      name: this.name,
+      status: 422,
+      message: this.message,
+      stacktrace: this.stack
+    }
+  }
+}
+
 async function httpRequest({
   url,
   method,
@@ -37,7 +54,7 @@ async function httpRequest({
     // if(err.response.data.message === "Signature has expired") {
     //   destroySession({ authToken })
     // }
-    throw new Error(err);
+    throw new PermissionError("Permission Denied");
   }
 
 }
