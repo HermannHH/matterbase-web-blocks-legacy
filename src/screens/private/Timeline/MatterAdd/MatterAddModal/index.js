@@ -5,6 +5,8 @@ import { Formik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { object, string, setLocale } from "yup";
 
+import FormikDateTimePicker from 'components/FormikDateTimePicker';
+
 setLocale({
   mixed: {
     required: "Is required"
@@ -86,6 +88,7 @@ function MatterAddModal({
                   </Form.Control.Feedback>
                 }
               </Form.Group>
+              <FormikDateTimePicker />
       </Modal.Body>
       <Modal.Footer>
           <Button
