@@ -1,145 +1,240 @@
 .formik-date-time-picker {
-  display: flex;
-  width: 100%;
-  > .rdt {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    text-align: center;
-    > .form-control {
+  // display: flex;
+  // width: 100%;
+  // > .rdt {
+  //   display: flex;
+  //   width: 100%;
+  //   flex-direction: column;
+  //   text-align: center;
+  //   > .form-control {
 
+  //   };
+  //   > .rdtPicker {
+  //     display: flex;
+  //     width: 100%;
+  //     flex-direction: column;
+  //     background-color: $white;
+  //     @include border-radius(5px);
+  //     @extend .has-shadow;
+  //     padding: 15px;
+
+  //     > .rdtDays {
+  //       > table {
+  //         width: 100%;
+  //         > thead {
+  //           > tr {
+  //             > th {
+  //               padding: 10px 0;
+  //               &.rdtPrev {
+  //                 cursor: pointer;
+  //                 @include border-radius(50%);
+  //                 padding: 10px 0;
+  //                 font-size: 24px;
+  //                 color: $bombay;
+  //                 &:hover {
+  //                   color: $dodgerBlue;
+  //                   background-color: $selago;
+  //                 }
+  //               };
+  //               &.rdtNext {
+  //                 cursor: pointer;
+  //                 @include border-radius(50%);
+  //                 padding: 10px 0;
+  //                 font-size: 24px;
+  //                 color: $bombay;
+  //                 &:hover {
+  //                   color: $dodgerBlue;
+  //                   background-color: $selago;
+  //                 }
+  //               };
+  //             };
+  //           };
+  //         };
+
+  //         > tbody {
+  //           > tr {
+  //             > td {
+  //               cursor: pointer;
+  //               // @include border-radius(50%);
+  //               padding: 5px 0;
+  //               // font-size: 24px;
+  //               color: $bombay;
+  //               &:hover {
+  //                 color: $dodgerBlue;
+  //                 // font-weight: bold;
+  //                 background-color: $selago;
+  //               }
+
+  //             };
+  //           };
+  //         };
+
+  //         > tfoot {
+  //           > tr {
+  //             > td {
+  //               padding: 10px 0;
+  //               @include border-radius(5px);
+  //               background-color: $snowGrey;
+  //               font-weight: bold;
+  //               &:hover {
+  //                 cursor: pointer;
+  //                 color: $dodgerBlue;
+  //                 background-color: $selago;
+  //               }
+  //             };
+  //           };
+
+  //         };
+  //       };
+  //     };
+
+  //     > .rdtTime {
+  //       display: flex;
+  //       width: 100%;
+  //       flex-direction: row;
+  //       > table {
+  //         width: 100%;
+  //         > thead {
+  //           > tr {
+  //             > .rdtSwitch {
+  //               padding: 10px 0;
+  //               @include border-radius(5px);
+  //               background-color: $snowGrey;
+  //               &:hover {
+  //                 color: $dodgerBlue;
+  //                 cursor: pointer;
+  //                 background-color: $selago;
+  //               }
+
+  //             };
+  //           };
+  //         };
+  //         > tbody {
+  //           > tr {
+  //             > td {
+  //               > .rdtCounters {
+  //                 display: flex;
+  //                 align-items: center;
+  //                 padding: 20px 0;
+  //                 // width: 33%;
+  //                 > .rdtCounter {
+  //                   flex-basis: 33%;
+  //                   flex-grow: 1;
+  //                   flex-shrink: 1;
+
+  //                   > .rdtBtn {
+  //                     color: $bombay;
+  //                     padding: 10px;
+  //                     display: flex;
+  //                     align-items: center;
+  //                     justify-content: center;
+  //                     &:hover {
+  //                       color: $dodgerBlue;
+  //                       cursor: pointer;
+  //                       background-color: $selago;
+
+  //                     }
+  //                   };
+  //                 }
+  //               }
+  //             };
+  //           };
+  //         };
+  //       }
+  //     };
+  //   };
+  // };
+
+  > .react-datepicker-wrapper {
+    > .react-datepicker__input-container {
+      > input {};
     };
-    > .rdtPicker {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
+  };
+
+  > .react-datepicker-popper {
+    > .react-datepicker {
       background-color: $white;
       @include border-radius(5px);
       @extend .has-shadow;
-      padding: 15px;
+      // padding: 15px;
+      border: 0px;
+      > .react-datepicker__triangle {
+        border-color: $white;
+      };
 
-      > .rdtDays {
-        > table {
-          width: 100%;
-          > thead {
-            > tr {
-              > th {
-                padding: 10px 0;
-                &.rdtPrev {
-                  cursor: pointer;
-                  @include border-radius(50%);
-                  padding: 10px 0;
-                  font-size: 24px;
-                  color: $bombay;
-                  &:hover {
-                    background-color: $selago;
-                  }
-                };
-                &.rdtNext {
-                  cursor: pointer;
-                  @include border-radius(50%);
-                  padding: 10px 0;
-                  font-size: 24px;
-                  color: $bombay;
-                  &:hover {
-                    background-color: $selago;
-                  }
-                };
-              };
+      > .react-datepicker__navigation {
+        cursor: pointer;
+        @include border-radius(50%);
+        // padding: 5px;
+        // font-size: 24px;
+        color: $bombay;
+        &:hover {
+          color: $dodgerBlue;
+          // background-color: $selago;
+        }
+      };
+
+      > .react-datepicker__month-container {
+        > .react-datepicker__header {
+          background-color: $white;
+          @include border-top-radius(5px);
+          border-color: $mercury;
+          > .react-datepicker__current-month {
+            color: $bombay;
+          };
+          > .react-datepicker__day-names {
+            > .react-datepicker__day-name {
+              font-weight: bold;
             };
           };
-
-          > tbody {
-            > tr {
-              > td {
-                cursor: pointer;
-                // @include border-radius(50%);
-                padding: 5px 0;
-                // font-size: 24px;
-                color: $bombay;
-                &:hover {
-                  color: $dodgerBlue;
-                  // font-weight: bold;
-                  background-color: $selago;
-                }
-
+        };
+        > .react-datepicker__month {
+          > .react-datepicker__week {
+            > .react-datepicker__day {
+              // @include border-top-radius(10px);
+              &:hover {
+                background-color: $selago;
+                color: $dodgerBlue;
+              };
+              &--selected {
+                background-color: $dodgerBlue;
               };
             };
-          };
-
-          > tfoot {
-            > tr {
-              > td {
-                padding: 10px 0;
-                @include border-radius(5px);
-                background-color: $snowGrey;
-                font-weight: bold;
-                &:hover {
-                  cursor: pointer;
-                  color: $dodgerBlue;
-                  background-color: $selago;
-                }
-              };
-            };
-
           };
         };
       };
 
-      > .rdtTime {
-        display: flex;
-        width: 100%;
-        flex-direction: row;
-        > table {
-          width: 100%;
-          > thead {
-            > tr {
-              > .rdtSwitch {
-                padding: 10px 0;
+      > .react-datepicker__time-container {
+        border-color: $mercury;
+        // width: 120px;
+        > .react-datepicker__header {
+          background-color: $white;
+          @include border-top-radius(5px);
+          border-color: $mercury;
+        };
+        > .react-datepicker__time {
+          > .react-datepicker__time-box {
+            > .react-datepicker__time-list {
+              > .react-datepicker__time-list-item {
+                // padding: 20px;
+                height: auto;
+                padding: 0px;
+                padding: 10px 3px;
                 @include border-radius(5px);
-                background-color: $snowGrey;
                 &:hover {
-                  color: $dodgerBlue;
-                  cursor: pointer;
                   background-color: $selago;
-                }
-
+                  color: $dodgerBlue;
+                };
+                &--selected {
+                  background-color: $dodgerBlue;
+                };
               };
-            };
+            }
           };
-          > tbody {
-            > tr {
-              > td {
-                > .rdtCounters {
-                  display: flex;
-                  align-items: center;
-                  padding: 20px 0;
-                  // width: 33%;
-                  > .rdtCounter {
-                    flex-basis: 33%;
-                    flex-grow: 1;
-                    flex-shrink: 1;
-
-                    > .rdtBtn {
-                      color: $bombay;
-                      padding: 10px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      &:hover {
-                        color: $dodgerBlue;
-                        cursor: pointer;
-                        background-color: $selago;
-
-                      }
-                    };
-                  }
-                }
-              };
-            };
-          };
-        }
+        };
       };
-    };
-  };
+    }
+  }
 }
+
+

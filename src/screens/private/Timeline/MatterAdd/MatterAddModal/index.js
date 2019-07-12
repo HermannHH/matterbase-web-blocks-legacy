@@ -6,6 +6,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { object, string, setLocale } from "yup";
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
+import moment from 'moment';
 
 setLocale({
   mixed: {
@@ -33,6 +34,7 @@ function MatterAddModal({
   const isUpdate = editToken ? true : false;
   const matter = isUpdate ? indexedObject[editToken] : {};
   const initialTitle = isUpdate ? matter.title : '';
+  const initialValues = isUpdate ? { title: '', startAt: moment() } : { title: '', startAt: '' };
 
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
@@ -40,21 +42,21 @@ function MatterAddModal({
         <Modal.Title>{isUpdate ? "Edit Matter" : "Add a Matter"}</Modal.Title>
       </Modal.Header>
       <Formik
-          initialValues={{ title: initialTitle }}
+          initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
-            if(isUpdate) {
-              await updateItem({ token: matter.token, title: values.title });
-            } else {
-              await createItem({ title: values.title });
-            }
+            // if(isUpdate) {
+            //   await updateItem({ token: matter.token, title: values.title });
+            // } else {
+            //   await createItem({ title: values.title });
+            // }
             
-            setShowMatterModal(false);
-            setSubmitting(false);
-            // setTimeout(() => {
-            //   alert(JSON.stringify(values, null, 2));
-            //   setSubmitting(false);
-            // }, 400);
+            // setShowMatterModal(false);
+            // setSubmitting(false);
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
           }}
         >
           {({
@@ -65,6 +67,8 @@ function MatterAddModal({
             handleBlur,
             handleSubmit,
             isSubmitting,
+            setFieldTouched,
+            setFieldValue,
             isValid
             /* and other goodies */
           }) => (
@@ -88,7 +92,17 @@ function MatterAddModal({
                   </Form.Control.Feedback>
                 }
               </Form.Group>
-              <FormikDateTimePicker />
+              {/* {console.log('fefeef', values)} */}
+              <FormikDateTimePicker
+                value={values.startAt}
+                onChange={setFieldValue}
+                onBlur={setFieldTouched}
+                errors={errors}
+                touched={touched}
+                name="startAt"
+                label="Timezone"
+                placeholder="Your timezone"
+              />
       </Modal.Body>
       <Modal.Footer>
           <Button
