@@ -9,7 +9,7 @@ const Wrapper = withTheme(styled.a`
   ${props => `
     background-color: inherit;
     > img {
-      width: 170px;
+      width: 200px !important;
     }
   `}
 `);
@@ -17,7 +17,7 @@ const Wrapper = withTheme(styled.a`
 export default function NavbarBrand({ route }) {
   return (
     <Wrapper className="navbar-brand" onClick={() => navigate(route)} style={{ cursor: "pointer"}}>
-      <img src={`${constants.ENV.ASSET_BASE_PATH}/branding/logo-full.png`} />
+      <img src={`${constants.ENV.ASSET_BASE_PATH}/branding/logo-full-v2.png`} />
     </Wrapper>
   );
 }
