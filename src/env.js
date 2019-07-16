@@ -5,7 +5,7 @@ export default {
     ASSET_BASE_PATH: 'https://s3.amazonaws.com/matterbase',
     GOOGLE_TAG_MANAGER_ACTIVE: false
   },
-  DEV: {
+  STAGING: {
     BASE_URL: 'http://localhost:3000',
     API_V1_ROOT_PATH: 'https://api-dev.matterbase.io/api/v1',
     ASSET_BASE_PATH: 'https://s3.amazonaws.com/matterbase',
