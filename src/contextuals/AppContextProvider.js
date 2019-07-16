@@ -78,9 +78,9 @@ export default function AppContextProvider({ children }) {
       isEmailVerified: resp.is_email_verified,
       profileCompleted: resp.profile_completed,
       profile: {
-        firstName: resp.first_name,
-        lastName: resp.last_name,
-        timezone: resp.timezone,
+        firstName: resp.profile.first_name,
+        lastName: resp.profile.last_name,
+        timezone: resp.profile.timezone,
       }
     });
     await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });

@@ -9,7 +9,8 @@ function MatterAdd({
   indexedObject,
   setShowMatterModal,
   createItem,
-  updateItem
+  updateItem,
+  data
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ function MatterAdd({
             setShowMatterModal={setShowMatterModal}
             createItem={createItem}
             updateItem={updateItem}
+            timezone={data.user && data.user.profile && data.user.profile.timezone}
           />
           <MatterAddButtonBlock
             showMatterModal={showMatterModal}

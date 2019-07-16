@@ -19,7 +19,7 @@ import MatterAdd from './MatterAdd';
 import MatterList from './MatterList';
 
 function Timeline({
-  appContext: { actions }
+  appContext: { actions, data }
 }) {
 
   const [loading, setLoading] = useState(true);
@@ -89,6 +89,7 @@ function Timeline({
           setShowMatterModal={setShowMatterModal}
           createItem={createItem}
           updateItem={updateItem}
+          data={data}
         />
         }/>
       </div>

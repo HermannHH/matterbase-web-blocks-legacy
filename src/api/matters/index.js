@@ -11,11 +11,15 @@ async function mattersList() {
 };
 
 async function createMatter({
-  title
+  title,
+  startAt,
+  endAt
 }) {
   const data = {
     matter: {
-      title
+      title,
+      start_at: startAt,
+      end_at: endAt,
     }
   };
   return await httpRequest({
@@ -36,11 +40,15 @@ async function destroyMatter({
 
 async function updateMatter({
   token,
-  title
+  title,
+  startAt,
+  endAt
 }) {
   const data = {
     matter: {
-      title
+      title,
+      start_at: startAt,
+      end_at: endAt,
     }
   };
   return await httpRequest({

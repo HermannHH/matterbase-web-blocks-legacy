@@ -20,11 +20,9 @@ function MatterAddModal({
   indexedObject,
   setShowMatterModal,
   createItem,
-  updateItem
+  updateItem,
+  timezone
 }) {
-
-  
-
 
   const validationSchema = object().shape({
     title: string()
@@ -34,7 +32,7 @@ function MatterAddModal({
   const isUpdate = editToken ? true : false;
   const matter = isUpdate ? indexedObject[editToken] : {};
   const initialTitle = isUpdate ? matter.title : '';
-  const initialValues = isUpdate ? { title: '', startAt: moment() } : { title: '', startAt: '' };
+  const initialValues = isUpdate ? { title: '', startAt: moment(), endAt: moment() } : { title: '', startAt: '', endAt: '' };
 
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
@@ -92,7 +90,7 @@ function MatterAddModal({
                   </Form.Control.Feedback>
                 }
               </Form.Group>
-              {/* {console.log('fefeef', values)} */}
+              {console.log('fefeef', values)}
               <FormikDateTimePicker
                 value={values.startAt}
                 onChange={setFieldValue}
@@ -100,8 +98,20 @@ function MatterAddModal({
                 errors={errors}
                 touched={touched}
                 name="startAt"
-                label="Timezone"
-                placeholder="Your timezone"
+                label="Start At"
+                placeholder="Matter starts at..."
+                timezone={timezone}
+              />
+              <FormikDateTimePicker
+                value={values.endAt}
+                onChange={setFieldValue}
+                onBlur={setFieldTouched}
+                errors={errors}
+                touched={touched}
+                name="endAt"
+                label="Ends At"
+                placeholder="Matter ends at..."
+                timezone={timezone}
               />
       </Modal.Body>
       <Modal.Footer>
