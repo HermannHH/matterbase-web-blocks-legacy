@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import { ToastProvider } from 'react-toast-notifications';
 import { ThemeProvider } from 'styled-components';
 import {Helmet} from "react-helmet";
 

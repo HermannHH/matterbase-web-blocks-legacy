@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, PureComponent } from 'react';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 import { navigate } from '@reach/router';
 
 import routes from 'routes';
@@ -14,7 +14,7 @@ import Loading from 'components/Loading';
 
 
 
-export default function AppContextProvider({ children }) {
+function AppContextProviderWithoutToast({ children }) {
 
   const [handshakeConfirmed, setConfirmHandshake] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -26,6 +26,8 @@ export default function AppContextProvider({ children }) {
     timezone: null,
   },
   });
+
+  const { addToast } = useToasts();
 
 
   async function handleSignOut() {
@@ -107,6 +109,10 @@ export default function AppContextProvider({ children }) {
     };
   }, []);
 
+  function showToast({ message, type }) {
+    addToast(message, { appearance: type });
+  }
+
   if (!handshakeConfirmed || loading || (isAuthenticated && !isUserSet)) {
     return <Loading fullScreen/>;
   }
@@ -123,11 +129,35 @@ export default function AppContextProvider({ children }) {
           setLoading,
           setIsAuthenticated,
           handleGetCurrentUser,
-          handleError
+          handleError,
+          showToast
         }
       }}
     >
       {children}
     </AppContext.Provider>
   );
+};
+
+
+class AppContextProvider extends PureComponent {
+
+  componentDidCatch(err) {
+    console.log('error caught in context', err)
+  }
+
+  render() {
+    const { children } = this.props;
+    return (
+      <ToastProvider
+        placement="bottom-left"
+      >
+        <AppContextProviderWithoutToast>
+          {children}
+        </AppContextProviderWithoutToast>
+      </ToastProvider>
+    );
+  }
 }
+
+export default AppContextProvider;
