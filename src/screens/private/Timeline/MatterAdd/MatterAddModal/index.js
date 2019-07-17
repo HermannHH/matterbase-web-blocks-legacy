@@ -29,11 +29,14 @@ function MatterAddModal({
       .required()
   });
 
+  moment.tz.setDefault(timezone);
+
   const isUpdate = editToken ? true : false;
   const matter = isUpdate ? indexedObject[editToken] : {};
-  const initialTitle = isUpdate ? matter.title : '';
-  const initialValues = isUpdate ? { title: '', startAt: moment(), endAt: moment() } : { title: '', startAt: '', endAt: '' };
-
+  const ROUNDING = 15 * 60 * 1000; // Rounds up to nearest 15 min interval
+  console.log('matter', matter)
+  const initialValues = isUpdate ? { title: matter.title, startAt: moment(matter.start_at), endAt: moment(matter.end_at) } : { title: '', startAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(30, 'minutes'), endAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(90, 'minutes') };
+  console.log('initialValues', initialValues)
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
       <Modal.Header closeButton >
@@ -43,18 +46,25 @@ function MatterAddModal({
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
-            // if(isUpdate) {
-            //   await updateItem({ token: matter.token, title: values.title });
-            // } else {
-            //   await createItem({ title: values.title });
-            // }
+            const { title, startAt, endAt } = values;
+            const data = {
+              token: matter.token,
+              title,
+              startAt: startAt.format(),
+              endAt: endAt.format(),
+            }
+            if(isUpdate) {
+              await updateItem({...data});
+            } else {
+              await createItem({...data});
+            }
             
-            // setShowMatterModal(false);
-            // setSubmitting(false);
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+            setShowMatterModal(false);
+            setSubmitting(false);
+            // setTimeout(() => {
+            //   // alert(JSON.stringify(values, null, 2));
+            //   setSubmitting(false);
+            // }, 400);
           }}
         >
           {({

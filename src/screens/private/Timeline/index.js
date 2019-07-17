@@ -41,14 +41,14 @@ function Timeline({
   }, []);
 
 
-  async function createItem({ title }) {
-    const data = await createMatter({ title });
+  async function createItem({ title, startAt, endAt }) {
+    const data = await createMatter({ title, startAt, endAt });
     await setIndexedObject(writeToIndexedObject(indexedObject, data.token, data));
     await setKeyedArray(appendToKeyedArray(keyedArray, data.token));
   };
 
-  async function updateItem({ token, title }) {
-    const data = await updateMatter({ token, title });
+  async function updateItem({ token, title, startAt, endAt }) {
+    const data = await updateMatter({ token, title, startAt, endAt });
     await setIndexedObject(writeToIndexedObject(indexedObject, data.token, data));
   };
 

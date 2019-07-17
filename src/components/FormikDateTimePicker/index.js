@@ -20,15 +20,9 @@ export default function FormikDateTimePicker({
   timezone
 
 }) {
-  console.log('FormikDateTimePicker', errors);
-
-  const startTime = moment.tz(new Date().getTime(), "Australia/Melbourne");
-
-  console.log('startTime', startTime, startTime.format('YYYY-MM-DD HH:mm'))
 
   function handleChange(selected) {
-    const timezoneSelected = moment(selected).tz(timezone).format('YYYY-MM-DD HH:mm');
-    console.log('timezoneSelected', timezoneSelected);
+    const timezoneSelected = moment(selected);
     onChange(name, timezoneSelected);
   };
   return (
@@ -47,11 +41,12 @@ export default function FormikDateTimePicker({
         selected={value}
         onChange={(val) => handleChange(val)}
         onBlur={() => onBlur(name, true)}
-        minDate={new Date(startTime.format('YYYY-MM-DD HH:mm'))}
+        // minDate={new Date(startTime.format('YYYY-MM-DD HH:mm'))}
         showTimeSelect
-        dateFormat="Pp"
+        // dateFormat="Pp"
         timeIntervals={15}
-        timeFormat="p"
+        // timeFormat="p"
+        dateFormat="DD MMM, YYYY hh:mm A"
         placeholderText={placeholder}
       />
     </div>
