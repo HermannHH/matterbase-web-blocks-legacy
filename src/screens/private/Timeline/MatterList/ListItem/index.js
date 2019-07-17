@@ -39,13 +39,15 @@ function ListItem({
             </Dropdown>
           </div>
           <div className="card-row">
-            <span className="badge badge-primary">
-              {moment(data.start_at).format('DD MMM, YYYY hh:mm A')}
-            </span>
-            to 
-            <span className="badge badge-primary">
-              {moment(data.end_at).format('DD MMM, YYYY hh:mm A')}
-            </span>
+            <div className="card-row-container">
+              <span className="badge badge-primary">
+                {moment(data.start_at).format('DD MMM, YYYY hh:mm A')}
+              </span>
+              to 
+              <span className="badge badge-primary">
+                {moment(data.end_at).format('DD MMM, YYYY hh:mm A')}
+              </span>
+            </div>
           </div>
         <div className="card-actions">
           <a className="btn-link-dodger-blue" style={{ cursor: "pointer" }} onClick={() => navigate(replaceUrlParams(':matterId', routes.private.blocks.path, token))}>See More <FontAwesomeIcon icon={faArrowRight} /></a>
