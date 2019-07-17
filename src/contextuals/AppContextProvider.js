@@ -19,6 +19,7 @@ export default function AppContextProvider({ children }) {
   const [handshakeConfirmed, setConfirmHandshake] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isUserSet, setIsUserSet] = useState(false);
   const [user, setUser] = useState({ isEmailVerified: null, email: null, profileCompleted: null, profile: {
     firstName: null,
     lastName: null,
@@ -36,6 +37,7 @@ export default function AppContextProvider({ children }) {
     })
     navigate(routes.public.home.path);
     setIsAuthenticated(false);
+    setIsUserSet(false);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -83,6 +85,7 @@ export default function AppContextProvider({ children }) {
         timezone: resp.profile.timezone,
       }
     });
+    setIsUserSet(true);
     await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });
   }
 
@@ -104,7 +107,7 @@ export default function AppContextProvider({ children }) {
     };
   }, []);
 
-  if (!handshakeConfirmed || loading) {
+  if (!handshakeConfirmed || loading || (isAuthenticated && !isUserSet)) {
     return <Loading fullScreen/>;
   }
 
