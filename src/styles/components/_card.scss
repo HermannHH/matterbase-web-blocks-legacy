@@ -17,6 +17,17 @@
   > .card-content {
     padding: 15px;
   }
+  > .card-row {
+    padding: 8px 15px;
+    > .badge {
+      &:first-child {
+        margin-right: 10px;
+      };
+      &:last-child {
+        margin-left: 10px;
+      };
+    }
+  };
   > .card-actions {
     display: flex;
     justify-content: flex-end;

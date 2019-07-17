@@ -103,6 +103,7 @@ function Timeline({
             destroyItem={destroyItem}
             setEditToken={setEditToken}
             matterDataInitialised={matterDataInitialised}
+            timezone={data.user.profile.timezone}
           />
       </div>
     </div>

@@ -13,7 +13,8 @@ function MatterList({
   loading,
   destroyItem,
   setEditToken,
-  matterDataInitialised
+  matterDataInitialised,
+  timezone
 }) {
   let content = <Loading />;
   if (!loading && matterDataInitialised && keyedArray.length) {
@@ -24,6 +25,7 @@ function MatterList({
       data={indexedObject[token]}
       handleDestroyItem={destroyItem}
       setEditToken={setEditToken}
+      timezone={timezone}
     />));
   } else if (!loading && matterDataInitialised) {
     content = <NoResults text="You have not added any Matters yet"/>
