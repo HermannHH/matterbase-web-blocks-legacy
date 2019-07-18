@@ -7,7 +7,7 @@ export default {
   },
   STAGING: {
     BASE_URL: 'http://localhost:3000',
-    API_V1_ROOT_PATH: 'https://api-dev.matterbase.io/api/v1',
+    API_V1_ROOT_PATH: 'https://staging-api.matterbase.io/api/v1',
     ASSET_BASE_PATH: 'http://d3c6yuhwj0xuxl.cloudfront.net',
     GOOGLE_TAG_MANAGER_ACTIVE: false
   },
