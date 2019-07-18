@@ -45,26 +45,26 @@ function MatterAddModal({
       <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={async (values, { setSubmitting }) => {
-            const { title, startAt, endAt } = values;
-            const data = {
-              token: matter.token,
-              title,
-              startAt: startAt.format(),
-              endAt: endAt.format(),
-            }
-            if(isUpdate) {
-              await updateItem({...data});
-            } else {
-              await createItem({...data});
-            }
-            
-            setShowMatterModal(false);
-            setSubmitting(false);
-            // setTimeout(() => {
-            //   // alert(JSON.stringify(values, null, 2));
-            //   setSubmitting(false);
-            // }, 400);
+          onSubmit={async (values, { setSubmitting, setErrors }) => {
+            try {
+              const { title, startAt, endAt } = values;
+              const data = {
+                token: matter.token,
+                title,
+                startAt: startAt.format(),
+                endAt: endAt.format(),
+              }
+              if(isUpdate) {
+                await updateItem({...data});
+              } else {
+                await createItem({...data});
+              }
+              setShowMatterModal(false);
+            } catch (error) {
+              setErrors({...error})
+            } finally {
+              setSubmitting(false);
+            };
           }}
         >
           {({
@@ -100,7 +100,6 @@ function MatterAddModal({
                   </Form.Control.Feedback>
                 }
               </Form.Group>
-              {console.log('fefeef', values)}
               <FormikDateTimePicker
                 value={values.startAt}
                 onChange={setFieldValue}

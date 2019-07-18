@@ -8,6 +8,7 @@ import { signOut } from 'api/sessions';
 import { getCurrentUser } from 'api/users';
 
 import { getCookie } from 'utils/cookiesHelper';
+import errorHandler from 'utils/errorHandler';
 import AppContext from './AppContext';
 
 import Loading from 'components/Loading';
@@ -47,21 +48,23 @@ function AppContextProviderWithoutToast({ children }) {
   };
 
   async function handleError(err) {
-    const errorObject = JSON.parse(JSON.stringify(err));
+    console.log('error handler', err)
+    const errorObject = JSON.stringify(err);
     const { status } = errorObject;
-    if (status && status === 422 ) {
-      console.log('in catcher')
-      setLoading(true);
-      setUser({
-        email: null,
-        isEmailVerified: null
-      });
-      navigate(routes.public.home.path);
-      setIsAuthenticated(false);
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    };
+    console.log('amit', status, errorObject)
+    // if (status && status === 422 ) {
+    //   console.log('in catcher')
+    //   setLoading(true);
+    //   setUser({
+    //     email: null,
+    //     isEmailVerified: null
+    //   });
+    //   navigate(routes.public.home.path);
+    //   setIsAuthenticated(false);
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //   }, 1000);
+    // };
   }
 
   async function handleOnboardRedirect({ profileCompleted, nextPath }) {
@@ -76,19 +79,23 @@ function AppContextProviderWithoutToast({ children }) {
   }
 
   async function handleGetCurrentUser({ nextPath }) {
-    const resp = await getCurrentUser();
-    setUser({
-      email: resp.email,
-      isEmailVerified: resp.is_email_verified,
-      profileCompleted: resp.profile_completed,
-      profile: {
-        firstName: resp.profile.first_name,
-        lastName: resp.profile.last_name,
-        timezone: resp.profile.timezone,
-      }
-    });
-    setIsUserSet(true);
-    await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });
+    try {
+      const resp = await getCurrentUser();
+      setUser({
+        email: resp.email,
+        isEmailVerified: resp.is_email_verified,
+        profileCompleted: resp.profile_completed,
+        profile: {
+          firstName: resp.profile.first_name,
+          lastName: resp.profile.last_name,
+          timezone: resp.profile.timezone,
+        }
+      });
+      setIsUserSet(true);
+      await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });
+    } catch (error) {
+      handleError(error);
+    }
   }
 
 
@@ -140,14 +147,8 @@ function AppContextProviderWithoutToast({ children }) {
 };
 
 
-class AppContextProvider extends PureComponent {
+function AppContextProvider({ children }) {
 
-  componentDidCatch(err) {
-    console.log('error caught in context', err)
-  }
-
-  render() {
-    const { children } = this.props;
     return (
       <ToastProvider
         placement="bottom-left"
@@ -157,7 +158,6 @@ class AppContextProvider extends PureComponent {
         </AppContextProviderWithoutToast>
       </ToastProvider>
     );
-  }
-}
+};
 
-export default AppContextProvider;
+export default errorHandler(AppContextProvider);

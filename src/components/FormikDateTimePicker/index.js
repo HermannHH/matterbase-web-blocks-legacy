@@ -20,7 +20,7 @@ export default function FormikDateTimePicker({
   timezone
 
 }) {
-
+  console.log('errors', errors)
   function handleChange(selected) {
     const timezoneSelected = moment(selected);
     onChange(name, timezoneSelected);
