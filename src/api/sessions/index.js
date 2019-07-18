@@ -23,7 +23,7 @@ async function signOut() {
   return await httpRequest({
     url: `${ENV.API_V1_ROOT_PATH}/sessions/destroy`,
     method: 'delete',
-    onSuccess: (resp) => deleteCookie("authToken")
+    // onSuccess: (resp) => deleteCookie("authToken")
   });
 };
 

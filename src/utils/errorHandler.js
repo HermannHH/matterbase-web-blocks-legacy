@@ -1,12 +1,14 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
 
 import ErrorPage from 'components/ErrorPage';
 
-const errorHandler = (WrappedComponent) => {
+
+function errorHandler(WrappedComponent) {
   return class EH extends PureComponent {
     state = {
-      error: null
+      error: null,
+      triggerSoftSignOut: false,
     };
 
     componentDidMount() {
@@ -37,6 +39,10 @@ const errorHandler = (WrappedComponent) => {
           console.log(err.response.data);
           console.log(err.response.status);
           console.log(err.response.headers);
+          if(err.response.status === 401) {
+            console.log('destroy session');
+            this.setState({ triggerSoftSignOut: true })
+          }
       } else if (err.request) {
           /*
           * The request was made but no response was received, `err.request`
@@ -61,7 +67,8 @@ const errorHandler = (WrappedComponent) => {
     }
 
     render() {
-      let renderSection = <WrappedComponent {...this.props} />
+      const { triggerSoftSignOut } = this.state;
+      let renderSection = <WrappedComponent {...this.props} triggerSoftSignOut={triggerSoftSignOut} unsetTriggerSoftSignOut={() => this.setState({ triggerSoftSignOut: false })}/>
       
       if (this.state.error === 500) { 
         renderSection = <ErrorPage code="500" text="An error happened on our side. Please try again later."/>;

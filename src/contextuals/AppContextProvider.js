@@ -1,6 +1,9 @@
-import React, { useState, useEffect, PureComponent } from 'react';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import React, { useState, useEffect, Fragment } from 'react';
+// import { ToastProvider, useToasts } from 'react-toast-notifications';
+import axios from 'axios';
 import { navigate } from '@reach/router';
+
+import { setCookie, deleteCookie } from "utils/cookiesHelper";
 
 import routes from 'routes';
 
@@ -15,7 +18,7 @@ import Loading from 'components/Loading';
 
 
 
-function AppContextProviderWithoutToast({ children }) {
+function AppContextProvider({ children, triggerSoftSignOut, unsetTriggerSoftSignOut }) {
 
   const [handshakeConfirmed, setConfirmHandshake] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -28,12 +31,17 @@ function AppContextProviderWithoutToast({ children }) {
   },
   });
 
-  const { addToast } = useToasts();
+  // const { addToast } = useToasts();
+
+  // console.log('triggerSoftSignOut', rest)
 
 
-  async function handleSignOut() {
+  async function handleSignOut(softSignOut) {
     setLoading(true);
-    await signOut();
+    if(!softSignOut) {
+      await signOut();
+    }
+    await deleteCookie("authToken");
     setUser({
       email: null,
       isEmailVerified: null
@@ -47,25 +55,6 @@ function AppContextProviderWithoutToast({ children }) {
     // setLoading(false);
   };
 
-  async function handleError(err) {
-    console.log('error handler', err)
-    const errorObject = JSON.stringify(err);
-    const { status } = errorObject;
-    console.log('amit', status, errorObject)
-    // if (status && status === 422 ) {
-    //   console.log('in catcher')
-    //   setLoading(true);
-    //   setUser({
-    //     email: null,
-    //     isEmailVerified: null
-    //   });
-    //   navigate(routes.public.home.path);
-    //   setIsAuthenticated(false);
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //   }, 1000);
-    // };
-  }
 
   async function handleOnboardRedirect({ profileCompleted, nextPath }) {
     const currentPath = window.location.pathname;
@@ -94,10 +83,9 @@ function AppContextProviderWithoutToast({ children }) {
       setIsUserSet(true);
       await handleOnboardRedirect({ profileCompleted: resp.profile_completed, nextPath });
     } catch (error) {
-      handleError(error);
+      console.log('handleGetCurrentUser')
     }
-  }
-
+  };
 
   useEffect(() => {
     const authToken = getCookie('authToken');
@@ -116,48 +104,52 @@ function AppContextProviderWithoutToast({ children }) {
     };
   }, []);
 
-  function showToast({ message, type }) {
-    addToast(message, { appearance: type });
-  }
+  useEffect(() => {
+    if(triggerSoftSignOut) {
+      handleSignOut(true);
+      unsetTriggerSoftSignOut();
+    }
+  }, [triggerSoftSignOut])
 
-  if (!handshakeConfirmed || loading || (isAuthenticated && !isUserSet)) {
-    return <Loading fullScreen/>;
-  }
+  // function showToast({ message, type }) {
+  //   addToast(message, { appearance: type });
+  // };
+
+  let renderSection = <Loading fullScreen/>
+      
+  if (handshakeConfirmed && !loading && (isAuthenticated ? isUserSet : !isUserSet)) {
+   renderSection = ( <AppContext.Provider
+        value={{
+          data: {
+            isAuthenticated,
+            user
+          },
+          actions: {
+            handleSignOut,
+            setLoading,
+            setIsAuthenticated,
+            handleGetCurrentUser,
+            // showToast
+          }
+        }}
+      >
+        {children}
+      </AppContext.Provider>
+   );
+  };
+
+  // if (!handshakeConfirmed || loading || (isAuthenticated && !isUserSet)) {
+  //   return <Loading fullScreen/>;
+  // }
 
   return (
-    <AppContext.Provider
-      value={{
-        data: {
-          isAuthenticated,
-          user
-        },
-        actions: {
-          handleSignOut,
-          setLoading,
-          setIsAuthenticated,
-          handleGetCurrentUser,
-          handleError,
-          showToast
-        }
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <Fragment>
+      {renderSection}
+    </Fragment>
   );
 };
 
 
-function AppContextProvider({ children }) {
 
-    return (
-      <ToastProvider
-        placement="bottom-left"
-      >
-        <AppContextProviderWithoutToast>
-          {children}
-        </AppContextProviderWithoutToast>
-      </ToastProvider>
-    );
-};
 
 export default errorHandler(AppContextProvider);
