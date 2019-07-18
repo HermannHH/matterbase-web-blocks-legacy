@@ -34,6 +34,7 @@ async function httpRequest({
     data,
     headers: {
       'AUTHORIZATION': authToken,
+      'Content-Type': 'application/json'
     },
     config
   }
