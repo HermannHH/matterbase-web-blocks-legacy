@@ -5,19 +5,17 @@ import standard from 'screens/public/layouts/standard';
 
 import AboveTheFold from 'screens/public/Home/AboveTheFold';
 import TheWhy from 'screens/public/Home/TheWhy';
-import TimeAtCore from 'screens/public/Home/TimeAtCore';
-import EverythingYouNeed from 'screens/public/Home/EverythingYouNeed';
-import Notepad from 'screens/public/Home/Notepad';
 import FinalCallToAction from 'screens/public/Home/FinalCallToAction';
+import UseCases from 'screens/public/Home/UseCases';
+import Pricing from 'screens/public/Home/Pricing';
 
 function Home(props) {
   return (
     <div>
       <AboveTheFold />
       <TheWhy />
-      <TimeAtCore />
-      <EverythingYouNeed />
-      <Notepad />
+      <UseCases />
+      <Pricing />
       <FinalCallToAction />
     </div>
   );

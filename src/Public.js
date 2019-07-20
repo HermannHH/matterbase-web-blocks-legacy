@@ -9,6 +9,7 @@ import Login from 'screens/public/Login';
 import Register from 'screens/public/Register';
 import ForgotPassword from 'screens/public/ForgotPassword';
 import ResetPassword from 'screens/public/ResetPassword';
+import UseCases from 'screens/public/UseCases';
 
 
 function Public({ appContext }) {
@@ -21,6 +22,7 @@ function Public({ appContext }) {
       <Register path={routes.public.register.path} appContext={appContext} />
       <ForgotPassword path={routes.public.forgotPassword.path} appContext={appContext} />
       <ResetPassword path={routes.public.resetPassword.path} appContext={appContext} />
+      <UseCases path={routes.public.useCases.path} appContext={appContext} />
     </Router>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 
-function TheWhy({ theme }) {
+function Pricing({ theme }) {
   return (
     <div>
       <section
@@ -10,7 +10,7 @@ function TheWhy({ theme }) {
       >
         <div className="row d-flex justify-content-center align-items-center py-3">
           <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
-              <h1>Why Matterbase?</h1>
+              <h1>Pricing</h1>
           </div>
         </div>
         <div className="row d-flex justify-content-center align-items-center">
@@ -33,4 +33,4 @@ function TheWhy({ theme }) {
   );
 }
 
-export default withTheme(TheWhy);
+export default withTheme(Pricing);

@@ -6,6 +6,7 @@ export default {
   public: {
     home: { path: '/' },
     aboutUs: { path: '/about-us' },
+    useCases: { path: '/use-cases' },
     pricing: { path: '/pricing' },
     login: { path: '/auth/login' },
     register: { path: '/auth/register' },

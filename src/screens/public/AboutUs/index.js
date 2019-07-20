@@ -12,7 +12,7 @@ function AboutUs(props) {
       </Helmet>
       <div className="row">
         <div className="col-12">
-          <div className="my-5">
+          <div className="my-5  d-flex flex-column align-items-center justify-content-center">
       
             <h1>Who built Matterbase</h1>
             <p>

@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 import standard from 'screens/public/layouts/standard';
 
+import Faq from './Faq';
+
 const Card = styled.div`
   border: none;
   border-radius: 1rem;
@@ -130,6 +132,9 @@ function Pricing(props) {
         </Card>
       </div>
     </div>
+  </div>
+  <div>
+    <Faq />
   </div>
 </section>
   );

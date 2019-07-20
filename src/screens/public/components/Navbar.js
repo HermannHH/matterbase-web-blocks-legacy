@@ -34,6 +34,9 @@ function Navbar() {
             <a className="nav-link" onClick={() => navigate(routes.public.aboutUs.path)} style={{ cursor: "pointer"}}>
               About Us
             </a>
+            <a className="nav-link" onClick={() => navigate(routes.public.useCases.path)} style={{ cursor: "pointer"}}>
+              Use Cases
+            </a>
             <a className="nav-link" onClick={() => navigate(routes.public.pricing.path)} style={{ cursor: "pointer"}}>
               Pricing
             </a>
