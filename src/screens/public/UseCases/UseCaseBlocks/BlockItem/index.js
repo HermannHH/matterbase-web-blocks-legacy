@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 
 export default function BlockItem({
   headline,
+  handleButtonClick
 }) {
   return (
     <div className="block-item">
@@ -16,7 +17,7 @@ export default function BlockItem({
         </div>
         
         <div className="card-actions">
-          <Button className="btn-ghost-selago btn-block">See use case</Button>
+          <Button onClick={() => handleButtonClick()}className="btn-ghost-selago btn-block">See use case</Button>
         </div>
       </div>
     </div>
