@@ -41,12 +41,10 @@ export default function AboveTheFold() {
           <div className="col-sm-10 col-lg-6">
             <div id="atl-text-container">
               <h1 className="display-4 font-weight-bold black-text">
-                Focused workflows for you and your team
+                Productivity building blocks for individuals & teams
               </h1>
               <h4 className="tundora-text" style={{ lineHeight: '2rem' }}>
-                Everyone finds productivity in their own unique workflows.
-                Matterbase provides the building blocks for you and your team to
-                be productive in your own way.
+                Everyone finds productivity in their own unique workflows. Matterbase offers adaptable, time-based building blocks to be productive in your way.
               </h4>
               <div className="mt-5">
                 <a
@@ -62,7 +60,7 @@ export default function AboveTheFold() {
           </div>
           <div className="col-sm-10 col-lg-6">
             <div id="main-image-container">
-              <img src={`${constants.ENV.ASSET_BASE_PATH}/image.png`} />
+              <img src={`${constants.ENV.ASSET_BASE_PATH}/assets/block-builder.png`} />
             </div>
           </div>
         </AtlWrapper>

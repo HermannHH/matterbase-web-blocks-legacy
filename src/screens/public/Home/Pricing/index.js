@@ -15,16 +15,12 @@ function Pricing({ theme }) {
         </div>
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
-            <h5 className="black-text" style={{ lineHeight: '2.3rem' }}>
-              "I have always found calendars to be too structured and
-              disconnected for my own liking. What I needed was a place where I
-              could jot down ideas, notes and tasks that are event related,
-              without having to switch between apps. This is why I decided to
-              build Matterbase"
-            </h5>
-            <h6 className="tundora-text" style={{ lineHeight: '2.5rem' }}>
-              - Hermann (Maker)
-            </h6>
+            <h4 className="black-text" style={{ lineHeight: '2.3rem' }}>
+              We will always have a free tier
+            </h4>
+            <h4 className="black-text" style={{ lineHeight: '2.3rem' }}>
+              There is great value in trying a platform before committing to it. For this reason, we will always have a free tier. There is no need to provide any credit card details before knowing that Matterbase works for you. More features & pricing plans coming soon.
+            </h4>
           </div>
         </div>
       </section>

@@ -13,24 +13,15 @@ function AboutUs(props) {
       <div className="row">
         <div className="col-12">
           <div className="my-5  d-flex flex-column align-items-center justify-content-center">
-      
-            <h1>Who built Matterbase</h1>
+            <h1>What's in a name?</h1>
             <p>
-            👋 Hi my name is Hermann. I'm an indie-maker and creator of Matterbase. You can get in touch with me on <a target='_blank' href='https://twitter.com/Hermann_Harris'>twitter</a> or via <a href='mailto:hermann@matterbase.io'>email</a>
-            </p>
-      
-            <h1>Why the name?</h1>
-            <p>
-            A name defines who you are. In naming our platform Matterbase, we wanted to portray what we stand for, in a memorable way.
+            A name defines who you are. In naming our platform, we wanted to portray what we stand for, in a memorable way. 
             </p>
             <p>
-            The scientific definition of matter, is everything that has mass and takes up space. Everything around you is made up of matter.
+            The scientific definition of matter, is that everything has mass and takes up space. What your see around you, consists of matter. Your daily life is a combination of blocks of time consumed by various activities and tasks.
             </p>
             <p>
-            Your daily life is a combination of events, meetings, appointments to name but a few. Every single one of these consumes a part of your valuable time. It reminds us of the way matter occupies space.
-            </p>
-            <p>
-            We built Matterbase from the ground up, with time at the very core of our productivity universe. It makes sense to place your most valuable, yet limited resource at the centre of all your productivity efforts, doesn't it?
+            Matter occupies space. Time is at the very core of our productivity universe. Matterbase places Time at the centre of all your productivity efforts.
             </p>
           </div>
         </div>

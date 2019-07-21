@@ -15,16 +15,9 @@ function UseCases({ theme }) {
         </div>
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
-            <h5 className="black-text" style={{ lineHeight: '2.3rem' }}>
-              "I have always found calendars to be too structured and
-              disconnected for my own liking. What I needed was a place where I
-              could jot down ideas, notes and tasks that are event related,
-              without having to switch between apps. This is why I decided to
-              build Matterbase"
-            </h5>
-            <h6 className="tundora-text" style={{ lineHeight: '2.5rem' }}>
-              - Hermann (Maker)
-            </h6>
+            <h4 className="tundora-text" style={{ lineHeight: '2.3rem' }}>
+              We built Matterbase from the ground up with one thing in mind: Adaptability. Our users are very creative and have been using the platform in ingenious ways. One of these ways is to DYNAMIC VALUE:
+            </h4>
           </div>
         </div>
       </section>
