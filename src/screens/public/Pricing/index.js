@@ -48,7 +48,8 @@ const Card = styled.div`
 
 function Pricing(props) {
   return (
-    <section className="pricing pb-5" style={{
+    <section
+      className="pricing pb-5" style={{
       background: "#007bff",
       background: "linear-gradient(to right, #0062E6, #33AEFF)"
     }}>

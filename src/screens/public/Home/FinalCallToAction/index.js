@@ -1,8 +1,11 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
-import constants from 'utils/constants';
 
-import Button from 'components/Button';
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
+import { Button } from 'react-bootstrap';
 
 function FinalCallToAction({ theme }) {
   return (
@@ -18,7 +21,7 @@ function FinalCallToAction({ theme }) {
             </h1>
           </div>
           <div className="my-5">
-            <Button>TRY IT FOR FREE</Button>
+            <Button size="lg" onClick={() => navigate(routes.public.register.path)}>TRY IT FOR FREE</Button>
           </div>
         </div>
       </div>

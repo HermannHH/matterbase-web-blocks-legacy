@@ -49,6 +49,7 @@ function Navbar() {
             <a
               className="btn btn-primary mx-2"
               onClick={() => navigate(routes.public.register.path)} style={{ cursor: "pointer"}}
+              style={{ color: "white", cursor: "pointer"}}
             >
               Register
             </a>

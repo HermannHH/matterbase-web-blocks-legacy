@@ -1,6 +1,12 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
+import UseCase from 'components/UseCase';
+
 function UseCases({ theme }) {
   return (
     <div>
@@ -8,18 +14,13 @@ function UseCases({ theme }) {
         className="container rad-5 p-5 my-5"
         style={{ backgroundColor: theme.colors.snowGrey, borderRadius: '5px' }}
       >
-        <div className="row d-flex justify-content-center align-items-center py-3">
-          <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
-              <h1>Use Cases</h1>
-          </div>
-        </div>
-        <div className="row d-flex justify-content-center align-items-center">
-          <div className="col-sm-12 d-flex justify-content-center flex-column text-center">
-            <h4 className="tundora-text" style={{ lineHeight: '2.3rem' }}>
-              We built Matterbase from the ground up with one thing in mind: Adaptability. Our users are very creative and have been using the platform in ingenious ways. One of these ways is to DYNAMIC VALUE:
-            </h4>
-          </div>
-        </div>
+        <UseCase
+          heading="Use Cases"
+          text={<h4>We built Matterbase from the ground up with one thing in mind: Adaptability. <br/> Our users are very creative and have been using the platform in ingenious ways. One of these ways is to <strong className="dodger-blue-text">DYNAMIC VALUE:</strong></h4>}
+          url="http://localhost:3000"
+          buttonText="See more use cases"
+          handleButtonClick={() => navigate(routes.public.useCases.path)}
+        />
       </section>
       <div className="my-5 py-5" />
     </div>
