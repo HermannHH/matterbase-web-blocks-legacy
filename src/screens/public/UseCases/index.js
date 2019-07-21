@@ -13,10 +13,14 @@ function UseCases(props) {
       <Helmet>
           <title>Matterbase | Use Cases</title>
       </Helmet>
-      <div className="row">
-        <div className="col-12">
+      <div className="row d-flex justify-content-center">
+        <div className="col-12 col-lg-10">
           <div className="my-5">
               <UseCaseBlocks />
+          </div>
+        </div>
+        <div className="col-12 col-lg-10">
+          <div className="my-5">
               <UseCaseList />
           </div>
         </div>

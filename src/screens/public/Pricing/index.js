@@ -4,6 +4,10 @@ import {Helmet} from "react-helmet";
 
 import styled from 'styled-components';
 
+import { navigate } from '@reach/router';
+
+import routes from 'routes';
+
 import standard from 'screens/public/layouts/standard';
 
 import Faq from './Faq';
@@ -48,14 +52,15 @@ const Card = styled.div`
 
 function Pricing(props) {
   return (
+    <div>
+    <Helmet>
+        <title>Matterbase | Pricing</title>
+    </Helmet>
     <section
       className="pricing pb-5" style={{
       background: "#007bff",
       background: "linear-gradient(to right, #0062E6, #33AEFF)"
     }}>
-    <Helmet>
-        <title>Matterbase | Pricing</title>
-    </Helmet>
   <div className="container py-5">
     <div className="row d-flex flex-column justify-content-center align-items-center">
       <div className="col-10 col-md-6 text-center text-white py-5">
@@ -95,13 +100,13 @@ function Pricing(props) {
                 <span className="fa-li">
                   <i className="fas fa-check"></i>
                 </span>
-                Unlimited Documents
+                Unlimited Task Blocks
               </li>
               <li>
                 <span className="fa-li">
                   <i className="fas fa-check"></i>
                 </span>
-                Unlimited Document Exports
+                Unlimited Sticky Note Blocks
               </li>
               <li className="text-muted">
                 <span className="fa-li">
@@ -128,16 +133,20 @@ function Pricing(props) {
                 API Access
               </li>
             </ul>
-            <a className="btn btn-block btn-success text-uppercase">Register</a>
+            <div className="py-3">
+              <a className="btn btn-block btn-success text-uppercase" style={{ color: "white", cursor: "pointer"}} onClick={() => navigate(routes.public.register.path)}>Register</a>
+            </div>
           </div>
         </Card>
       </div>
     </div>
   </div>
   <div>
-    <Faq />
   </div>
+    
 </section>
+<Faq />
+</div>
   );
 }
 
