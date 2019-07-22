@@ -14,7 +14,7 @@ import StickyNoteAdd from './StickyNoteAdd';
 import StickyNoteItem from './StickyNoteItem';
 import Loading from 'components/Loading';
 
-function StickyNotes({ blockToken, data, matterToken }) {
+function StickyNotes({ blockToken, data, matterToken, embedded }) {
 
   const [loading, setLoading] = useState(true);
   const [stickyNotesKeyedArray, setStickyNotesKeyedArray] = useState([]);
@@ -48,7 +48,7 @@ function StickyNotes({ blockToken, data, matterToken }) {
 
   let stickyNotesContent;
   if (stickyNotesKeyedArray.length) {
-    stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
+    stickyNotesContent = stickyNotesKeyedArray.map( token => <StickyNoteItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={stickyNotesIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem} embedded={embedded}/>)
   }
 
 
@@ -59,7 +59,9 @@ function StickyNotes({ blockToken, data, matterToken }) {
       :
       <Fragment>
         {stickyNotesContent}
-        <StickyNoteAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+        {!embedded &&
+          <StickyNoteAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+        }
       </Fragment>
       }
     </div>

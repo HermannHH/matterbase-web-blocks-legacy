@@ -13,6 +13,13 @@
    border-top-left-radius: $radius;
    background-clip: padding-box;
 }
+
+@mixin border-top-left-radius($radius) {
+   -webkit-border-top-left-radius: $radius;
+   border-top-left-radius: $radius;
+   background-clip: padding-box;
+}
+
 @mixin border-right-radius($radius) {
   -webkit-border-bottom-right-radius: $radius;
   border-bottom-right-radius: $radius;

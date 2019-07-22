@@ -16,7 +16,7 @@ import TaskAdd from './TaskAdd';
 import TaskItem from './TaskItem';
 import Loading from 'components/Loading';
 
-function Tasklist({ blockToken, data,  matterToken }) {
+function Tasklist({ blockToken, data,  matterToken, embedded }) {
 
   const [loading, setLoading] = useState(true);
   const [tasksKeyedArray, setTasksKeyedArray] = useState([]);
@@ -49,7 +49,7 @@ function Tasklist({ blockToken, data,  matterToken }) {
 
   let tasksContent;
   if (tasksKeyedArray.length) {
-    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem}/>)
+    tasksContent = tasksKeyedArray.map( token => <TaskItem key={token} token={token} matterToken={matterToken} blockToken={blockToken} data={tasksIndexedObject[token]} destroyItem={destroyItem} updateItem={updateItem} embedded={embedded}/>)
   } else {
     tasksContent = <NoResuts text="No tasks added yet"/>;
   }
@@ -61,7 +61,9 @@ function Tasklist({ blockToken, data,  matterToken }) {
         <Loading />
       :
       <Fragment>
-        <TaskAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+        {!embedded &&
+          <TaskAdd createItem={createItem} blockToken={blockToken} matterToken={matterToken}/>
+        }
         {tasksContent}
       </Fragment>
       }

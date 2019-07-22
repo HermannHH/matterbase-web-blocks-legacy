@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { navigate } from '@reach/router';
@@ -7,6 +7,8 @@ import {Helmet} from "react-helmet";
 import routes from 'routes';
 
 import { blocksList, createBlock, destroyBlock } from 'api/matters/blocks';
+
+import PoweredByMatterbase from 'components/PoweredByMatterbase';
 
 import standard from 'screens/private/layouts/standard';
 
@@ -23,6 +25,10 @@ import {
   appendToKeyedArray,
   writeToIndexedObject
 } from 'utils/dataStructures';
+
+
+const params = (new URL(document.location)).searchParams;
+const embedded = params.get("embedded");
 
 function Blocks({ matterId }) {
 
@@ -64,21 +70,25 @@ function Blocks({ matterId }) {
 
   return (
     <div>
-      <Helmet>
-          <title>Matterbase | Blocks</title>
-      </Helmet>
-      <div styles={{ zIndex: 9}}>
-        <SubNavbar 
-          actionsLeft={
-            <div>
-              <a id="sub-navbar--title" style={{ cursor: "pointer"}} onClick={() => navigate(routes.private.home.path)}><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
-            </div>
-          }
-        />
-      </div>
+      {!embedded &&
+      <Fragment>
+        <Helmet>
+            <title>Matterbase | Blocks</title>
+        </Helmet>
+        <div styles={{ zIndex: 9}}>
+          <SubNavbar 
+            actionsLeft={
+              <div>
+                <a id="sub-navbar--title" style={{ cursor: "pointer"}} onClick={() => navigate(routes.private.home.path)}><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
+              </div>
+            }
+          />
+        </div>
+      </Fragment>
+      }
       <div className="container" style={{paddingTop: "66px", zIndex: 8, paddingBottom: "150px"}}>
         <div className="row d-flex justify-content-center">
-          <div className="col-12 col-md-10">
+          <div className="col-12 col-lg-10">
             <BlocksList 
               loading={loading}
               blocksKeyedArray={blocksKeyedArray}
@@ -86,20 +96,27 @@ function Blocks({ matterId }) {
               destroyItem={destroyItem}
               blocksDataInitialised={blocksDataInitialised}
               matterToken={matterId}
+              embedded={embedded}
             />
-            <BlockAdd
-              loading={loading}
-              showBlockModal={showBlockModal}
-              setShowBlockModal={setShowBlockModal}
-              createItem={createItem}
-              matterToken={matterId}
-            />
+            {!embedded &&
+              <BlockAdd
+                loading={loading}
+                showBlockModal={showBlockModal}
+                setShowBlockModal={setShowBlockModal}
+                createItem={createItem}
+                matterToken={matterId}
+              />
+            }
           </div>
         </div>
+        {embedded &&
+          <PoweredByMatterbase />
+        
+        }
       </div>
     </div>
   )
 };
 
 
-export default standard(Blocks);
+export default standard(Blocks, embedded);

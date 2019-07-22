@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import StickyNoteUpdateForm from './StickyNoteUpdateForm';
 
-export default function StickyNoteItem({ token, data, destroyItem, updateItem, matterToken, blockToken }) {
+export default function StickyNoteItem({ token, data, destroyItem, updateItem, matterToken, blockToken, embedded }) {
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -21,8 +21,8 @@ export default function StickyNoteItem({ token, data, destroyItem, updateItem, m
         blockToken={blockToken}
       />
       :
-      <div className="sticky-notes-item-paper" onDoubleClick={() => setIsEditing(true)}>
-        <div className="remover"  onClick={() => destroyItem({ matterToken, blockToken, token })}>
+      <div className="sticky-notes-item-paper" onDoubleClick={() => !embedded && setIsEditing(true)}>
+        <div className="remover"  onClick={() => !embedded && destroyItem({ matterToken, blockToken, token })}>
           <FontAwesomeIcon icon={faTimes} />
         </div>
         <div>

@@ -1,0 +1,28 @@
+.powered-by-matterbase {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  // border: thin solid red;
+  @include border-top-left-radius(5px);
+  padding: 5px;
+  background-color: $snowGrey;
+  @extend .has-shadow;
+  cursor: pointer;
+  &:hover {
+    background-color: $selago;
+  }
+  &--icon {
+    margin: 0 8px;
+    > img {
+      width: 25px;
+      height: 25px;
+    }
+  };
+  &--text {
+    color: $tundora;
+    font-weight: 600;
+    font-size: 12px;
+  };
+}
