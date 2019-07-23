@@ -10,12 +10,12 @@ function AboutUs(props) {
       <Helmet>
           <title>Matterbase | About Us</title>
       </Helmet>
-      <div className="row">
-        <div className="col-12">
-          <div className="my-5  d-flex flex-column align-items-center justify-content-center">
+      <div className="row my-5">
+        <div className="col-12 my-5">
+          <div className="my-5  d-flex flex-column align-items-center justify-content-center ">
             <h1>What's in a name?</h1>
             <p>
-            A name defines who you are. In naming our platform, we wanted to portray what we stand for, in a memorable way. 
+            A name defines who you are. In naming our platform, we wanted to portray what we stand for, in a memorable way.
             </p>
             <p>
             The scientific definition of matter, is that everything has mass and takes up space. What your see around you, consists of matter. Your daily life is a combination of blocks of time consumed by various activities and tasks.
