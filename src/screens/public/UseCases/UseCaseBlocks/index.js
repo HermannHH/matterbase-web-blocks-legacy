@@ -9,8 +9,13 @@ export default function UseCaseBlocks() {
   return (
     <div className="use-case-blocks">
       <div className="use-case-summary">
-        <h1 className="">Here are a few examples</h1>
-        <p>eifiwjfbej</p>
+        <div className="container">
+          <div className="row d-flex justify-content-center">
+            <div className="col-12 col-md-8 py-5">
+              <h1 className="">Ways people like you are using Matterbase</h1>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="blocks-list">
         <BlockItem headline="Meeting Assistant" handleButtonClick={() => animateScrollTo(document.querySelector('#meeting-assistant', { offset: 60 }))} />

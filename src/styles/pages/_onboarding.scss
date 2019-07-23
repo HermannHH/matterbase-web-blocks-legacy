@@ -34,6 +34,21 @@
     }
     > #info-panel {
       width: 75%;
+      #info-panel-image {
+        > img {
+          width: 100%;
+          @extend .p-5;
+        }
+      };
+      #info-panel-text {
+        @extend .p-5;
+        text-align: center;
+        > h1 {
+          font-weight: bold;
+          color: $dodgerBlue;
+
+        }
+      }
     }
 
   };
