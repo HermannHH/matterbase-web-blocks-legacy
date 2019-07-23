@@ -9,7 +9,7 @@ import FourOhFour from 'screens/errors/FourOhFour'
 // import ChangePassword from 'screens/private/ChangePassword';
 // import Notepad from 'screens/private/Notepad';
 // import TaskList from 'screens/private/TaskList';
-import { Timeline, Blocks, Onboarding } from 'screens/private';
+import { Timeline, Onboarding } from 'screens/private';
 
 
 function Private({ appContext }) {
@@ -17,8 +17,8 @@ function Private({ appContext }) {
     <Router>
       <Timeline path={routes.private.home.path} appContext={appContext}/>
       <Onboarding path={routes.private.onboarding.path} appContext={appContext}/>
-      <Blocks path={routes.private.blocks.path} appContext={appContext}/>
-      <FourOhFour default />
+      {/* <Blocks path={routes.private.blocks.path} appContext={appContext}/> */}
+      {/* <FourOhFour default /> */}
     </Router>
   );
 }

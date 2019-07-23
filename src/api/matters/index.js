@@ -10,6 +10,15 @@ async function mattersList() {
   });
 };
 
+async function matterShow({
+  token
+}) {
+  return await httpRequest({
+    url: `${ENV.API_V1_ROOT_PATH}/matters/${token}`,
+    method: 'get'
+  });
+};
+
 async function createMatter({
   title,
   startAt,
@@ -61,6 +70,7 @@ async function updateMatter({
 
 export {
   mattersList,
+  matterShow,
   createMatter,
   destroyMatter,
   updateMatter

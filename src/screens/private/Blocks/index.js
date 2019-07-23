@@ -6,6 +6,7 @@ import {Helmet} from "react-helmet";
 
 import routes from 'routes';
 
+import { matterShow } from 'api/matters';
 import { blocksList, createBlock, destroyBlock } from 'api/matters/blocks';
 
 import PoweredByMatterbase from 'components/PoweredByMatterbase';
@@ -33,13 +34,15 @@ const embedded = params.get("embedded");
 function Blocks({ matterId }) {
 
   const [loading, setLoading] = useState(true);
+  const [matter, setMatter] = useState({});
   const [blocksKeyedArray, setBlocksKeyedArray] = useState([]);
   const [blocksIndexedObject, setBlocksIndexedObject] = useState({});
   const [blocksDataInitialised, setBlocksDataInitialised] = useState(false);
 
   async function fetchBlocksList() {
+    const matterData = await matterShow({ token: matterId });
     const data = await blocksList({ matterToken: matterId });
-    // console.log('Blocks list data', data)
+    setMatter({...matterData});
     const reducedData = dataReduce(data, 'token');
     // console.log('reduced', reducedData)
     setBlocksIndexedObject(reducedData.indexedObject);
@@ -79,7 +82,9 @@ function Blocks({ matterId }) {
           <SubNavbar 
             actionsLeft={
               <div>
-                <a id="sub-navbar--title" style={{ cursor: "pointer"}} onClick={() => navigate(routes.private.home.path)}><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
+                <a id="sub-navbar--title" style={{ cursor: "pointer"}} onClick={() => navigate(routes.private.home.path)}><FontAwesomeIcon icon={faArrowLeft} />
+                  {matter.title}
+                </a>
               </div>
             }
           />

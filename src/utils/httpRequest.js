@@ -28,14 +28,24 @@ async function httpRequest({
   onFailure
 }) {
   const authToken = getCookie('authToken');
+
+  let headers;
+  if (authToken) {
+    headers = {
+      'AUTHORIZATION': authToken,
+      'Content-Type': 'application/json'
+    };
+  } else {
+    headers = {
+      'Content-Type': 'application/json'
+    };
+  }
+
   const params = {
     url,
     method,
     data,
-    headers: {
-      'AUTHORIZATION': authToken,
-      'Content-Type': 'application/json'
-    },
+    headers,
     config
   }
   try {
