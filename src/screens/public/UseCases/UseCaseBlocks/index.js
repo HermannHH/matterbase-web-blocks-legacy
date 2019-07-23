@@ -12,7 +12,7 @@ export default function UseCaseBlocks() {
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="col-12 col-md-8 py-5">
-              <h1 className="">Ways people like you are using Matterbase</h1>
+              <h1 className="display-4 font-weight-bold black-text">Daily problems solved using Matterbase</h1>
             </div>
           </div>
         </div>
