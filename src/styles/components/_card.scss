@@ -4,11 +4,37 @@
   @extend .has-shadow;
   @include border-radius(5px);
   width: 100%;
+  > .card-head {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
   > .card-delete {
     position: absolute;
     top: 15px;
     right: 15px;
+  };
+  > .card-content {
+    padding: 15px;
   }
+  > .card-row {
+    padding: 5px 15px;
+    > .card-row-container {
+      border: thin solid $mercury;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      @include border-radius(5px);
+      > .badge {
+        &:first-child {
+          margin-right: 10px;
+        };
+        &:last-child {
+          margin-left: 10px;
+        };
+      }
+    };
+  };
   > .card-actions {
     display: flex;
     justify-content: flex-end;

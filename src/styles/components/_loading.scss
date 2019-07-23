@@ -1,0 +1,18 @@
+.loading {
+  min-height: 350px;
+  &.full {
+    height: 100vh;
+  };
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  > svg {
+    color: $mercury;
+    margin-bottom: 15px;
+  };
+  > h5 {
+    color: $mercury;
+  }
+}

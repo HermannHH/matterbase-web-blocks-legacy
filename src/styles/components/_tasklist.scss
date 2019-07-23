@@ -1,0 +1,57 @@
+.tasklist {
+  .tasklist-item {
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &-checkbox {
+      padding: 7px 15px 7px 0px;
+      > a {
+        cursor: pointer;
+        > svg {
+          color: $mercury;
+        };
+        &:hover {
+          > svg {
+            color: $dodgerBlue;
+          };
+        }
+      };
+      
+    };
+    &-text {
+      padding: 7px 15px;
+      background-color: $mercury;
+      @include border-radius(5px);
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    };
+
+    &.completed {
+      > .tasklist-item-text {
+        text-decoration: line-through;
+        background-color: $snowGrey;
+      };
+      > .tasklist-item-checkbox {
+        > a {
+          > svg {
+            color: $dodgerBlue;
+          };
+          &:hover {
+            > svg {
+              color: $mercury;
+            };
+          }
+        }
+      };
+    }
+    &-actions {
+      padding: 7px 0px 7px 15px;
+      > a {
+        cursor: pointer;
+      }
+    };
+  }
+}

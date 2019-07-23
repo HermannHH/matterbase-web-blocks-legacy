@@ -1,0 +1,55 @@
+#onboarding {
+  display: flex;
+  min-height: 100vh;
+
+  &-left {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    };
+    > form {
+      width: 80%;
+      button {
+        margin-top: 30px;
+      }
+    };
+    #nav-logo{
+      position: fixed;
+      top: 25px;
+      left: 25px;
+    }
+  };
+  &-right {
+    display: none;
+    @include media-breakpoint-up(lg) {
+      background-color: $selago;
+      display: flex;
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+    }
+    > #info-panel {
+      width: 75%;
+      #info-panel-image {
+        > img {
+          width: 100%;
+          @extend .p-5;
+        }
+      };
+      #info-panel-text {
+        @extend .p-5;
+        text-align: center;
+        > h1 {
+          font-weight: bold;
+          color: $dodgerBlue;
+
+        }
+      }
+    }
+
+  };
+}

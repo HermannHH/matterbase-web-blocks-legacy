@@ -5,5 +5,5 @@ import BootstrapButton from 'react-bootstrap/Button';
 const Wrapper = styled(BootstrapButton)``;
 
 export default function Button({ children }) {
-  return <div className="test"><Wrapper>{children}</Wrapper></div>;
+  return <div ><Wrapper>{children}</Wrapper></div>;
 }

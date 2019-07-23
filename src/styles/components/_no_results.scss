@@ -1,0 +1,13 @@
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @extend .p-5;
+  @include border-radius(5px);
+  border: 2px dotted;
+  border-color: $snowGrey;
+  width: 100%;
+  > h4 {
+    color: $mercury;
+  }
+}

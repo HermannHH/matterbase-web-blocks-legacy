@@ -1,7 +1,10 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components';
 
+import { navigate } from '@reach/router';
+
 import routes from 'routes';
+
 import NavbarBrand from 'components/NavbarBrand';
 
 const Wrapper = withTheme(styled.nav`
@@ -14,7 +17,7 @@ function Navbar() {
   return (
     <Wrapper className="navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
-        <NavbarBrand href={routes.home.path} />
+        <NavbarBrand  route={routes.public.home.path} />
         <button
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
@@ -28,21 +31,25 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <a className="nav-link" href={routes.public.aboutUs.path}>
+            <a className="nav-link" onClick={() => navigate(routes.public.aboutUs.path)} style={{ cursor: "pointer"}}>
               About Us
             </a>
-            <a className="nav-link" href={routes.public.pricing.path}>
+            <a className="nav-link" onClick={() => navigate(routes.public.useCases.path)} style={{ cursor: "pointer"}}>
+              Use Cases
+            </a>
+            <a className="nav-link" onClick={() => navigate(routes.public.pricing.path)} style={{ cursor: "pointer"}}>
               Pricing
             </a>
             <a
               className="btn btn-outline-secondary ml-4 mr-2"
-              href={routes.public.login.path}
+              onClick={() => navigate(routes.public.login.path)} style={{ cursor: "pointer"}}
             >
               Login
             </a>
             <a
               className="btn btn-primary mx-2"
-              href={routes.public.register.path}
+              onClick={() => navigate(routes.public.register.path)} style={{ cursor: "pointer"}}
+              style={{ color: "white", cursor: "pointer"}}
             >
               Register
             </a>

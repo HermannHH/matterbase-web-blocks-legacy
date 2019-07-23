@@ -1,0 +1,80 @@
+.sticky-notes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  &-item {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    // flex-basis: 33.33%;
+    flex-basis: 100%;
+    @include media-breakpoint-up(md) {
+      flex-basis: 50%;
+    };
+    @include media-breakpoint-up(lg) {
+      flex-basis: 33.33%;
+    };
+    @extend .p-3;
+    &-paper {
+      height: 200px;
+      background-color: $marigoldYellow;
+      @extend .has-shadow;
+      padding: 15px;
+      position: relative;
+      > .remover {
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        cursor: pointer;
+        > svg {
+          color: $tundora;
+        }
+      }
+    };
+    &-form {
+      height: 200px;
+      background-color: $marigoldYellow;
+      @extend .has-shadow;
+      // padding: 15px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      &-input {
+        background-color: $marigoldYellow;
+        // display: flex;
+        // flex-basis: 80%;
+        height: 164px !important;
+        // flex: 1 1 150px;
+        resize: none;
+        border: none;
+        @include border-top-radius(5px);
+        @include border-bottom-radius(0px);
+        box-shadow: none;
+       -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+       -moz-transition: none;
+       -webkit-transition: none;
+        background-color: lighten($marigoldYellow, 15%) !important;
+       &:focus {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -moz-transition: none;
+        -webkit-transition: none;
+       }
+      };
+      &-actions {
+        > button {
+          @include border-top-radius(0px);
+          border: 0px;
+        }
+        // flex: 1 1 20%;
+        // display: flex;
+        // flex-basis: 20%;
+        // flex: 1 1 auto;
+      }
+    }
+  }
+}
