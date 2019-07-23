@@ -22,13 +22,15 @@ async function matterShow({
 async function createMatter({
   title,
   startAt,
-  endAt
+  endAt,
+  embeddable
 }) {
   const data = {
     matter: {
       title,
       start_at: startAt,
       end_at: endAt,
+      embeddable
     }
   };
   return await httpRequest({
@@ -51,13 +53,15 @@ async function updateMatter({
   token,
   title,
   startAt,
-  endAt
+  endAt,
+  embeddable
 }) {
   const data = {
     matter: {
       title,
       start_at: startAt,
       end_at: endAt,
+      embeddable
     }
   };
   return await httpRequest({
