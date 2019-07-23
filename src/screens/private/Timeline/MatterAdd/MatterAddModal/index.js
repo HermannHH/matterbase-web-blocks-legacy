@@ -34,8 +34,23 @@ function MatterAddModal({
   const isUpdate = editToken ? true : false;
   const matter = isUpdate ? indexedObject[editToken] : {};
   const ROUNDING = 15 * 60 * 1000; // Rounds up to nearest 15 min interval
-  console.log('matter', matter)
-  const initialValues = isUpdate ? { title: matter.title, startAt: moment(matter.start_at), endAt: moment(matter.end_at) } : { title: '', startAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(30, 'minutes'), endAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(90, 'minutes') };
+  // console.log('matter', matter)
+  let initialValues;
+  if (isUpdate) {
+    initialValues = {
+      title: matter.title,
+      startAt: moment(matter.start_at),
+      endAt: moment(matter.end_at),
+      embeddable: matter.embeddable
+    };
+   } else {
+     initialValues = {
+       title: '',
+       startAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(30, 'minutes'),
+       endAt: moment(Math.ceil((+moment()) / ROUNDING) * ROUNDING).add(90, 'minutes'),
+       embeddable: false
+      }
+   };
   console.log('initialValues', initialValues)
   return (
     <Modal show={showMatterModal} onHide={() => setShowMatterModal(false)}>
@@ -47,12 +62,13 @@ function MatterAddModal({
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, setErrors }) => {
             try {
-              const { title, startAt, endAt } = values;
+              const { title, startAt, endAt, embeddable } = values;
               const data = {
                 token: matter.token,
                 title,
                 startAt: startAt.format(),
                 endAt: endAt.format(),
+                embeddable
               }
               if(isUpdate) {
                 await updateItem({...data});
@@ -122,6 +138,17 @@ function MatterAddModal({
                 placeholder="Matter ends at..."
                 timezone={timezone}
               />
+              <Form.Group>
+                <Form.Check
+                  type="checkbox"
+                  label="Embeddable?"
+                  name="embeddable"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  checked={values.embeddable}
+                  isInvalid={errors.embeddable && touched.embeddable}
+                />
+              </Form.Group>
       </Modal.Body>
       <Modal.Footer>
           <Button
