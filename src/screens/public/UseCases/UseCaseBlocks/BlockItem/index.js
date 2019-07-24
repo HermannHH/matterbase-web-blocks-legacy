@@ -4,12 +4,13 @@ import { Button } from 'react-bootstrap';
 
 export default function BlockItem({
   headline,
-  handleButtonClick
+  handleButtonClick,
+  coverImgUrl
 }) {
   return (
     <div className="block-item">
       <div className="card">
-        <div className="card-cover">
+        <div className="card-cover" style={{backgroundImage: `url(${coverImgUrl})`}}>
 
         </div>
         <div className="card-body">
