@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components';
-
+import { Navbar as BootstrapNavbar } from 'react-bootstrap';
 import { navigate } from '@reach/router';
 
 import routes from 'routes';
@@ -15,10 +15,11 @@ const Wrapper = withTheme(styled.nav`
 
 function Navbar() {
   return (
-    <Wrapper className="navbar navbar-expand-lg navbar-light sticky-top">
+    <BootstrapNavbar className="navbar navbar-expand-lg navbar-light sticky-top white-background" expand="lg">
       <div className="container">
         <NavbarBrand  route={routes.public.home.path} />
-        <button
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+        {/* <button
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -28,8 +29,9 @@ function Navbar() {
           type="button"
         >
           <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        </button> */}
+        <BootstrapNavbar.Collapse id="basic-navbar-nav">
+        {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
           <ul className="navbar-nav ml-auto">
             <a className="nav-link" onClick={() => navigate(routes.public.aboutUs.path)} style={{ cursor: "pointer"}}>
               About Us
@@ -54,9 +56,9 @@ function Navbar() {
               Register
             </a>
           </ul>
-        </div>
+          </BootstrapNavbar.Collapse>
       </div>
-    </Wrapper>
+    </BootstrapNavbar>
   );
 }
 
