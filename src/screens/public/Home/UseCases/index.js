@@ -7,11 +7,11 @@ import routes from 'routes';
 
 import UseCase from 'components/UseCase';
 
-import useCases from 'screens/public/useCases';
+import cases from 'screens/public/cases';
 
 function UseCases({ theme }) {
 
-  const uc = _.sample(useCases);
+  const uc = _.sample(cases);
   
   return (
     <div>
@@ -24,7 +24,7 @@ function UseCases({ theme }) {
           text={<h4>We built Matterbase from the ground up with adaptability in mind. <br/> Our users are very creative and have been using the platform in ingenious ways. One of these ways is as a <strong className="dodger-blue-text">{uc.name}</strong></h4>}
           url={`${uc.url}?embedded=true`}
           buttonText="See more use cases"
-          handleButtonClick={() => navigate(routes.public.useCases.path)}
+          handleButtonClick={() => navigate(routes.public.cases.path)}
         />
       </section>
       <div className="my-5 py-5" />
