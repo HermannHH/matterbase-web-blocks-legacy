@@ -1,6 +1,4 @@
-import constants from 'utils/constants';
-
-export default {
+module.exports = {
   // home: { path: '/' },
   // Public
   public: {
